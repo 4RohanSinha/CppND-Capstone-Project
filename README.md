@@ -29,36 +29,42 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ./Capstone
 ```
 
-# Expected Behavior
+## Expected Behavior
+
+
+## File Structure
+* CppND-Capstone Project/
+	* CMakeLists.txt
+	* README.md
+	* include/
+		* Graphics.h
+	* src/
+		* Graphics.cpp
+		* main.cpp
+
+
+## Class Structure
 
 
 
-# File Structure
-
-
-
-# Class Structure
-
-
-
-# Rubric Points
+## Rubric Points
 
 
 
 
 
-## README
+### README
 * <strong>A README with instructions is included with the project.</strong>
 	* The README is included with the project and has instructions for building/running the project. <strong>File: README.md. Line Numbers: 15 - 30.</strong>
 	* If any additional libraries are needed to run the project, these are indicated with cross-platform installation instructions. <strong>File: README.md. Line Numbers: 7 - 14.</strong>
 
 	* You can submit your writeup as markdown or pdf. <strong>File: README.md</strong>
 	
-## Compiling and Testing
+### Compiling and Testing
 * <strong>The submission must compile and run.</strong>
 	* See instructions above.
 
-## Loops, Functions, I/O
+### Loops, Functions, I/O
 * <strong>The project demonstrates an understanding of C++ functions and control structure.</strong>
 	* A variety of control structures are used in the project. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 	* The project is clearly organized into functions. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
@@ -69,7 +75,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * <strong>The project accepts user input and processes the input.</strong>
 	* The project accepts input from a user as part of the necessary operation of the program. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-## Object-Oriented Programming
+### Object-Oriented Programming
 * <strong>The project uses Object Oriented Programming techniques.</strong>
 	* The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
@@ -97,7 +103,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * <strong>Templates generalize functions in the project.</strong>
 	*One function is declared with a template that allows it to accept a generic parameter. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-## Memory Management
+### Memory Management
 * <strong>The project makes use of references in function declarations.</strong>
 	* At least two variables are defined as references, or two functions use pass-by-reference in the project code. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 * <strong>The project uses destructors appropriately.</strong>
@@ -112,7 +118,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * <strong>The project uses smart pointers instead of raw pointers.</strong>
 	* The project uses at least one smart pointer: `unique_ptr`, `shared_ptr`, or `weak_ptr`. The project does not use raw pointers. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-## Concurrency
+### Concurrency
 * <strong>The project uses multithreading.</strong>
 	* The project uses multiple threads in the execution. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
@@ -123,3 +129,4 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 	* A mutex or lock (e.g. `std::lock_guard` or `std::unique_lock`) is used to protect data that is shared across multiple threads in the project code. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 * <strong>A condition variable is used in the project.</strong>
 	* A `std::condition_variable` is used in the project code to synchronize thread execution. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
+
