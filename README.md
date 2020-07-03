@@ -1,6 +1,6 @@
 # CppND-Capstone-Project
 
-This is the project for the Capstone Project in the Udacity C++ Nanodegree Program. <br />
+The &lt;Insert Project Name&gt; is the project for the Capstone Project in the Udacity C++ Nanodegree Program. <br />
 
 THIS IS A WORK IN PROGRESS. FILL IN DESCRIPTION HERE.<br /><br />
 
@@ -28,3 +28,18 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ```
 ./Capstone
 ```
+
+### File Structure
+
+
+### Class Structure
+
+
+### Expected Behavior
+
+
+### Rubric Points
+
+* README
+	* A README with instructions is included with the project.
+		* The README is included with the project and has instructions for building/running the project. File: README.md. Line Numbers 15 - 30.
