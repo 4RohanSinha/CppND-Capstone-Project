@@ -54,11 +54,11 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 
 	* You can submit your writeup as markdown or pdf. <strong>File: README.md</strong>
 	
-# Compiling and Testing
+## Compiling and Testing
 * The submission must compile and run.
 	* See instructions above.
 
-# Loops, Functions, I/O
+## Loops, Functions, I/O
 * The project demonstrates an understanding of C++ functions and control structure.
 	* A variety of control structures are used in the project. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 	* The project is clearly organized into functions. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
@@ -69,7 +69,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * The project accepts user input and processes the input.
 	* The project accepts input from a user as part of the necessary operation of the program. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-# Object-Oriented Programming
+## Object-Oriented Programming
 * The project uses Object Oriented Programming techniques.
 	* The project code is organized into classes with class attributes to hold the data, and class methods to perform tasks. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
@@ -97,7 +97,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * Templates generalize functions in the project.
 	*One function is declared with a template that allows it to accept a generic parameter. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-# Memory Management
+## Memory Management
 * The project makes use of references in function declarations.
 	* At least two variables are defined as references, or two functions use pass-by-reference in the project code. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 * The project uses destructors appropriately.
@@ -112,7 +112,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 * The project uses smart pointers instead of raw pointers.
 	* The project uses at least one smart pointer: `unique_ptr`, `shared_ptr`, or `weak_ptr`. The project does not use raw pointers. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
-# Concurrency
+## Concurrency
 * The project uses multithreading.
 	* The project uses multiple threads in the execution. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
