@@ -42,4 +42,5 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 
 * README
 	* A README with instructions is included with the project.
-		* The README is included with the project and has instructions for building/running the project. File: README.md. Line Numbers 15 - 30.
+		* The README is included with the project and has instructions for building/running the project. <strong>File: README.md. Line Numbers 15 - 30.</strong>
+	
