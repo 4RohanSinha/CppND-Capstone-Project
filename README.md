@@ -29,21 +29,28 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ./Capstone
 ```
 
+### Expected Behavior
+
+
+
 ### File Structure
+
 
 
 ### Class Structure
 
 
-### Expected Behavior
-
 
 ### Rubric Points
+
+
+
+
 
 * README
 	* A README with instructions is included with the project.
 		* The README is included with the project and has instructions for building/running the project. <strong>File: README.md. Line Numbers: 15 - 30.</strong>
-		* If any additional libraries are needed to run the project, these are indicated with cross-platform installation instructions. <strong>File: README.md. Line Numbers: 7-14.</strong>
+		* If any additional libraries are needed to run the project, these are indicated with cross-platform installation instructions. <strong>File: README.md. Line Numbers: 7 - 14.</strong>
 
 		* You can submit your writeup as markdown or pdf. <strong>File: README.md</strong>
 	
