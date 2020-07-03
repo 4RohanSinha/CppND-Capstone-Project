@@ -6,5 +6,7 @@ set(CXX_FLAGS "-Wall")
 set (CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
 project(Capstone)
+include_directories(include)
+file(GLOB SOURCES "src/*.cpp")
 
-add_executable(Capstone src/main.cpp)
+add_executable(Capstone ${SOURCES})
