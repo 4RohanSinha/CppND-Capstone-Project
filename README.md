@@ -1,4 +1,4 @@
-# CppND-Capstone-Project
+# CppND Capstone Project
 
 The &lt;Insert Project Name&gt; is the project for the Capstone Project in the Udacity C++ Nanodegree Program. <br />
 
