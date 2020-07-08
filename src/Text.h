@@ -19,7 +19,7 @@ public:
 
 	Text(std::string text, Font font);
 	
-	Text(std::string text, Font font, float x, float y, float width, float height);
+	Text(std::string text, Font font, float x, float y);
 	
 	void ChangeFont(Font newFont);
 	
@@ -27,7 +27,6 @@ public:
 	
 	void CreateSurface();
 
-	void ConstructRectangle();
 private:
 	std::string text_;
 	Font font_{Font("Ubuntu-M")};

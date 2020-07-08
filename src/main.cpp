@@ -1,23 +1,40 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
-#include "Renderer.h"
+#include "Engine.h"
 #include <iostream>
 #include <memory>
-using std::cout;
+#include <thread>
+#include <future>
 
+
+//A sample program
+//TODO: Find a way to prevent the user from having to declare pointers to Node objects
 int main() {
-	Renderer fw(200, 400);
-	SDL_Event event;
+	Engine gameEngine(200, 400);
 
-	Font font = Font("Ubuntu-M", 300);
-	Text* test = new Text("Hello World", font, 50, 50, 250, 50);
-	fw.AddNode(test);
-	while (!(event.type == SDL_QUIT)) {
-		SDL_Delay(10);
-		SDL_PollEvent(&event);
-		fw.Update();
+	Font font = Font("Ubuntu-M", 20);
+	Text* test = new Text("Hello World", font, 50, 50);
+	Text* testA = new Text("Hello Again", font, 50, 100);
+	gameEngine.AddNode(test);
+
+	std::thread mover;
+
+	int iter = 0;
+	while (gameEngine.IsRunning()) {
+		gameEngine.RenderLoop();
+		iter++;
+		
+		if (iter == 100) {
+			test->Move(100, 100);
+		}
+
+		if (iter == 200) {
+			test->Move(50, 50);
+		}
 	}
-	cout << "Hello, World\n";
+
 	delete test;
+	delete testA;
+	
 }

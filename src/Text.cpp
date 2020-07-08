@@ -7,37 +7,18 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
 
-Text::Text(std::string text): Node(0, 0, 100, 100), text_(text) {
-	rect_ = new SDL_Rect;
-	ConstructRectangle();
+Text::Text(std::string text): Node(0, 0), text_(text) {
 	CreateSurface();
 }
 
-Text::Text(std::string text, Font font) : Node(0, 0, 100, 100), text_(text) {
-	rect_ = new SDL_Rect;
+Text::Text(std::string text, Font font) : Node(0, 0), text_(text) {
 	font_ = font;
-	ConstructRectangle();
 	CreateSurface();
 }
 
-Text::Text(std::string text, Font font, float x, float y, float width, float height): Node(x, y), text_(text) {
+Text::Text(std::string text, Font font, float x, float y): Node(x, y), text_(text) {
 	font_ = font;
-	rect_ = new SDL_Rect;
 	CreateSurface();
-	if (CheckLength(width) && CheckLength(height)) {
-		width_ = width;
-		height_ = height;
-		ConstructRectangle();
-	} else {
-		throw std::invalid_argument("Error: invalid length");
-	}
-}
-
-void Text::ConstructRectangle() {
-	rect_->x = x_;
-	rect_->y = y_;
-	rect_->w = width_;
-	rect_->h = height_;
 }
 
 void Text::ChangeFont(Font newFont) {
