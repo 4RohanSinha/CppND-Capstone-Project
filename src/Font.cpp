@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Font.h"
+#include "Node.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
@@ -27,11 +28,7 @@ Font::Font(std::string font, float size, SDL_Color color) {
 	SetColor(color);
 }
 
-Font::~Font() {
-	if (fontTTF_ != NULL && fontTTF_ != nullptr)
-		TTF_CloseFont(fontTTF_);
-}
-
+//
 //assign the font style to a new font only if it exists in the fonts folder
 //otherwise, throw an invalid argument exception 
 void Font::SetFont(std::string font) {
@@ -105,11 +102,14 @@ bool Font::IsValidRGBPoint(int val) {
 }
 
 void Font::SDLConvert() {
-	if (fontTTF_ != NULL && fontTTF_ != nullptr)
-		TTF_CloseFont(fontTTF_);
 
 	if (FontExists(font_.c_str())) {
 		std::string fontFile = "../fonts/" + font_ + ".ttf";
-		fontTTF_ = TTF_OpenFont(fontFile.c_str(), size_); 
+		fontTTF_ = TTF_OpenFont(fontFile.c_str(), size_);
 	}
+}
+
+void Font::DeleteTTF() {
+	if (fontTTF_ != nullptr && fontTTF_ != NULL)
+		TTF_CloseFont(fontTTF_);
 }

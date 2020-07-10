@@ -2,18 +2,28 @@
 
 Sprite::Sprite(std::string mainImage, float x, float y): Node(x, y) {
 	imageSources_.push_back(mainImage);
+	rendererSetDimensions_ = false;
+	currentForm_ = 0;
+	CreateSurface();
 }
 
 Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): Node(x, y, width, height) {
 	imageSources_.push_back(mainImage);
+	rendererSetDimensions_ = false;
+	currentForm_ = 0;
+	CreateSurface();
 }
 
 void Sprite::CreateSurface() {
-
+	surface_ = GetSharedPtr(IMG_Load(imageSources_[currentForm_].c_str()));
 }
 
 void Sprite::NextImage() {
 
+}
+
+void Sprite::ChangeElement() {
+		
 }
 
 void Sprite::ChangeImage() {

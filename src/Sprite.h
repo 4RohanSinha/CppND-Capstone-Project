@@ -1,3 +1,6 @@
+#ifndef SPRITE_H
+#define SPRITE_H
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -19,6 +22,8 @@ public:
 
 	void ChangeImage();
 
+	void ChangeElement();
+
 	void AnimateSize(int newWidth, int newHeight);
 
 	void AddImage(std::string img);
@@ -37,3 +42,5 @@ private:
 	
 	int currentForm_; //index of current image source being used from the vector
 };
+
+#endif

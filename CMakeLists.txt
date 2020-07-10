@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 
 add_definitions(-std=c++17)
 
-set(CXX_FLAGS "-g -Wall `sdl2-config --libs --cflags` -lSDL2_ttf")
+set(CXX_FLAGS "-g -Wall `sdl2-config --libs --cflags` -lSDL2_ttf -lSDL2_image")
 set (CMAKE_CXX_FLAGS, "${CXX_FLAGS} -pthread")
 
 project(Capstone)
@@ -17,4 +17,4 @@ file(GLOB SOURCES "src/*.cpp")
 
 add_executable(Capstone ${SOURCES})
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(Capstone ${SDL2_LIBRARIES} SDL2_ttf Threads::Threads)
+target_link_libraries(Capstone ${SDL2_LIBRARIES} SDL2_ttf SDL2_image Threads::Threads)

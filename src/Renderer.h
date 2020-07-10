@@ -9,26 +9,37 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include <thread>
+#include <future>
 #include "Node.h"
 #include "Text.h"
+#include "Sprite.h"
+#include "Layer.h"
+
 
 class Renderer {
 public:
 	Renderer(): height_(200), width_(400) {}
-	Renderer(int height, int width);
-	~Renderer();
-	void AddNode(Node* node);
+	Renderer(int height, int width, std::string windowTitle);
+	void AddLayers(int n);
+	void AddToLayer(int layer, std::shared_ptr<Node> node);
+	void AddNode(std::shared_ptr<Node> node);
 	void Update();
 	void Clear();
-	void ClearNode(Node* node);
-	void HideNode(Node* node);
-	void ShowNode(Node* node);
+	void ClearNode(std::shared_ptr<Node> node);
+	void HideNode(std::shared_ptr<Node> node);
+	void ShowNode(std::shared_ptr<Node> node);
+	int GetNumberOfLayers();
+	~Renderer();
 private:
 	int height_;
 	int width_;
-	std::vector<Node*> nodes_;
-	SDL_Renderer *renderer = NULL;
-	SDL_Window *window = NULL;
+	std::string windowTitle_;
+	std::vector<std::shared_ptr<Layer>> layers_;
+	std::vector<std::shared_ptr<Node>> nodes_;
+	std::vector<std::future<void>> layerThreads_;
+	std::shared_ptr<SDL_Renderer> renderer = nullptr;
+	std::shared_ptr<SDL_Window> window = nullptr;
 };
 
 #endif

@@ -20,11 +20,16 @@ public:
 	Text(std::string text, Font font);
 	
 	Text(std::string text, Font font, float x, float y);
-	
+
+	void SetText(std::string text);
+
+	void ChangeElement();
+
 	void ChangeFont(Font newFont);
 	
 	void ChangeColor(SDL_Color color);
 	
+protected:
 	void CreateSurface();
 
 private:

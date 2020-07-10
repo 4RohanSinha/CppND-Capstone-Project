@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <memory>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
@@ -18,8 +19,6 @@ public:
 	Font(std::string font, SDL_Color color);
 
 	Font(std::string font, float size, SDL_Color color);
-
-	~Font();
 
 	std::string GetFontName() { return font_; }
 
@@ -41,11 +40,14 @@ public:
 
 	void SDLConvert();
 
+	void DeleteTTF();
+
 	TTF_Font* GetTTF();
+
 private:
 	std::string font_{"Ubuntu-M"};
 	SDL_Color color_;
-	TTF_Font* fontTTF_ = nullptr;
+	TTF_Font* fontTTF_ = NULL;
 	float size_;
 
 	void SetDefaultColor();

@@ -1,15 +1,23 @@
 #include "Engine.h"
 
-Engine::Engine(int WindowWidth, int WindowHeight) {
-	renderer_ = new Renderer(WindowWidth, WindowHeight);
+Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
+	renderer_ = std::make_shared<Renderer>(WindowWidth, WindowHeight, WindowTitle);
 }
 
-void Engine::AddNode(Node* node) {
+void Engine::AddLayers(int n) {
+	renderer_->AddLayers(n);
+}
+
+void Engine::AddToLayer(int layer, std::shared_ptr<Node> node) {
+	renderer_->AddToLayer(layer, node);
+}
+
+void Engine::AddNode(std::shared_ptr<Node> node) {
 	renderer_->AddNode(node);
 }
 
 void Engine::RenderLoop() {
-	SDL_Delay(10);
+	SDL_Delay(8);
 	SDL_PollEvent(&event);
 	renderer_->Update();
 }
@@ -18,18 +26,15 @@ bool Engine::IsRunning() {
 	return !(event.type == SDL_QUIT);
 }
 
-void Engine::ClearNode(Node* node) {
+void Engine::ClearNode(std::shared_ptr<Node> node) {
 	renderer_->ClearNode(node);
 }
 
-void Engine::HideNode(Node* node) {
+void Engine::HideNode(std::shared_ptr<Node> node) {
 	renderer_->HideNode(node);
 }
 
-void Engine::ShowNode(Node* node) {
+void Engine::ShowNode(std::shared_ptr<Node> node) {
 	renderer_->ShowNode(node);
-}
 
-Engine::~Engine() {
-	delete renderer_;
 }
