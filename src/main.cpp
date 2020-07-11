@@ -24,8 +24,6 @@ int main() {
 	gameEngine->AddToLayer(1, bird);
 	
 
-	std::thread mover;
-
 	int iter = 0;
 	while (gameEngine->IsRunning()) {
 		gameEngine->RenderLoop();

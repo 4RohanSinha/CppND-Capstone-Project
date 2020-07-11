@@ -28,7 +28,6 @@ private:
 	std::shared_ptr<SDL_Renderer> renderer_; //allow the main renderer from the Renderer class which instantiates the Layer objects to be a shared resource
 	//Note: the SDL2 functions rely on raw pointers, so renderer_.get() will have to be used frequently
 	
-	std::mutex mtx_;
 };
 
 #endif

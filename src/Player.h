@@ -7,7 +7,7 @@ class Player: public Sprite {
 public:
 
 private:
-//	Controller* controller = nullptr;
+
 };
 
 #endif

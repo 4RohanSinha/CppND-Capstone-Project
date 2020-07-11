@@ -29,7 +29,8 @@ void Text::SetText(std::string text) {
 	status_ = TextureRender::kRenderNow;
 }
 
-void Text::ChangeElement() {}
+void Text::AnimationChange() {
+}
 
 void Text::ChangeFont(Font newFont) {
 	font_.SetFont(newFont);

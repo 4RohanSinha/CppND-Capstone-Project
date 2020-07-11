@@ -23,7 +23,7 @@ public:
 
 	void SetText(std::string text);
 
-	void ChangeElement();
+	void AnimationChange();
 
 	void ChangeFont(Font newFont);
 	

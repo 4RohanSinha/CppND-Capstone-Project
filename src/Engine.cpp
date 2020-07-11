@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
-	renderer_ = std::make_shared<Renderer>(WindowWidth, WindowHeight, WindowTitle);
+	renderer_ = std::make_unique<Renderer>(WindowWidth, WindowHeight, WindowTitle);
 }
 
 void Engine::AddLayers(int n) {
@@ -14,6 +14,11 @@ void Engine::AddToLayer(int layer, std::shared_ptr<Node> node) {
 
 void Engine::AddNode(std::shared_ptr<Node> node) {
 	renderer_->AddNode(node);
+}
+
+void Engine::AssignPlayer(std::shared_ptr<Node> node) {
+	renderer_->AddNode(node);
+	player = node;
 }
 
 void Engine::RenderLoop() {

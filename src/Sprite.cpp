@@ -12,6 +12,7 @@ Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): 
 	rendererSetDimensions_ = false;
 	currentForm_ = 0;
 	CreateSurface();
+	
 }
 
 void Sprite::CreateSurface() {
@@ -19,14 +20,16 @@ void Sprite::CreateSurface() {
 }
 
 void Sprite::NextImage() {
-
-}
-
-void Sprite::ChangeElement() {
-		
+	if (currentForm_ + 1 < imageSources_.size())
+		currentForm_++;
+	status_ = TextureRender::kRenderNow;
 }
 
 void Sprite::ChangeImage() {
+		
+}
+
+void Sprite::AnimationChange() {
 
 }
 

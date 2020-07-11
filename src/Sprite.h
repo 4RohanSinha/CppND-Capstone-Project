@@ -22,7 +22,7 @@ public:
 
 	void ChangeImage();
 
-	void ChangeElement();
+	void AnimationChange();
 
 	void AnimateSize(int newWidth, int newHeight);
 

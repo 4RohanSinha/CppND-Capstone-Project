@@ -30,21 +30,34 @@ void Layer::Update() {
 
 			}
 
-			if (!((i->moveAnimates_).empty())) {
+			if (!((i->animations_).empty())) {
 				ClearNode(i);
-				auto curAnimation = (i->moveAnimates_).front();
-				curAnimation->SetStartCoordinates(i->x_, i->y_);
+				auto curAnimation = (i->animations_).front();
+				curAnimation->SetStartPosition(std::vector<float>{i->x_, i->y_});
 				if (curAnimation->HasReachedDestination()) {
-					(i->moveAnimates_).pop();
-					i->status_ = TextureRender::kRenderNow;
+					(i->animations_).pop();
 				} else {
-					auto nextPoint = curAnimation->GetNextPoint();
-					if (nextPoint.size() == 2) {
-						i->x_ = nextPoint[0];
-						i->y_ = nextPoint[1];
+					auto nextPoint = curAnimation->GetNextPosition();
+					if (nextPoint.size() == 5) {
+						for (auto j: curAnimation->GetType()) {
+							if (j == AnimationType::kMove) {
+								i->x_ = nextPoint[0];
+								i->y_ = nextPoint[1];
+							}
+							
+							if (j == AnimationType::kSize) {
+								i->width_ = (int) (nextPoint[2]);
+								i->height_ = (int) (nextPoint[3]);
+							}
+						}
 					}
 				}
+
+				i->AnimationChange();
 			}	
+	
+			i->ConstructRectangle();
+
 			if (i->status_ == TextureRender::kRenderNow) {
 				ClearNode(i);
 				i->CreateSurface();
@@ -57,7 +70,7 @@ void Layer::Update() {
 				i->CreateSurface();
 				i->CreateTexture(renderer_);
 			}
-			i->ConstructRectangle();
+
 
 			for (int k = 0; k < n; k++) {
 				SDL_RenderCopy(renderer_.get(), (i->texture_).get(), NULL, (i->rect_).get());
@@ -73,7 +86,13 @@ bool Layer::HasNodes() {
 	return (nodes_.size() > 0);
 }
 
+//TODO: transparent backgrounds
 void Layer::ClearNode(std::shared_ptr<Node> node) {
+	SDL_SetRenderDrawBlendMode(renderer_.get(), SDL_BLENDMODE_NONE);
+	SDL_SetRenderTarget(renderer_.get(), (node->texture_).get());
+	SDL_RenderFillRect(renderer_.get(), (node->rect_).get());
+	SDL_SetRenderDrawBlendMode(renderer_.get(), SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer_.get(), 0, 0, 0, 0);
 	SDL_SetRenderTarget(renderer_.get(), (node->texture_).get());
 	SDL_RenderFillRect(renderer_.get(), (node->rect_).get());
 }

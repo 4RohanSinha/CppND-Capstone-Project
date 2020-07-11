@@ -15,8 +15,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 #include <cmath>
+#include "Animation.h"
 #include "MoveAnimation.h"
-#include "MessageQueue.h"
 
 //Using SDL2 with smart pointers
 //research for using SDL2 and smart pointers combined is from: https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
@@ -58,42 +58,33 @@ public:
 	//virtual function to create surface
 	//surface is used to create the texture that can then be rendered
 	
-	virtual void ChangeElement() = 0;
+	virtual void AnimationChange() = 0;
 	void Move(float newX, float newY);
 
 	void ChangeSize(int width, int height);
 
 	void Clear();
-	bool IsMoving() { return isAnimating_; }
+
+	bool IsAnimating() { return !animations_.empty(); }
 
 protected:
 	bool rendererSetDimensions_{false};
-	bool isAnimating_{false};
-	std::mutex mtx_; //mutex to prevent multiple calls to Node::Move() from affecting the movement of the object
 	TextureRender status_{TextureRender::kRenderNow};
 	float x_;
 	float y_;
 	int width_;
 	int height_;
 	bool isHidden_{false};
-	//SDL_Surface * surface_ = NULL;
-	//SDL_Texture * texture_ = NULL;
 	std::shared_ptr<SDL_Surface> surface_ = nullptr;
 	std::shared_ptr<SDL_Texture> texture_ = nullptr;
-	//SDL_Rect * rect_;
 	std::shared_ptr<SDL_Rect> rect_ = nullptr;
-	//std::vector<std::thread> moveThreads_;
-	std::vector<std::future<void>> moveThreads_;
-	std::queue<std::shared_ptr<MoveAnimation>> moveAnimates_;
-	std::shared_ptr<MessageQueue<PointMessage>> queue_ = nullptr;
+	std::queue<std::shared_ptr<Animation>> animations_;
 
 	void ConstructRectangle();
 	virtual void CreateSurface() = 0;
 	void CreateTexture(std::shared_ptr<SDL_Renderer> renderer); //create texture that the renderer will use
 
 	static bool CheckLength(float len);
-	void MotionAnimate(float newX, float newY);
-	//virtual void SizeAnimate(int width, int height);
 
 	//make this class a friend so that it can access the texture private member
 	//this member should not be accessed from other classes or users, so keep it protected

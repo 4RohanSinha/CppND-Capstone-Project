@@ -1,27 +1,23 @@
 #ifndef MOVEANIMATION_H
 #define MOVEANIMATION_H
 
+#include "Animation.h"
 #include <vector>
 
-class MoveAnimation {
+class MoveAnimation: public Animation {
 public:
-	MoveAnimation(float startX, float startY, float endX, float endY);
+	MoveAnimation(float endX, float endY);
 	bool HasReachedDestination();
-	void SetStartCoordinates(float startX, float startY);
+	void SetStartPosition(std::vector<float> position);
 	std::vector<float> GetStartCoordinates();
-	std::vector<float> GetNextPoint();
 	std::vector<float> GetDestination();
-	bool HasStarted();
+
+protected:
+	void GoToNextPosition();
+
 private:
-	float startX_;
-	float startY_;
-	float currentX_;
-	float currentY_;
-	float finalX_;
-	float finalY_;
 	float slope_;
 	float intercept_;
-	bool hasStarted_{false};
 };
 
 #endif
