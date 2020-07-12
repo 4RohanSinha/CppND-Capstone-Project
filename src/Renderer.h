@@ -20,7 +20,7 @@
 class Renderer {
 public:
 	Renderer(): height_(200), width_(400) {}
-	Renderer(int height, int width, std::string windowTitle);
+	Renderer(int height, int width, std::string windowTitle, std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes);
 	void AddLayers(int n);
 	void AddToLayer(int layer, std::shared_ptr<Node> node);
 	void AddNode(std::shared_ptr<Node> node);
@@ -36,8 +36,7 @@ private:
 	int width_;
 	std::string windowTitle_;
 	std::vector<std::shared_ptr<Layer>> layers_;
-	std::vector<std::shared_ptr<Node>> nodes_;
-	std::vector<std::future<void>> layerThreads_;
+	std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes_;
 	std::shared_ptr<SDL_Renderer> renderer = nullptr;
 	std::shared_ptr<SDL_Window> window = nullptr;
 };

@@ -16,8 +16,6 @@ public:
 	
 	Sprite(std::string mainImage, float x, float y, int width, int height);
 
-	void CreateSurface();
-
 	void NextImage();
 
 	void ChangeImage();
@@ -37,9 +35,14 @@ public:
 	int NumberImages() { return imageSources_.size(); }
 
 	static bool CheckImageSource(std::string src);
+
+protected:
+
+	void CreateSurface();
+
 private:
 	std::vector<std::string> imageSources_;
-	
+
 	int currentForm_; //index of current image source being used from the vector
 };
 

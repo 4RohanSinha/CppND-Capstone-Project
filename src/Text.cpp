@@ -10,18 +10,21 @@
 Text::Text(std::string text): Node(0, 0), text_(text) {
 	CreateSurface();
 	rendererSetDimensions_ = true;
+	collisionBitMask = "Text";
 }
 
 Text::Text(std::string text, Font font) : Node(0, 0), text_(text) {
 	font_ = font;
 	CreateSurface();
 	rendererSetDimensions_ = true;
+	collisionBitMask = "Text";
 }
 
 Text::Text(std::string text, Font font, float x, float y): Node(x, y), text_(text) {
 	font_ = font;
 	CreateSurface();
 	rendererSetDimensions_ = true;
+	collisionBitMask = "Text";
 }
 
 void Text::SetText(std::string text) {

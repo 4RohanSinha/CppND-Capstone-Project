@@ -8,7 +8,7 @@
 #include <iostream>
 
 //TODO: add title as argument to constructor function
-Renderer::Renderer(int height, int width, std::string windowTitle): height_(height), width_(width), windowTitle_(windowTitle) {
+Renderer::Renderer(int height, int width, std::string windowTitle, std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes): height_(height), width_(width), windowTitle_(windowTitle) {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
 	window = GetSharedPtr(SDL_CreateWindow(windowTitle_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, 0));
@@ -16,11 +16,13 @@ Renderer::Renderer(int height, int width, std::string windowTitle): height_(heig
 	SDL_SetRenderDrawColor(renderer.get(), 0, 0, 0, 0);
 	SDL_RenderClear(renderer.get());
 	SDL_RenderPresent(renderer.get());
+	nodes_ = nodes;
 }
 
 void Renderer::AddNode(std::shared_ptr<Node> node) {
 	if (layers_.size() > 0) {
 		layers_[layers_.size() - 1]->AddNode(node);
+		nodes_->push_back(node);
 	}
 }
 
@@ -43,6 +45,7 @@ void Renderer::AddToLayer(int layer, std::shared_ptr<Node> node) {
 		for (int i = layers_.size(); i < layer-1; i++)
 			layers_.push_back(std::make_shared<Layer>(renderer));
 	layers_[layer-1]->AddNode(node);
+	nodes_->push_back(node);
 }
 
 void Renderer::Update() {

@@ -54,7 +54,7 @@ void Node::CreateTexture(std::shared_ptr<SDL_Renderer> renderer) {
 }
 
 void Node::Move(float newX, float newY) {
-	animations_.push(std::make_shared<MoveAnimation>(newX, newY));
+	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY));
 }
 
 void Node::ChangeSize(int width, int height) {

@@ -21,7 +21,7 @@ int main() {
 	gameEngine->AddLayers(5);
 	gameEngine->AddToLayer(2, test);
 	gameEngine->AddToLayer(3, testA);
-	gameEngine->AddToLayer(1, bird);
+	gameEngine->AddToLayer(4, bird);
 	
 
 	int iter = 0;

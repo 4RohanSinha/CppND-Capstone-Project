@@ -2,21 +2,29 @@
 #define CONTROLLER_H
 
 #include <SDL2/SDL.h>
-#include "Event.h" 
+#include <memory>
+#include "Node.h"
+#include "Event.h"
+#include "CollisionDetector.h"
+#include "GameEventListener.h"
 
 class Controller {
 public:
-	Controller() {}
-	void ListenForUserInput();
-	void SendEvent(std::shared_ptr<Event> event) { events_.push(event); }
-	//NOTE: if the event happens to be SDL_QUIT, immediately return and quit the program
-	std::shared_ptr<Event> ReceiveNextEvent(); //pop the events_ queue and return the popped el
+	Controller(std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes);
+	//these template functions can only be defined within the header files themselves
+	template <typename T>
+	void HandleCollisionsBetween(std::shared_ptr<Node> nodeOne, std::shared_ptr<Node> nodeTwo, T handlerFunction) {
+		handlerFunction();
+	}
 
-	bool IsRunning();
+	template <typename T>
+	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
+		handlerFunction();
+	}
 private:
-	std::queue<std::shared_ptr<Event>> events_;
-	bool isRunning_{true};
-	SDL_Event event;
+	std::unique_ptr<CollisionDetector> collideDetect = nullptr;
+	std::unique_ptr<GameEventListener> gameEventController = nullptr;
+	std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes_ = nullptr;
 };
 
 #endif

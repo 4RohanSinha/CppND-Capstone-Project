@@ -5,6 +5,7 @@ Sprite::Sprite(std::string mainImage, float x, float y): Node(x, y) {
 	rendererSetDimensions_ = false;
 	currentForm_ = 0;
 	CreateSurface();
+	collisionBitMask = "Sprite";
 }
 
 Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): Node(x, y, width, height) {
@@ -12,12 +13,14 @@ Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): 
 	rendererSetDimensions_ = false;
 	currentForm_ = 0;
 	CreateSurface();
+	collisionBitMask = "Sprite";
 	
 }
 
 void Sprite::CreateSurface() {
 	surface_ = GetSharedPtr(IMG_Load(imageSources_[currentForm_].c_str()));
 }
+
 
 void Sprite::NextImage() {
 	if (currentForm_ + 1 < imageSources_.size())
@@ -30,7 +33,6 @@ void Sprite::ChangeImage() {
 }
 
 void Sprite::AnimationChange() {
-
 }
 
 void Sprite::AnimateSize(int newWidth, int newHeight) {}

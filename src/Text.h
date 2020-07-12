@@ -34,6 +34,7 @@ protected:
 
 private:
 	std::string text_;
+	std::vector<std::string> textOptions_;
 	Font font_{Font("Ubuntu-M")};
 };
 

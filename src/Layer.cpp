@@ -40,12 +40,12 @@ void Layer::Update() {
 					auto nextPoint = curAnimation->GetNextPosition();
 					if (nextPoint.size() == 5) {
 						for (auto j: curAnimation->GetType()) {
-							if (j == AnimationType::kMove) {
+							if (j == Animation::AnimationType::kMove) {
 								i->x_ = nextPoint[0];
 								i->y_ = nextPoint[1];
 							}
 							
-							if (j == AnimationType::kSize) {
+							if (j == Animation::AnimationType::kSize) {
 								i->width_ = (int) (nextPoint[2]);
 								i->height_ = (int) (nextPoint[3]);
 							}
@@ -88,11 +88,6 @@ bool Layer::HasNodes() {
 
 //TODO: transparent backgrounds
 void Layer::ClearNode(std::shared_ptr<Node> node) {
-	SDL_SetRenderDrawBlendMode(renderer_.get(), SDL_BLENDMODE_NONE);
-	SDL_SetRenderTarget(renderer_.get(), (node->texture_).get());
-	SDL_RenderFillRect(renderer_.get(), (node->rect_).get());
-	SDL_SetRenderDrawBlendMode(renderer_.get(), SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(renderer_.get(), 0, 0, 0, 0);
 	SDL_SetRenderTarget(renderer_.get(), (node->texture_).get());
 	SDL_RenderFillRect(renderer_.get(), (node->rect_).get());
 }

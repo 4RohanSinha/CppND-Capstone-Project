@@ -12,8 +12,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 find_package(SDL2 REQUIRED)
 find_package(Threads REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} src)
+include_directories(${PROJECT_SOURCE_DIR}/animation)
 
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "src/animation/*.cpp")
 
 add_executable(Capstone ${SOURCES})
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)

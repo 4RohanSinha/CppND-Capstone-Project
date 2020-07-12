@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <vector>
+#include <unordered_map>
 #include <queue>
 #include <deque>
 #include <algorithm>
@@ -15,8 +16,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 #include <cmath>
-#include "Animation.h"
-#include "MoveAnimation.h"
+#include "animation/Animation.h"
+#include "animation/MoveAnimation.h"
 
 //Using SDL2 with smart pointers
 //research for using SDL2 and smart pointers combined is from: https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
@@ -77,8 +78,11 @@ protected:
 	bool isHidden_{false};
 	std::shared_ptr<SDL_Surface> surface_ = nullptr;
 	std::shared_ptr<SDL_Texture> texture_ = nullptr;
+
+	std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> textures_;
+
 	std::shared_ptr<SDL_Rect> rect_ = nullptr;
-	std::queue<std::shared_ptr<Animation>> animations_;
+	std::queue<std::shared_ptr<Animation::Animation>> animations_;
 
 	void ConstructRectangle();
 	virtual void CreateSurface() = 0;
@@ -86,11 +90,14 @@ protected:
 
 	static bool CheckLength(float len);
 
+	std::string collisionBitMask{"Unknown Node type"};
+
 	//make this class a friend so that it can access the texture private member
 	//this member should not be accessed from other classes or users, so keep it protected
 	//limit its access to descendant and friend classes
 	friend class Renderer;
 	friend class Layer;	
+	friend class CollisionDetector;
 };
 
 #endif

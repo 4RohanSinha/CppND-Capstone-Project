@@ -6,7 +6,8 @@
 #include <cstdarg>
 #include "Node.h"
 
-enum EventType {
+//enum class to allow for the same value in two diff. enums (kNone)
+enum class EventType {
 	kCollision,
 	kUpKey,
 	kDownKey,
@@ -14,15 +15,16 @@ enum EventType {
 	kTapUp,
 	kSwipe,
 	kClick,
-	kQuit
+	kQuit,
+	kNone
 };
 
-enum KeyCharacter {
+enum class KeyCharacter {
 	keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM,
 	keyN, keyO, keyP, keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ,
 	keyShift, keyCtrl, keyLeftArr, keyRightArr, keyUpArr, keyDownArr,
 	key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, keyReturn, keyTab,
-	keyPlus, keyMinus, keyEquals, keySlash, keyComma, keyPeriod
+	keyPlus, keyMinus, keyEquals, keySlash, keyComma, keyPeriod, kNone
 };
 
 class Event {
@@ -45,12 +47,17 @@ public:
 	void SetCoordinates(float x, float y) { coordinates_.assign(x, y); }
 
 	KeyCharacter GetKeyCharacter() { return keyChar_; }
+
 	void SetKeyCharacter(KeyCharacter keyChar) { keyChar_ = keyChar; }
+
+	bool operator==(const Event& otherEvent) const;
+	
+	bool operator!=(const Event& otherEvent) const;
 private:
-	EventType event_;
+	EventType event_{EventType::kNone};
 	std::vector<std::shared_ptr<Node>> nodesInvolved_;
 	std::vector<float> coordinates_;
-	KeyCharacter keyChar_;
+	KeyCharacter keyChar_{KeyCharacter::kNone};
 };
 
 #endif
