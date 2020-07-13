@@ -3,6 +3,7 @@
 
 #include "Animation.h"
 #include <vector>
+#include <cmath>
 
 namespace Animation {
 	class MoveAnimation: public Animation {

@@ -16,7 +16,7 @@ Event::Event(EventType event, int num, ...) {
 bool Event::operator==(const Event& otherEvent) const {
 	if (event_ != otherEvent.event_)
 		return false;
-	else if (keyChar_ != otherEvent.keyChar_)
+	else if (keyChar_ != otherEvent.keyChar_ && (keyChar_ != KeyCharacter::kAll && otherEvent.keyChar_ != KeyCharacter::kAll))
 		return false;
 	else if (coordinates_.size() != otherEvent.coordinates_.size())
 		return false;

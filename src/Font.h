@@ -38,6 +38,10 @@ public:
 
 	static bool IsValidSize(float size);
 
+	//TODO: convert to use unique_ptrs
+	//this may remove the need for DeleteTTF
+	//make sure that it does not exist as a member variable for this object and is only a temp variable
+	//that way, the destructor will get called after the scope is exited
 	void SDLConvert();
 
 	void DeleteTTF();

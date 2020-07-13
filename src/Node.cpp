@@ -63,6 +63,11 @@ void Node::ChangeSize(int width, int height) {
 void Node::Clear() {
 }
 
+void Node::ClearAnimations() {
+	std::queue<std::shared_ptr<Animation::Animation>> empty;
+	std::swap(animations_, empty);
+}
+
 bool Node::CheckLength(float len) {
 	if (len > 0)
 		return true;

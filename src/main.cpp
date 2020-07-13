@@ -12,7 +12,8 @@
 //A sample program
 //TODO: Find a way to prevent the user from having to declare pointers to Node objects
 int main() {
-	std::unique_ptr<Engine> gameEngine = std::make_unique<Engine>(500, 500, "Test Game Engine");
+	//shared pointer so that the same object can be used by the main() function and also be captured by controller methods to manipulate nodes
+	std::shared_ptr<Engine> gameEngine = std::make_shared<Engine>(500, 500, "Test Game Engine");
 
 	Font font = Font("Ubuntu-M", 20);
 	std::shared_ptr<Text> test = std::make_shared<Text>("Hello World", font, 50, 50);
@@ -22,6 +23,33 @@ int main() {
 	gameEngine->AddToLayer(2, test);
 	gameEngine->AddToLayer(3, testA);
 	gameEngine->AddToLayer(4, bird);
+	gameEngine->HandleCollisionsBetween(test, testA, [gameEngine, testA] () {
+		gameEngine->HideNode(testA);
+	});
+
+	gameEngine->HandleCollisionsBetween(test, bird, [gameEngine, test] () {
+		gameEngine->HideNode(test);		
+	});
+
+	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [bird] () {
+		bird->Move(bird->GetX() - 400, bird->GetY());		
+	});
+
+	gameEngine->HandleKeyPressFor(KeyCharacter::keyRightArr, [bird] () {
+		bird->Move(bird->GetX() + 400, bird->GetY());		
+	});
+
+	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [bird] () {
+		bird->Move(bird->GetX(), bird->GetY() - 400);
+	});
+
+	gameEngine->HandleKeyPressFor(KeyCharacter::keyDownArr, [bird] () {
+		bird->Move(bird->GetX(), bird->GetY() + 400);		
+	});
+
+	gameEngine->HandleKeyUpFor(KeyCharacter::kAll, [bird] () {
+		bird->ClearAnimations();		
+	});
 	
 
 	int iter = 0;
@@ -35,9 +63,6 @@ int main() {
 			test->Move(0, 0);
 			test->Move(300, 300);
 			test->Move(75, 10);
-			bird->Move(400, 50);
-			bird->Move(50, 50);
-			bird->Move(300, 300);
 		}
 
 		if (iter == 150) {
@@ -47,6 +72,10 @@ int main() {
 		if (iter == 200) {
 		}
 
+		if (iter == 500) {
+			gameEngine->ShowNode(testA);
+		}
+
 	}
-	return 0;	
+	return 0;
 }

@@ -33,6 +33,12 @@ std::shared_ptr<T> GetSharedPtr(T *t) {
 	//TODO: see if function pointer can be passed in instead
 	return std::shared_ptr<T>(t, [](T* t) { SDL_DelObject(t); });
 }
+
+template<typename T>
+std::unique_ptr<T> GetUniquePtr(T *t) {
+	return std::unique_ptr<T, void*(T*)>(t, [](T* t) { SDL_DelObject(t); });
+}
+
 enum TextureRender {
 	kRenderNow,
 	kRenderForever,
@@ -66,6 +72,8 @@ public:
 
 	void Clear();
 
+	void ClearAnimations();
+
 	bool IsAnimating() { return !animations_.empty(); }
 
 protected:
@@ -90,7 +98,7 @@ protected:
 
 	static bool CheckLength(float len);
 
-	std::string collisionBitMask{"Unknown Node type"};
+	std::string collisionBitMask{"Unknown Node Type"};
 
 	//make this class a friend so that it can access the texture private member
 	//this member should not be accessed from other classes or users, so keep it protected

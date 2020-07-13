@@ -24,12 +24,13 @@ enum class KeyCharacter {
 	keyN, keyO, keyP, keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ,
 	keyShift, keyCtrl, keyLeftArr, keyRightArr, keyUpArr, keyDownArr,
 	key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, keyReturn, keyTab,
-	keyPlus, keyMinus, keyEquals, keySlash, keyComma, keyPeriod, kNone
+	keyPlus, keyMinus, keyEquals, keySlash, keyComma, keyPeriod, kNone, kAll
 };
 
 class Event {
 public:
 	Event(EventType event): event_(event) {}
+
 	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 	Event(EventType event, int num, ...);
 
@@ -38,9 +39,9 @@ public:
 	auto GetNodesInvolved() { return nodesInvolved_; }
 
 	void AddNodeInvolved(std::shared_ptr<Node> node) { nodesInvolved_.push_back(node); }
-	void SetEvent(EventType event) { event_ = event; }
+	void SetEventType(EventType event) { event_ = event; }
 
-	EventType GetEvent() { return event_; }
+	EventType GetEventType() { return event_; }
 
 	std::vector<float> GetCoordinates() { return coordinates_; }
 
@@ -58,6 +59,7 @@ private:
 	std::vector<std::shared_ptr<Node>> nodesInvolved_;
 	std::vector<float> coordinates_;
 	KeyCharacter keyChar_{KeyCharacter::kNone};
+
 };
 
 #endif

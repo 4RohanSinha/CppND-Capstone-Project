@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+//TODO: vertical slope (problem: startX_ - finalX_ = 0, so denominator = 0)
 Animation::MoveAnimation::MoveAnimation(float endX, float endY): Animation() {
 	startX_ = 0;
 	startY_ = 0;
@@ -16,16 +17,25 @@ Animation::MoveAnimation::MoveAnimation(float endX, float endY): Animation() {
 
 void Animation::MoveAnimation::GoToNextPosition() {
 	hasStarted_ = true;
-	std::vector<float> finalRes;
-	if (currentX_ < finalX_) {
-		currentX_ += 0.5;
+	if (std::isinf(slope_)) {
+		if (currentY_ < finalY_)
+			currentY_ += 0.5;
+		else if (currentY_ > finalY_)
+			currentY_ -= 0.5;
+		return;		
 	}
-	else if (finalX_ == currentX_)
-		return;
 
-	else if (currentX_ > finalX_)
-		currentX_ -= 0.5;
-	currentY_ = (slope_*currentX_) + intercept_;
+	else {
+		if (currentX_ < finalX_) {
+			currentX_ += 0.5;
+		}
+		else if (finalX_ == currentX_)
+			return;
+
+		else if (currentX_ > finalX_)
+			currentX_ -= 0.5;
+		currentY_ = (slope_*currentX_) + intercept_;
+	}
 }
 
 bool Animation::MoveAnimation::HasReachedDestination() {
