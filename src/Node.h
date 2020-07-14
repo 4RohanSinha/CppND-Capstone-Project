@@ -70,6 +70,8 @@ public:
 
 	void ChangeSize(int width, int height);
 
+	void SetForm(int form);
+
 	void Clear();
 
 	void ClearAnimations();
@@ -87,14 +89,23 @@ protected:
 	std::shared_ptr<SDL_Surface> surface_ = nullptr;
 	std::shared_ptr<SDL_Texture> texture_ = nullptr;
 
-	std::unordered_map<std::string, std::shared_ptr<SDL_Texture>> textures_;
-
 	std::shared_ptr<SDL_Rect> rect_ = nullptr;
+
+	int currentForm_ = 0;
+
+	std::vector<std::string> sources_;
+
+	std::vector<std::shared_ptr<SDL_Surface>> surfaces_;
+
+	std::vector<std::shared_ptr<SDL_Texture>> textures_;
+
 	std::queue<std::shared_ptr<Animation::Animation>> animations_;
 
+	std::queue<std::shared_ptr<SDL_Surface>> newSurfaces_;
+
 	void ConstructRectangle();
-	virtual void CreateSurface() = 0;
-	void CreateTexture(std::shared_ptr<SDL_Renderer> renderer); //create texture that the renderer will use
+	virtual void GenerateSurfacesFromSources() = 0;
+	virtual void CreateSurface(int i) = 0;
 
 	static bool CheckLength(float len);
 
@@ -103,6 +114,7 @@ protected:
 	//make this class a friend so that it can access the texture private member
 	//this member should not be accessed from other classes or users, so keep it protected
 	//limit its access to descendant and friend classes
+	//TODO: figure out way to reduce number of friend classes
 	friend class Renderer;
 	friend class Layer;	
 	friend class CollisionDetector;

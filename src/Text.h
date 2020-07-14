@@ -21,6 +21,7 @@ public:
 	
 	Text(std::string text, Font font, float x, float y);
 
+	//TODO: allow for adding text option without replacing current onr
 	void SetText(std::string text);
 
 	void AnimationChange();
@@ -30,7 +31,8 @@ public:
 	void ChangeColor(SDL_Color color);
 	
 protected:
-	void CreateSurface();
+	void CreateSurface(int i);
+	void GenerateSurfacesFromSources();
 
 private:
 	std::string text_;

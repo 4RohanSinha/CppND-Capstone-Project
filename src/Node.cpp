@@ -44,15 +44,6 @@ void Node::ConstructRectangle() {
 	rect_->h = height_;
 }
 
-void Node::CreateTexture(std::shared_ptr<SDL_Renderer> renderer) {
-	if (renderer == nullptr || renderer == NULL)
-		throw std::invalid_argument("Fatal Error: Node::CreateTexture(): renderer is a nullptr");
-	
-	CreateSurface();
-	
-	texture_ = GetSharedPtr(SDL_CreateTextureFromSurface(renderer.get(), surface_.get()));
-}
-
 void Node::Move(float newX, float newY) {
 	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY));
 }

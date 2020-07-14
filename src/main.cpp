@@ -19,6 +19,8 @@ int main() {
 	std::shared_ptr<Text> test = std::make_shared<Text>("Hello World", font, 50, 50);
 	std::shared_ptr<Text> testA = std::make_shared<Text>("Hello Again", font, 50, 100);
 	std::shared_ptr<Sprite> bird = std::make_shared<Sprite>("../photos/bird.png", 200, 200, 100, 100);	
+	//test->SetText("Hi");
+	//test->SetText("Hello World");
 	gameEngine->AddLayers(5);
 	gameEngine->AddToLayer(2, test);
 	gameEngine->AddToLayer(3, testA);
@@ -32,19 +34,19 @@ int main() {
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [bird] () {
-		bird->Move(bird->GetX() - 400, bird->GetY());		
+		bird->Move(bird->GetX() - 800, bird->GetY());		
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyRightArr, [bird] () {
-		bird->Move(bird->GetX() + 400, bird->GetY());		
+		bird->Move(bird->GetX() + 800, bird->GetY());		
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() - 400);
+		bird->Move(bird->GetX(), bird->GetY() - 800);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyDownArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() + 400);		
+		bird->Move(bird->GetX(), bird->GetY() + 800);		
 	});
 
 	gameEngine->HandleKeyUpFor(KeyCharacter::kAll, [bird] () {
@@ -70,6 +72,7 @@ int main() {
 		}
 
 		if (iter == 200) {
+			test->SetText("Hello Again Again");
 		}
 
 		if (iter == 500) {

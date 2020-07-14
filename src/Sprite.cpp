@@ -4,7 +4,6 @@ Sprite::Sprite(std::string mainImage, float x, float y): Node(x, y) {
 	imageSources_.push_back(mainImage);
 	rendererSetDimensions_ = false;
 	currentForm_ = 0;
-	CreateSurface();
 	collisionBitMask = "Sprite";
 }
 
@@ -12,20 +11,24 @@ Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): 
 	imageSources_.push_back(mainImage);
 	rendererSetDimensions_ = false;
 	currentForm_ = 0;
-	CreateSurface();
 	collisionBitMask = "Sprite";
 	
 }
 
-void Sprite::CreateSurface() {
-	surface_ = GetSharedPtr(IMG_Load(imageSources_[currentForm_].c_str()));
+void Sprite::CreateSurface(int i) {
+	surface_ = GetSharedPtr(IMG_Load(imageSources_[i].c_str()));
+	surfaces_.push_back(surface_);
 }
 
+void Sprite::GenerateSurfacesFromSources() {
+	int i = 0;
+	while (i < imageSources_.size()) {
+		CreateSurface(i);
+		i++;
+	}
+}
 
 void Sprite::NextImage() {
-	if (currentForm_ + 1 < imageSources_.size())
-		currentForm_++;
-	status_ = TextureRender::kRenderNow;
 }
 
 void Sprite::ChangeImage() {

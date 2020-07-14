@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 
 add_definitions(-std=c++17)
 
-set(CXX_FLAGS "-g -Wall `sdl2-config --libs --cflags` -lSDL2_ttf -lSDL2_image")
+set(CXX_FLAGS "-g -Wall -Werror `sdl2-config --libs --cflags` -lSDL2_ttf -lSDL2_image")
 set (CMAKE_CXX_FLAGS, "${CXX_FLAGS} -pthread")
 
 project(Capstone)

@@ -38,12 +38,13 @@ public:
 
 protected:
 
-	void CreateSurface();
+	void CreateSurface(int i);
+
+	void GenerateSurfacesFromSources();
 
 private:
 	std::vector<std::string> imageSources_;
 
-	int currentForm_; //index of current image source being used from the vector
 };
 
 #endif

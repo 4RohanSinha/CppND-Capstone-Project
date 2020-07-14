@@ -1,5 +1,5 @@
-#ifndef EVENTLISTENER_H
-#define EVENTLISTENER_H
+#ifndef GAMEEVENTLISTENER_H
+#define GAMEEVENTLISTENER_H
 
 #include <SDL2/SDL.h>
 #include "Event.h"
