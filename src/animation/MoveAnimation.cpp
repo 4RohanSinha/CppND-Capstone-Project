@@ -15,25 +15,36 @@ Animation::MoveAnimation::MoveAnimation(float endX, float endY): Animation() {
 	types_.push_back(AnimationType::kMove);
 }
 
+Animation::MoveAnimation::MoveAnimation(float endX, float endY, float speed): Animation(), speed_(speed) {
+	startX_ = 0;
+	startY_ = 0;
+	currentX_ = 0;
+	currentY_ = 0;
+	finalX_ = endX;
+	finalY_ = endY;
+	slope_ = (startY_ - finalY_)/(startX_ - finalX_);
+	intercept_ = startY_ - (slope_*startX_);
+	types_.push_back(AnimationType::kMove);
+}
 void Animation::MoveAnimation::GoToNextPosition() {
 	hasStarted_ = true;
 	if (std::isinf(slope_)) {
 		if (currentY_ < finalY_)
-			currentY_ += 0.5;
+			currentY_ += 0.5*speed_;
 		else if (currentY_ > finalY_)
-			currentY_ -= 0.5;
+			currentY_ -= 0.5*speed_;
 		return;		
 	}
 
 	else {
 		if (currentX_ < finalX_) {
-			currentX_ += 0.5;
+			currentX_ += 0.5*speed_;
 		}
 		else if (finalX_ == currentX_)
 			return;
 
 		else if (currentX_ > finalX_)
-			currentX_ -= 0.5;
+			currentX_ -= 0.5*speed_;
 		currentY_ = (slope_*currentX_) + intercept_;
 	}
 }

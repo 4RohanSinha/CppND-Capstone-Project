@@ -33,7 +33,7 @@ void Layer::AddTextureFromNewSurface(std::shared_ptr<Node> node, std::shared_ptr
 	if (node->textures_.size() == node->surfaces_.size()) {
 		node->surfaces_.push_back(surface);
 	} else if (node->textures_.size() > node->surfaces_.size()) {
-		throw std::runtime_error("Error: the number of textures is greater than the number of surfaces for a node. Unable to proceed.");
+		throw std::runtime_error("Runtime Error: the number of textures is greater than the number of surfaces for a node. Unable to proceed.");
 	}
 	//no if statement if the number of surfaces is greater than the number of textures because that may imply that the user has already added the surface
 	node->textures_.push_back(CreateTextureFromSurface(surface));

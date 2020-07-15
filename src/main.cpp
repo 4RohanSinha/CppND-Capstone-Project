@@ -34,19 +34,19 @@ int main() {
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [bird] () {
-		bird->Move(bird->GetX() - 800, bird->GetY());		
+		bird->Move(bird->GetX() - 200, bird->GetY(), 4);		
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyRightArr, [bird] () {
-		bird->Move(bird->GetX() + 800, bird->GetY());		
+		bird->Move(bird->GetX() + 200, bird->GetY(), 4);		
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() - 800);
+		bird->Move(bird->GetX(), bird->GetY() - 200, 4);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyDownArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() + 800);		
+		bird->Move(bird->GetX(), bird->GetY() + 200, 4);		
 	});
 
 	gameEngine->HandleKeyUpFor(KeyCharacter::kAll, [bird] () {
@@ -60,7 +60,7 @@ int main() {
 		iter++;
 		if (iter == 100) {
 			test->Move(100, 100);
-			test->Move(200, 200);
+			test->Move(200, 0);
 			test->Move(50, 100);
 			test->Move(0, 0);
 			test->Move(300, 300);

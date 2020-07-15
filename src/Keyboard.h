@@ -7,9 +7,16 @@
 
 class Keyboard {
 public:
-	void GetKeyboardInput();
+	Keyboard();
+	void Update();
+	bool GetStatusOfKey(KeyCharacter key);
+	static Uint8 ConvertToSDL(KeyCharacter key);
 private:
-	std::unordered_map<KeyCharacter, bool> keys_;
+	
+	//information for std::hash from https://en.cppreference.com/w/cpp/utility/hash
+	//more info from https://www.reddit.com/r/cpp_questions/comments/3ayy9d/hash_for_enum_class/
+	static const std::unordered_map<KeyCharacter, Uint8, std::hash<std::underlying_type<KeyCharacter>::type>> keys_;
+	const unsigned char* keyStates_;
 
 };
 

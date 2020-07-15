@@ -67,6 +67,7 @@ public:
 	
 	virtual void AnimationChange() = 0;
 	void Move(float newX, float newY);
+	void Move(float newX, float newY, float speed);
 
 	void ChangeSize(int width, int height);
 

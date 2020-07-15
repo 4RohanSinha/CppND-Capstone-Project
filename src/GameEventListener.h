@@ -16,12 +16,10 @@ public:
 
 private:
 	Event event_ = Event(EventType::kNone);
-	SDL_Event eventSDL_;
 	
 	//usage of std::function from https://en.cppreference.com/w/cpp/utility/functional/function
 	std::function<void()> handlerFunction_;
 	std::shared_ptr<Input> inputMonitor_ = nullptr;
-	std::mutex mtx_;
 };
 
 #endif

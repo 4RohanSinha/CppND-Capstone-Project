@@ -48,6 +48,10 @@ void Node::Move(float newX, float newY) {
 	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY));
 }
 
+void Node::Move(float newX, float newY, float speed) {
+	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY, speed));
+}
+
 void Node::ChangeSize(int width, int height) {
 }
 
