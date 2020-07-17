@@ -1,7 +1,10 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+#include <SDL2/SDL.h>
+#include <stdexcept>
 #include <vector>
+#include <algorithm>
 #include <initializer_list>
 
 class Color {
@@ -13,7 +16,7 @@ public:
 
 	Color(int red, int green, int blue, int alpha);
 
-	Color(const Color& otherColor) const { color_ = otherColor.color_; }
+	Color(const Color& otherColor) { color_ = otherColor.color_; }
 
 	int GetRed() { return color_[0]; }
 
@@ -33,8 +36,9 @@ public:
 		return !(*this == otherColor);
 	}
 
-	bool operator=(const Color& otherColor) const {
+	Color& operator=(const Color& otherColor) {
 		color_ = otherColor.color_;
+		return *this;
 	}
 
 	SDL_Color ConvertToSDL();
