@@ -20,9 +20,9 @@ public:
 
 	void ChangeImage();
 
-	void AnimationChange();
-
 	void AnimateSize(int newWidth, int newHeight);
+
+	void SetImage(int imageIndex);
 
 	void AddImage(std::string img);
 
@@ -44,7 +44,7 @@ protected:
 
 private:
 	std::vector<std::string> imageSources_;
-
+	bool executeFunction_{false};
 };
 
 #endif

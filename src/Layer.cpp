@@ -75,7 +75,6 @@ void Layer::Update() {
 				i->ConstructRectangle();
 			}	
 	
-
 			if (i->status_ == TextureRender::kRenderNow) {
 				ClearNode(i);
 				if (i->newSurfaces_.size() > 0) {
@@ -84,6 +83,12 @@ void Layer::Update() {
 				}
 				i->status_ = TextureRender::kNoRender;
 			}
+
+			if (i->status_ == TextureRender::kClear) {
+				ClearNode(i);
+				i->status_ = TextureRender::kNoRender;
+			}
+
 
 			if (i->rendererSetDimensions_) {
 				SDL_QueryTexture((i->textures_[i->currentForm_]).get(), NULL, NULL, &i->width_, &i->height_);

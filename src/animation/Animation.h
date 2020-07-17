@@ -15,6 +15,7 @@ namespace Animation {
 		Animation() {}
 		virtual bool HasReachedDestination() = 0;
 		virtual void SetStartPosition(std::vector<float> position) = 0;
+		virtual void SetSpeed(float newSpeed) = 0;
 		std::vector<float> GetNextPosition();
 		virtual std::vector<float> GetDestination() = 0;
 		bool HasStarted();

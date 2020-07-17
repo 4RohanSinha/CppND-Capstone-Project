@@ -8,8 +8,6 @@
 #include "CollisionDetector.h"
 #include "GameEventListener.h"
 #include "Input.h"
-#include <thread>
-#include <mutex>
 
 class Controller {
 public:
@@ -41,6 +39,7 @@ public:
 	bool IsRunning() { return inputMonitor_->IsRunning(); }
 
 private:
+	//See if unique_ptr can be used or if pointers can be removed altogether
 	std::vector<std::shared_ptr<CollisionDetector>> collideDetect;
 	std::vector<std::shared_ptr<GameEventListener>> inputListeners;
 	std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes_ = nullptr;

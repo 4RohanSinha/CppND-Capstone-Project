@@ -8,12 +8,15 @@
 namespace Animation {
 	class MoveAnimation: public Animation {
 	public:
-		MoveAnimation(float endX, float endY);
+		//MoveAnimation(float endX, float endY);
+		//default parameters: https://en.cppreference.com/w/cpp/language/default_arguments
 		MoveAnimation(float endX, float endY, float speed);
+		MoveAnimation(float direction, float speed); //continue forever
 		bool HasReachedDestination();
 		void SetStartPosition(std::vector<float> position);
 		std::vector<float> GetStartCoordinates();
 		std::vector<float> GetDestination();
+		void SetSpeed(float newSpeed);
 
 	protected:
 		void GoToNextPosition();
@@ -21,7 +24,9 @@ namespace Animation {
 	private:
 		float slope_;
 		float intercept_;
-		float speed_{1.0};
+		float speed_{4.0};
+		float direction_;
+		bool hasDestination_{true};
 	};
 };
 #endif

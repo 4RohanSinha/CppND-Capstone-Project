@@ -34,6 +34,11 @@ Node::Node(Node &&source) {}
 Node& Node::operator=(Node &&source) {}
 */
 
+void Node::AnimationChange() {
+	if (animationFunction_)
+		animationFunction_();
+}
+
 void Node::ConstructRectangle() {
 	if (rect_ != NULL && rect_ != nullptr)
 		rect_.reset();
@@ -43,13 +48,17 @@ void Node::ConstructRectangle() {
 	rect_->w = width_;
 	rect_->h = height_;
 }
-
+/*
 void Node::Move(float newX, float newY) {
 	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY));
-}
+}*/
 
 void Node::Move(float newX, float newY, float speed) {
 	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY, speed));
+}
+
+void Node::Move(float direction, float speed) {
+	animations_.push(std::make_shared<Animation::MoveAnimation>(direction, speed));
 }
 
 void Node::ChangeSize(int width, int height) {

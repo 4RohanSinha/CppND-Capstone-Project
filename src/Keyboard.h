@@ -11,6 +11,7 @@ public:
 	void Update();
 	bool GetStatusOfKey(KeyCharacter key);
 	static Uint8 ConvertToSDL(KeyCharacter key);
+	std::vector<KeyCharacter> GetPressedKeys();
 private:
 	
 	//information for std::hash from https://en.cppreference.com/w/cpp/utility/hash

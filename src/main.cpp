@@ -7,7 +7,7 @@
 #include <memory>
 #include <thread>
 #include <future>
-
+#include <cmath>
 
 //A sample program
 //TODO: Find a way to prevent the user from having to declare pointers to Node objects
@@ -19,8 +19,9 @@ int main() {
 	std::shared_ptr<Text> test = std::make_shared<Text>("Hello World", font, 50, 50);
 	std::shared_ptr<Text> testA = std::make_shared<Text>("Hello Again", font, 50, 100);
 	std::shared_ptr<Sprite> bird = std::make_shared<Sprite>("../photos/bird.png", 200, 200, 100, 100);	
-	//test->SetText("Hi");
-	//test->SetText("Hello World");
+	
+	bird->AddImage("../photos/alligator.png");
+	bird->SetImage(0);
 	gameEngine->AddLayers(5);
 	gameEngine->AddToLayer(2, test);
 	gameEngine->AddToLayer(3, testA);
@@ -29,16 +30,19 @@ int main() {
 		gameEngine->HideNode(testA);
 	});
 
-	gameEngine->HandleCollisionsBetween(test, bird, [gameEngine, test] () {
-		gameEngine->HideNode(test);		
+	gameEngine->HandleCollisionsBetween(test, bird, [gameEngine, test, bird] () {
+		bird->ChangeSpeed(-4.0);
+		
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [bird] () {
 		bird->Move(bird->GetX() - 200, bird->GetY(), 4);		
+		bird->SetImage(1);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyRightArr, [bird] () {
 		bird->Move(bird->GetX() + 200, bird->GetY(), 4);		
+		bird->SetImage(0);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [bird] () {
@@ -55,16 +59,17 @@ int main() {
 	
 
 	int iter = 0;
+	int delta = 200;
 	while (gameEngine->IsRunning()) {
 		gameEngine->RenderLoop();
 		iter++;
 		if (iter == 100) {
-			test->Move(100, 100);
-			test->Move(200, 0);
-			test->Move(50, 100);
-			test->Move(0, 0);
-			test->Move(300, 300);
-			test->Move(75, 10);
+			test->Move(100, 100, 2);
+			test->Move(200, 0, 2);
+			test->Move(50, 100, 2);
+			test->Move(0, 0, 2);
+			test->Move(300, 300, 2);
+			test->Move(75, 10, 2);
 		}
 
 		if (iter == 150) {

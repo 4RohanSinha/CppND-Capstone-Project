@@ -11,6 +11,7 @@
 Renderer::Renderer(int height, int width, std::string windowTitle, std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes): height_(height), width_(width), windowTitle_(windowTitle) {
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
+	IMG_Init(IMG_INIT_PNG);
 	window = GetSharedPtr(SDL_CreateWindow(windowTitle_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, 0));
 	renderer = GetSharedPtr(SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 	SDL_SetRenderDrawColor(renderer.get(), 0, 0, 0, 0);
@@ -78,6 +79,7 @@ void Renderer::ShowNode(std::shared_ptr<Node> node) {
 
 Renderer::~Renderer() {
 	TTF_Quit();
+	IMG_Quit();
 	SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
 	SDL_Quit();
 }

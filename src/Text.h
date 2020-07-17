@@ -24,8 +24,6 @@ public:
 	//TODO: allow for adding text option without replacing current onr
 	void SetText(std::string text);
 
-	void AnimationChange();
-
 	void ChangeFont(Font newFont);
 	
 	void ChangeColor(SDL_Color color);

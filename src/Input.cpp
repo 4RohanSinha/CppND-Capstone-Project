@@ -11,6 +11,8 @@ Event Input::GetUserEvent() {
 	Event e = Event(EventType::kNone);
 	KeyCharacter key = KeyCharacter::kNone;
 
+	auto res = keyboard_->GetPressedKeys();
+
 	if (eventSDL_.type == SDL_QUIT) {
 		eType = EventType::kQuit;
 		e.SetEventType(eType);

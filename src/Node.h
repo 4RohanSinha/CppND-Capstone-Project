@@ -42,7 +42,8 @@ std::unique_ptr<T> GetUniquePtr(T *t) {
 enum TextureRender {
 	kRenderNow,
 	kRenderForever,
-	kNoRender
+	kNoRender,
+	kClear
 };
 
 class Node {
@@ -64,10 +65,17 @@ public:
 */	
 	//virtual function to create surface
 	//surface is used to create the texture that can then be rendered
+	template<typename T>
+	void CallOnAnimation(T animateFunction) {
+		animationFunction_ = animateFunction;
+	}
 	
-	virtual void AnimationChange() = 0;
-	void Move(float newX, float newY);
+	void AnimationChange();
+
+	//void Move(float newX, float newY);
 	void Move(float newX, float newY, float speed);
+
+	void Move(float direction, float speed);
 
 	void ChangeSize(int width, int height);
 
@@ -79,15 +87,34 @@ public:
 
 	bool IsAnimating() { return !animations_.empty(); }
 
+	void ChangeSpeed(float newSpeed) { if (IsAnimating()) animations_.front()->SetSpeed(-4.0); }
+
 protected:
 	bool rendererSetDimensions_{false};
+	
+	bool usesSurfaces_{true};
+
+	bool usesTextures_{true};
+
 	TextureRender status_{TextureRender::kRenderNow};
+	
 	float x_;
+	
 	float y_;
+
 	int width_;
+	
 	int height_;
+	
 	bool isHidden_{false};
+
+	//TODO: allow Node descendants not to require surfaces and textures
+	//fix the rendering system to do so
+	//allow descendants to declare their own custom rendering processes
+	//this will allow the Shape class to be used
+	
 	std::shared_ptr<SDL_Surface> surface_ = nullptr;
+	
 	std::shared_ptr<SDL_Texture> texture_ = nullptr;
 
 	std::shared_ptr<SDL_Rect> rect_ = nullptr;
@@ -105,19 +132,26 @@ protected:
 	std::queue<std::shared_ptr<SDL_Surface>> newSurfaces_;
 
 	void ConstructRectangle();
+	
 	virtual void GenerateSurfacesFromSources() = 0;
+	
 	virtual void CreateSurface(int i) = 0;
 
 	static bool CheckLength(float len);
 
 	std::string collisionBitMask{"Unknown Node Type"};
+	
+	std::function<void()> animationFunction_;
+	
 
 	//make this class a friend so that it can access the texture private member
 	//this member should not be accessed from other classes or users, so keep it protected
 	//limit its access to descendant and friend classes
 	//TODO: figure out way to reduce number of friend classes
 	friend class Renderer;
+	
 	friend class Layer;	
+	
 	friend class CollisionDetector;
 };
 

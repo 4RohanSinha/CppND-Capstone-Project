@@ -41,6 +41,7 @@ public:
 	auto GetNodesInvolved() { return nodesInvolved_; }
 
 	void AddNodeInvolved(std::shared_ptr<Node> node) { nodesInvolved_.push_back(node); }
+	
 	void SetEventType(EventType event) { event_ = event; }
 
 	EventType GetEventType() { return event_; }
@@ -53,6 +54,10 @@ public:
 
 	void SetKeyCharacter(KeyCharacter keyChar) { keyChar_ = keyChar; }
 
+	void AddKeyCharacter(KeyCharacter keyChar) { keyChars_.push_back(keyChar); }
+
+	std::vector<KeyCharacter> GetKeyCharacters() { return keyChars_; }
+	
 	bool operator==(const Event& otherEvent) const;
 	
 	bool operator!=(const Event& otherEvent) const;
@@ -61,6 +66,7 @@ private:
 	std::vector<std::shared_ptr<Node>> nodesInvolved_;
 	std::vector<float> coordinates_;
 	KeyCharacter keyChar_{KeyCharacter::kNone};
+	std::vector<KeyCharacter> keyChars_;
 
 };
 
