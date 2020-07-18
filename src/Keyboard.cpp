@@ -41,7 +41,12 @@ const std::unordered_map<KeyCharacter, Uint8, std::hash<std::underlying_type<Key
 	{KeyCharacter::key6, SDL_SCANCODE_6},
 	{KeyCharacter::key7, SDL_SCANCODE_7},
 	{KeyCharacter::key8, SDL_SCANCODE_8},
-	{KeyCharacter::key9, SDL_SCANCODE_9}
+	{KeyCharacter::key9, SDL_SCANCODE_9},
+	{KeyCharacter::keyReturn, SDL_SCANCODE_RETURN2},
+	{KeyCharacter::keyTab, SDL_SCANCODE_TAB},
+	{KeyCharacter::keySlash, SDL_SCANCODE_SLASH},
+	{KeyCharacter::keyComma, SDL_SCANCODE_COMMA},
+	{KeyCharacter::keyPeriod, SDL_SCANCODE_PERIOD}
 };
 
 Keyboard::Keyboard() {

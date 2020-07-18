@@ -36,21 +36,25 @@ int main() {
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [bird] () {
-		bird->Move(bird->GetX() - 200, bird->GetY(), 4);		
+		if (!bird->IsAnimating())
+			bird->Move(bird->GetX() - 10, bird->GetY(), 4);		
 		bird->SetImage(1);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyRightArr, [bird] () {
-		bird->Move(bird->GetX() + 200, bird->GetY(), 4);		
+		if (!bird->IsAnimating())
+			bird->Move(bird->GetX() + 10, bird->GetY(), 4);		
 		bird->SetImage(0);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() - 200, 4);
+		if (!bird->IsAnimating())
+			bird->Move(bird->GetX(), bird->GetY() - 10, 4);
 	});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyDownArr, [bird] () {
-		bird->Move(bird->GetX(), bird->GetY() + 200, 4);		
+		if (!bird->IsAnimating())
+			bird->Move(bird->GetX(), bird->GetY() + 10, 4);		
 	});
 
 	gameEngine->HandleKeyUpFor(KeyCharacter::kAll, [bird] () {
@@ -64,13 +68,13 @@ int main() {
 		gameEngine->RenderLoop();
 		iter++;
 		if (iter == 100) {
-			test->Move(100, 100, 2);
+/*			test->Move(100, 100, 2);
 			test->Move(200, 0, 2);
 			test->Move(50, 100, 2);
 			test->Move(0, 0, 2);
 			test->Move(300, 300, 2);
 			test->Move(75, 10, 2);
-		}
+*/		}
 
 		if (iter == 150) {
 			test->SetText("Hi");

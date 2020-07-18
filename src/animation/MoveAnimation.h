@@ -17,6 +17,7 @@ namespace Animation {
 		std::vector<float> GetStartCoordinates();
 		std::vector<float> GetDestination();
 		void SetSpeed(float newSpeed);
+		bool HasDestination() { return hasDestination_; }
 
 	protected:
 		void GoToNextPosition();

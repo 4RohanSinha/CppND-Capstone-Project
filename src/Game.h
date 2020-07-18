@@ -9,7 +9,7 @@ public:
 	Game();
 	void Run();
 private:
-	std::shared_ptr<Engine> gameEngine;
+	std::shared_ptr<Engine> gameEngine_;
 };
 
 #endif

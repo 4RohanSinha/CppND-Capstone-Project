@@ -48,17 +48,13 @@ void Node::ConstructRectangle() {
 	rect_->w = width_;
 	rect_->h = height_;
 }
-/*
-void Node::Move(float newX, float newY) {
-	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY));
-}*/
 
 void Node::Move(float newX, float newY, float speed) {
-	animations_.push(std::make_shared<Animation::MoveAnimation>(newX, newY, speed));
+	animations_.push_back(std::make_shared<Animation::MoveAnimation>(newX, newY, speed));
 }
 
 void Node::Move(float direction, float speed) {
-	animations_.push(std::make_shared<Animation::MoveAnimation>(direction, speed));
+	animations_.push_back(std::make_shared<Animation::MoveAnimation>(direction, speed));
 }
 
 void Node::ChangeSize(int width, int height) {
@@ -68,7 +64,7 @@ void Node::Clear() {
 }
 
 void Node::ClearAnimations() {
-	std::queue<std::shared_ptr<Animation::Animation>> empty;
+	std::deque<std::shared_ptr<Animation::Animation>> empty;
 	std::swap(animations_, empty);
 }
 

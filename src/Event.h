@@ -5,6 +5,7 @@
 #include <memory>
 #include <cstdarg>
 #include "Node.h"
+#include "Keyboard.h"
 
 //enum class to allow for the same value in two diff. enums (kNone)
 enum class EventType {
@@ -20,14 +21,14 @@ enum class EventType {
 };
 
 
+/*
 //WARNING: to add any keys to this enum, MAKE SURE THEY ARE BEFORE kNone.
 enum KeyCharacter {
 	keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM,
 	keyN, keyO, keyP, keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ,
 	keyShift, keyCtrl, keyLeftArr, keyRightArr, keyUpArr, keyDownArr,
-	key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, keyReturn, keyTab,
-	keyPlus, keyMinus, keyEquals, keySlash, keyComma, keyPeriod, kNone, kAll
-};
+	key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, keyReturn, keyTab, keySlash, keyComma, keyPeriod, kNone, kAll
+};*/
 
 class Event {
 public:
@@ -55,6 +56,8 @@ public:
 	void SetKeyCharacter(KeyCharacter keyChar) { keyChar_ = keyChar; }
 
 	void AddKeyCharacter(KeyCharacter keyChar) { keyChars_.push_back(keyChar); }
+
+	void SetKeyCharacters(std::vector<KeyCharacter> keyChars) { keyChars_ = keyChars; }
 
 	std::vector<KeyCharacter> GetKeyCharacters() { return keyChars_; }
 	

@@ -127,7 +127,7 @@ protected:
 
 	std::vector<std::shared_ptr<SDL_Texture>> textures_;
 
-	std::queue<std::shared_ptr<Animation::Animation>> animations_;
+	std::deque<std::shared_ptr<Animation::Animation>> animations_;
 
 	std::queue<std::shared_ptr<SDL_Surface>> newSurfaces_;
 

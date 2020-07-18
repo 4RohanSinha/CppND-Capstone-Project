@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "Event.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Input {
 public:
@@ -14,6 +15,7 @@ private:
 	SDL_Event eventSDL_;
 	bool isRunning_{true};
 	std::unique_ptr<Keyboard> keyboard_;
+	std::unique_ptr<Mouse> mouse_;
 };
 
 #endif

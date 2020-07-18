@@ -53,7 +53,7 @@ void Layer::Update() {
 				auto curAnimation = (i->animations_).front();
 				curAnimation->SetStartPosition(std::vector<float>{i->x_, i->y_});
 				if (curAnimation->HasReachedDestination()) {
-					(i->animations_).pop();
+					(i->animations_).pop_front();
 				} else {
 					auto nextPoint = curAnimation->GetNextPosition();
 					if (nextPoint.size() == 5) {

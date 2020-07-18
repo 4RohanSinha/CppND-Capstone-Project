@@ -1,9 +1,16 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include "Event.h"
 #include <SDL2/SDL.h>
+#include <unordered_map>
 #include <vector>
+
+enum KeyCharacter {
+        keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM,
+        keyN, keyO, keyP, keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ,
+        keyShift, keyCtrl, keyLeftArr, keyRightArr, keyUpArr, keyDownArr,
+        key0, key1, key2, key3, key4, key5, key6, key7, key8, key9, keyReturn, keyTab, keySlash, keyComma, keyPeriod, kNone, kAll
+};
 
 class Keyboard {
 public:
