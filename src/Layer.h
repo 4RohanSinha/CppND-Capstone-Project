@@ -9,7 +9,6 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include <mutex>
 #include "Node.h"
 
 class Layer {

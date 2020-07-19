@@ -2,6 +2,13 @@
 
 Input::Input() {
 	keyboard_ = std::make_unique<Keyboard>();
+	mouse_ = std::make_unique<Mouse>();
+}
+
+void Input::Update() {
+	keyboard_->Update();
+	if (updateMouse_)
+		mouse_->Update();
 }
 
 Event Input::GetUserEvent() {
@@ -10,8 +17,6 @@ Event Input::GetUserEvent() {
 	EventType eType;
 	Event e = Event(EventType::kNone);
 	KeyCharacter key = KeyCharacter::kNone;
-
-	auto res = keyboard_->GetPressedKeys();
 
 	if (eventSDL_.type == SDL_QUIT) {
 		eType = EventType::kQuit;
@@ -165,7 +170,8 @@ Event Input::GetUserEvent() {
 		eType = EventType::kTapUp;
 	} else if (eventSDL_.type == SDL_FINGERMOTION) {
 		eType = EventType::kSwipe;
-	}
+	} else if ((eventSDL_.type == SDL_MOUSEMOTION || eventSDL_.type == SDL_MOUSEBUTTONDOWN) || eventSDL_.type == SDL_MOUSEBUTTONUP)
+		updateMouse_ = true;
 
 	e.SetEventType(eType);
 	e.SetKeyCharacter(key);

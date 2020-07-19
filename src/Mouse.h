@@ -13,13 +13,12 @@ enum class MouseButton {
 
 class Mouse {
 public:
-	Mouse() {}
 	void Update();
 	std::vector<int> GetCoordinates();
 	MouseButton GetButtonClicked();
 private:
-	int mouseX_{0};
-	int mouseY_{0};
+	int mouseX_ = 0;
+	int mouseY_ = 0;
 	MouseButton buttonClicked_{MouseButton::kNone};
 
 	void UpdateCoordinates();

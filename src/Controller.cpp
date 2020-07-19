@@ -19,6 +19,7 @@ void Controller::ListenUpdate() {
 }
 
 void Controller::Update() {
+	inputMonitor_->Update();
 	ListenUpdate();
 	CollisionUpdate();
 }

@@ -18,7 +18,9 @@
 #include <cmath>
 #include "animation/Animation.h"
 #include "animation/MoveAnimation.h"
+#include "TextureManager.h"
 
+/*
 //Using SDL2 with smart pointers
 //research for using SDL2 and smart pointers combined is from: https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
 
@@ -32,7 +34,7 @@ template <typename T>
 std::shared_ptr<T> GetSharedPtr(T *t) {
 	//TODO: see if function pointer can be passed in instead
 	return std::shared_ptr<T>(t, [](T* t) { SDL_DelObject(t); });
-}
+}*/
 
 template<typename T>
 std::unique_ptr<T> GetUniquePtr(T *t) {
@@ -48,6 +50,7 @@ enum TextureRender {
 
 class Node {
 public:
+	Node() {}
 	Node(float x, float y, int width, int height); //basic constructor
 	Node(float x, float y); //basic constructor
 

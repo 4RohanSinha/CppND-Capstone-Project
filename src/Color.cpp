@@ -4,6 +4,9 @@ Color::Color(std::initializer_list<int> l) {
 	int max = *std::max_element(l.begin(), l.end());
         int min = *std::min_element(l.begin(), l.end());
         if (l.size() == 4 && (max <= 255 && min >= 0)) color_ = l;
+	else if (l.size() == 3 && (max <= 255 && min >= 0)) {
+		color_.assign({*l.begin(), *(l.begin() + 1), *(l.begin() + 2), 255});
+	}
         else throw std::invalid_argument("Error: Color constructor: arguments invalid. Either incorrect length for the initializer or one of the values passed in is not within the 0-255 range");
 }
 

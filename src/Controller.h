@@ -12,15 +12,14 @@
 class Controller {
 public:
 	Controller(std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes);
+
+	void Update();
+	
 	//these template functions can only be defined within the header files themselves
 	template <typename T>
 	void HandleCollisionsBetween(std::shared_ptr<Node> nodeOne, std::shared_ptr<Node> nodeTwo, T handlerFunction) {
 		collideDetect.push_back(std::make_shared<CollisionDetector>(nodeOne, nodeTwo, handlerFunction));
 	}
-
-
-
-	void Update();
 
 	template <typename T>
 	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
