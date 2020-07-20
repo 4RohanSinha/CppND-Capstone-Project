@@ -13,6 +13,10 @@ std::vector<int> Mouse::GetCoordinates() {
 	return res;
 }
 
+bool Mouse::HasBeenPressed() {
+	return (buttonClicked_ != MouseButton::kNone);
+}
+
 MouseButton Mouse::GetButtonClicked() {
 	Update();
 	return buttonClicked_;
@@ -23,15 +27,18 @@ void Mouse::UpdateCoordinates() {
 }
 
 void Mouse::UpdateButtonClicked() {
-	if (SDL_BUTTON(SDL_BUTTON_LEFT))
-		buttonClicked_ = MouseButton::kLeft;
+	if (SDL_GetMouseState(NULL, NULL)) {
+		if (SDL_BUTTON(SDL_BUTTON_LEFT))
+			buttonClicked_ = MouseButton::kLeft;
 
-	else if (SDL_BUTTON(SDL_BUTTON_RIGHT))
-		buttonClicked_ = MouseButton::kRight;
+		else if (SDL_BUTTON(SDL_BUTTON_RIGHT))
+			buttonClicked_ = MouseButton::kRight;
+		
+		else if (SDL_BUTTON(SDL_BUTTON_MIDDLE))
+			buttonClicked_ = MouseButton::kMiddle;
 	
-	else if (SDL_BUTTON(SDL_BUTTON_MIDDLE))
-		buttonClicked_ = MouseButton::kMiddle;
-	
+	}
 	else
 		buttonClicked_ = MouseButton::kNone;
+	
 }

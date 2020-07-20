@@ -6,7 +6,7 @@
 Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
 	nodes_ = std::make_shared<std::vector<std::shared_ptr<Node>>>();
 	renderer_ = std::make_unique<Renderer>(WindowWidth, WindowHeight, WindowTitle, nodes_);
-	controller = std::make_unique<Controller>(nodes_);
+	controller = std::make_unique<Controller>();
 }
 
 void Engine::AddLayers(int n) {

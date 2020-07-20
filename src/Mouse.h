@@ -15,6 +15,7 @@ class Mouse {
 public:
 	void Update();
 	std::vector<int> GetCoordinates();
+	bool HasBeenPressed();
 	MouseButton GetButtonClicked();
 private:
 	int mouseX_ = 0;

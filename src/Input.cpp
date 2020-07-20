@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Input.h"
 
 Input::Input() {
@@ -6,11 +7,16 @@ Input::Input() {
 }
 
 void Input::Update() {
+	SDL_PollEvent(&eventSDL_);
+	if (eventSDL_.type == SDL_QUIT) {
+		isRunning_ = false;
+	}
 	keyboard_->Update();
-	if (updateMouse_)
-		mouse_->Update();
+	mouse_->Update();
 }
 
+//TODO: get rid of the following method
+//also, see if static methods can be replaced
 Event Input::GetUserEvent() {
 	SDL_PollEvent(&eventSDL_);
 
@@ -170,8 +176,7 @@ Event Input::GetUserEvent() {
 		eType = EventType::kTapUp;
 	} else if (eventSDL_.type == SDL_FINGERMOTION) {
 		eType = EventType::kSwipe;
-	} else if ((eventSDL_.type == SDL_MOUSEMOTION || eventSDL_.type == SDL_MOUSEBUTTONDOWN) || eventSDL_.type == SDL_MOUSEBUTTONUP)
-		updateMouse_ = true;
+	}
 
 	e.SetEventType(eType);
 	e.SetKeyCharacter(key);

@@ -77,3 +77,7 @@ void Text::GenerateSurfacesFromSources() {
 		i++;
 	}
 }
+
+void Text::GetCurrentTexture() {
+
+}

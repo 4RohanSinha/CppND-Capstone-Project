@@ -15,11 +15,11 @@ public:
 	std::vector<int> GetMouseCoordinates() { return mouse_->GetCoordinates(); }
 	MouseButton GetMouseButton() { return mouse_->GetButtonClicked(); }
 	std::vector<KeyCharacter> GetPressedKeys() { return keyboard_->GetPressedKeys(); }
-	bool GetStatusOfKey(KeyCharacter key) { return keyboard_->GetStatusOfKey(key); }
+	std::vector<KeyCharacter> GetReleasedKeys() { return keyboard_->GetReleasedKeys(); }
+	KeyStatus GetStatusOfKey(KeyCharacter key) { return keyboard_->GetStatusOfKey(key); }
 private:
 	SDL_Event eventSDL_;
 	bool isRunning_{true};
-	bool updateMouse_{false};
 	std::unique_ptr<Keyboard> keyboard_;
 	std::unique_ptr<Mouse> mouse_;
 };

@@ -33,6 +33,7 @@ public:
 protected:
 	void CreateSurface(int i);
 	void GenerateSurfacesFromSources();
+	void GetCurrentTexture();
 
 private:
 	std::string text_;

@@ -42,6 +42,7 @@ protected:
 
 	void GenerateSurfacesFromSources();
 
+
 private:
 	std::vector<std::string> imageSources_;
 	bool executeFunction_{false};

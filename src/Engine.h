@@ -29,8 +29,18 @@ public:
 	}
 
 	template<typename T>
+	void HandleKeyPressFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
+		controller->HandleKeyPressFor(keys, handlerFunction);
+	}
+
+	template<typename T>
 	void HandleKeyUpFor(KeyCharacter key, T handlerFunction) {
 		controller->HandleKeyUpFor(key, handlerFunction);
+	}
+
+	template<typename T>
+	void HandleKeyUpFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
+		controller->HandleKeyUpFor(keys, handlerFunction);
 	}
 private:
 	std::unique_ptr<Renderer> renderer_ = nullptr;

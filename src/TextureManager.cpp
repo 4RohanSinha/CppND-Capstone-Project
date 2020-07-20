@@ -19,21 +19,6 @@ void TextureManager::AddTexture(std::shared_ptr<Texture> texture) {
 	textures_.push_back(texture);
 }
 
-std::shared_ptr<Texture> TextureManager::GetCurrentTexture() {
-	return textures_[currentIndex_];
-}
-
 std::shared_ptr<Texture> TextureManager::operator[](int i) const {
 	return textures_[i];
-}
-
-void TextureManager::RenderNextTexture() {
-	currentIndex_++;
-	if (currentIndex_ >= textures_.size())
-		currentIndex_ = 0;
-}
-
-void TextureManager::RenderTextureByIndex(int index) {
-	if (index >= 0 && index < textures_.size())
-		currentIndex_ = index;
 }
