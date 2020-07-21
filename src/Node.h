@@ -19,6 +19,7 @@
 #include "animation/Animation.h"
 #include "animation/MoveAnimation.h"
 #include "TextureManager.h"
+#include "Color.h"
 
 /*
 //Using SDL2 with smart pointers
@@ -54,8 +55,10 @@ public:
 	Node(float x, float y, int width, int height); //basic constructor
 	Node(float x, float y); //basic constructor
 
-	float GetX() { return x_; }
-	float GetY() { return y_; }
+	virtual void Draw() {}
+
+	float GetX() { return x; }
+	float GetY() { return y; }
 	int GetWidth() { return width_; }
 	int GetHeight() { return height_; }
 	//Rule of Five
@@ -82,15 +85,23 @@ public:
 
 	void ChangeSize(int width, int height);
 
+	virtual Color GetColor() { return Color(0, 0, 0, 0); }
+
 	void SetForm(int form);
 
-	void Clear();
+	virtual void Clear();
 
 	void ClearAnimations();
 
 	bool IsAnimating() { return !animations_.empty(); }
 
+	float GetSpeed() { if (IsAnimating()) return animations_.front()->GetSpeed(); else return 0; }
+
 	void ChangeSpeed(float newSpeed) { if (IsAnimating()) animations_.front()->SetSpeed(-4.0); }
+
+	float x;
+	float y;
+	std::string collisionBitMask{"Unknown Node Type"};
 
 protected:
 	bool rendererSetDimensions_{false};
@@ -101,15 +112,15 @@ protected:
 
 	TextureRender status_{TextureRender::kRenderNow};
 	
-	float x_;
-	
-	float y_;
-
 	int width_;
 	
 	int height_;
 	
 	bool isHidden_{false};
+
+	//NOTE: the variable below is used to help transition to the new rendering system
+	//delete after the transition is complete
+	bool useNewExperiment{false};
 
 	//TODO: allow Node descendants not to require surfaces and textures
 	//fix the rendering system to do so
@@ -134,17 +145,23 @@ protected:
 
 	std::queue<std::shared_ptr<SDL_Surface>> newSurfaces_;
 
-	void ConstructRectangle();
+	virtual void ConstructRectangle();
 	
-	virtual void GenerateSurfacesFromSources() = 0;
+	virtual void GenerateSurfacesFromSources() {}
 	
-	virtual void CreateSurface(int i) = 0;
+	virtual void CreateSurface(int i) {}
 
 	static bool CheckLength(float len);
 
-	std::string collisionBitMask{"Unknown Node Type"};
-	
+	virtual void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {}
+
+	virtual void Render() {}
+
 	std::function<void()> animationFunction_;
+
+	std::vector<SDL_Point> points_;
+
+	bool textureSurface_{true};
 	
 
 	//make this class a friend so that it can access the texture private member

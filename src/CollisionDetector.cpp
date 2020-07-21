@@ -2,15 +2,15 @@
 #include <iostream>
 
 void CollisionDetector::CheckForCollisions() {
-	auto iWidth = ((nodeOne->rect_)->w)/2;	
-	auto iHeight = ((nodeOne->rect_)->h)/2;	
-	auto jWidth = ((nodeTwo->rect_)->w)/2;	
-	auto jHeight = ((nodeTwo->rect_)->h)/2;	
+	auto iWidth = (nodeOne->GetWidth())/2;	
+	auto iHeight = (nodeOne->GetHeight())/2;	
+	auto jWidth = (nodeTwo->GetWidth())/2;	
+	auto jHeight = (nodeTwo->GetHeight())/2;	
 
-	auto iCenterX = iWidth + (nodeOne->rect_)->x;
-	auto iCenterY = iHeight + (nodeOne->rect_)->y;
-	auto jCenterX = jWidth + (nodeTwo->rect_)->x;
-	auto jCenterY = jHeight + (nodeTwo->rect_)->y;
+	auto iCenterX = iWidth + (nodeOne->x);
+	auto iCenterY = iHeight + (nodeOne->y);
+	auto jCenterX = jWidth + (nodeTwo->x);
+	auto jCenterY = jHeight + (nodeTwo->y);
 
 	if (abs(iCenterX - jCenterX) > (iWidth + jWidth)) {
 	

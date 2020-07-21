@@ -79,12 +79,12 @@ void Keyboard::Update() {
 //then in the next iteration it will be changed to keyNone to indicate that the key is no longer active
 
 //return vector of keys that are pressed
-std::vector<KeyCharacter> Keyboard::GetPressedKeys() {
+std::set<KeyCharacter> Keyboard::GetPressedKeys() {
 	return LookForKeyStatus(KeyStatus::keyPressed);
 }
 
 //return vector of keys that were pressed but now are released
-std::vector<KeyCharacter> Keyboard::GetReleasedKeys() {
+std::set<KeyCharacter> Keyboard::GetReleasedKeys() {
 	return LookForKeyStatus(KeyStatus::keyReleased);
 }
 
@@ -98,24 +98,21 @@ void Keyboard::UpdateKeyStatus() {
 	for (auto& i: keyStatuses_) {
 		if (keyStates_[ConvertToSDL(i.first)]) {
 			keyStatuses_[i.first] = KeyStatus::keyPressed;
-			return;
 		} else if (!keyStates_[ConvertToSDL(i.first)] && keyStatuses_[i.first] == KeyStatus::keyPressed) {
 			keyStatuses_[i.first] = KeyStatus::keyReleased;
-			return;
 		} else if (keyStatuses_[i.first] == KeyStatus::keyReleased) {
 			keyStatuses_[i.first] = KeyStatus::keyNone;
-			return;
 		}
 	}
 }
 
 //this function is a private method designed to look for keys with a particular key status (KeyStatus::keyPressed for example)
 //it is used in the Keyboard::GetPressedKeys() and Keyboard::GetReleasedKeys()
-std::vector<KeyCharacter> Keyboard::LookForKeyStatus(KeyStatus status) {
-	std::vector<KeyCharacter> res;
+std::set<KeyCharacter> Keyboard::LookForKeyStatus(KeyStatus status) {
+	std::set<KeyCharacter> res;
 	for (auto& i: keyStatuses_) {
 		if (keyStatuses_[i.first] == status) {
-			res.push_back(i.first);
+			res.insert(i.first);
 		}
 	}
 

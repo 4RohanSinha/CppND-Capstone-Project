@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <unordered_map>
 #include <vector>
+#include <set>
 
 enum KeyCharacter {
         keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM,
@@ -24,8 +25,8 @@ public:
 	void Update();
 	KeyStatus GetStatusOfKey(KeyCharacter key);
 	static Uint8 ConvertToSDL(KeyCharacter key);
-	std::vector<KeyCharacter> GetPressedKeys();
-	std::vector<KeyCharacter> GetReleasedKeys();
+	std::set<KeyCharacter> GetPressedKeys();
+	std::set<KeyCharacter> GetReleasedKeys();
 private:
 	
 	//information for std::hash from https://en.cppreference.com/w/cpp/utility/hash
@@ -34,7 +35,7 @@ private:
 	std::unordered_map<KeyCharacter, KeyStatus, std::hash<std::underlying_type<KeyCharacter>::type>> keyStatuses_;
 	const unsigned char* keyStates_;
 	void UpdateKeyStatus();
-	std::vector<KeyCharacter> LookForKeyStatus(KeyStatus status);
+	std::set<KeyCharacter> LookForKeyStatus(KeyStatus status);
 
 };
 

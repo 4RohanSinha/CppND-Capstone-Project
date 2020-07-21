@@ -1,10 +1,7 @@
 #include "EventHandler.h"
 
-bool EventHandler::CheckKeyboardInput(std::vector<KeyCharacter> inputKeys, std::vector<KeyCharacter> listenKeys) {
-	bool runFunction = (inputKeys == listenKeys);
-	for (int i = 0; i < listenKeys.size(); i++)
-		if (listenKeys[i] == KeyCharacter::kAll && inputKeys.size() > 0)
-			runFunction = true;
+bool EventHandler::CheckKeyboardInput(std::set<KeyCharacter> inputKeys, std::set<KeyCharacter> listenKeys) {
+	bool runFunction = (inputKeys == listenKeys) || (listenKeys.find(KeyCharacter::kAll) != listenKeys.end() && inputKeys.size() > 0);
 
 	return runFunction;
 }

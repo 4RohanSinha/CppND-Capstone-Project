@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include "Node.h"
+#include "SpriteManager.h"
 
 class Sprite: public Node {
 public:
@@ -18,34 +19,30 @@ public:
 
 	void NextImage();
 
-	void ChangeImage();
-
-	void AnimateSize(int newWidth, int newHeight);
-
 	void SetImage(int imageIndex);
 
 	void AddImage(std::string img);
 
-	std::string GetCurrentImage() { return imageSources_[currentForm_]; }
+	int GetCurrentImageIndex() { return spriteManager_->CurrentIndex(); }
 
-	int GetCurrentImageIndex() { return currentForm_; }
-
-	std::string GetImageSourceAt(int index) { return imageSources_[index]; }
-
-	int NumberImages() { return imageSources_.size(); }
+	std::string GetImageSourceAt(int index) { return (*spriteManager_)[index].begin()->first; }
+	std::string GetCurrentImage() { return GetImageSourceAt(GetCurrentImageIndex()); }
 
 	static bool CheckImageSource(std::string src);
 
-protected:
+	void ConstructRectangle() { spriteManager_->ConstructRectangle(x, y, width_, height_); }
 
-	void CreateSurface(int i);
+	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
 
-	void GenerateSurfacesFromSources();
+	void Render();
 
+	void Clear();
+
+	int GetWidth() { return spriteManager_->GetWidth(); }
+	int GetHeight() { return spriteManager_->GetHeight(); }
 
 private:
-	std::vector<std::string> imageSources_;
-	bool executeFunction_{false};
+	std::unique_ptr<SpriteManager> spriteManager_ = nullptr;
 };
 
 #endif

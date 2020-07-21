@@ -1,11 +1,11 @@
 #include "Node.h"
 #include <iostream>
 
-Node::Node(float x, float y): x_(x), y_(y), width_(0), height_(0) {
+Node::Node(float x, float y): x(x), y(y), width_(0), height_(0) {
 	rendererSetDimensions_ = true;
 }
 
-Node::Node(float x, float y, int width, int height): x_(x), y_(y) {
+Node::Node(float x, float y, int width, int height): x(x), y(y) {
 	if (CheckLength(width) && CheckLength(height)) {
 		width_ = width;
 		height_ = height;
@@ -43,8 +43,8 @@ void Node::ConstructRectangle() {
 	if (rect_ != NULL && rect_ != nullptr)
 		rect_.reset();
 	rect_ = std::make_shared<SDL_Rect>();
-	rect_->x = x_;
-	rect_->y = y_;
+	rect_->x = x;
+	rect_->y = y;
 	rect_->w = width_;
 	rect_->h = height_;
 }

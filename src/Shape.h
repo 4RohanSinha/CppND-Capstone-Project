@@ -11,14 +11,13 @@
 class Shape: public Node {
 public:
 	//TODO: make sure Draw() is called
-	Shape() { }
-	Shape(Color color): color_(color) { }
+	Shape() { textureSurface_ = false; }
+	Shape(Color color): color_(color) { textureSurface_ = false; }
 	Color GetColor() { return color_; }
 	virtual void Draw() = 0;
-	void GenerateSurfacesFromSurfaces() {}
+	void GenerateSurfacesFromSources() {}
 	void CreateSurface(int i) {}
 protected:
-	std::vector<SDL_Point> points_;
 	Color color_{255, 255, 255, 255};
 };
 
@@ -51,8 +50,6 @@ public:
 protected:
 	int x_;
 	int y_;
-	int width_;
-	int height_;
 	void AssignSides(int w, int h);
 };
 

@@ -25,26 +25,26 @@ public:
 
 	template <typename T>
 	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
-		std::vector<KeyCharacter> keyInput{key};
+		std::set<KeyCharacter> keyInput{key};
 		eventHandlers_.emplace_back(std::make_unique<KeyDownEventHandler>(inputMonitor_, handlerFunction, keyInput));
 	}
 
 	template <typename T>
 	void HandleKeyPressFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
-		std::vector<KeyCharacter> keyInput = keys;
+		std::set<KeyCharacter> keyInput = keys;
 		eventHandlers_.emplace_back(std::make_unique<KeyDownEventHandler>(inputMonitor_, handlerFunction, keyInput));
 	}
 
 	template <typename T>
 	void HandleKeyUpFor(KeyCharacter key, T handlerFunction) {
-		std::vector<KeyCharacter> keyInput{key};
+		std::set<KeyCharacter> keyInput{key};
 		eventHandlers_.emplace_back(std::make_unique<KeyUpEventHandler>(inputMonitor_, handlerFunction, keyInput));
 		
 	}
 
 	template <typename T>
 	void HandleKeyUpFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
-		std::vector<KeyCharacter> keyInput = keys;
+		std::set<KeyCharacter> keyInput = keys;
 		eventHandlers_.emplace_back(std::make_unique<KeyUpEventHandler>(inputMonitor_, handlerFunction, keyInput));
 	}
 

@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <initializer_list>
+#include <set>
 #include "Event.h"
 #include "Keyboard.h"
 #include "Input.h"
@@ -16,7 +17,7 @@ protected:
 	EventType eventType_{EventType::kNone};	
 	std::shared_ptr<Input> inputMonitor_ = nullptr;
 	std::function<void()> handlerFunction_;
-	static bool CheckKeyboardInput(std::vector<KeyCharacter> inputKeys, std::vector<KeyCharacter> listenKeys); //returns whether the handler function should be called or not
+	static bool CheckKeyboardInput(std::set<KeyCharacter> inputKeys, std::set<KeyCharacter> listenKeys); //returns whether the handler function should be called or not
 };
 
 class KeyDownEventHandler final: public EventHandler {
@@ -24,12 +25,12 @@ public:
 	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyDownEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::vector<KeyCharacter> keys): EventHandler(EventType::kDownKey, inputMonitor, handlerFunction), keys_(keys) {
+	KeyDownEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kDownKey, inputMonitor, handlerFunction), keys_(keys) {
 	}
 
 	void Listen();
 private:
-	std::vector<KeyCharacter> keys_;
+	std::set<KeyCharacter> keys_;
 };
 
 
@@ -38,11 +39,11 @@ public:
 	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyUpEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::vector<KeyCharacter> keys): EventHandler(EventType::kUpKey, inputMonitor, handlerFunction), keys_(keys) {
+	KeyUpEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kUpKey, inputMonitor, handlerFunction), keys_(keys) {
 	}
 
 	void Listen();
 private:
-	std::vector<KeyCharacter> keys_;
+	std::set<KeyCharacter> keys_;
 };
 #endif
