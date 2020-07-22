@@ -6,6 +6,7 @@
 
 class TextManager {
 public:
+	/*
 	TextManager(std::shared_ptr<SDL_Renderer> renderer);
 	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
 	void AddText(std::string text, Font font);
@@ -22,6 +23,7 @@ private:
 	std::unique_ptr<TextureManager> textureManager_ = nullptr;
 	int currentForm_;
 	bool rendererAssigned_{false};
+	*/
 };
 
 #endif

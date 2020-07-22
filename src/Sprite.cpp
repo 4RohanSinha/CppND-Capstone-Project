@@ -3,33 +3,31 @@
 Sprite::Sprite(std::string mainImage, float x, float y): Node(x, y) {
 	rendererSetDimensions_ = false;
 	collisionBitMask = "Sprite";
-	spriteManager_ = std::make_unique<SpriteManager>();
-	spriteManager_->AddSource(mainImage);
-	spriteManager_->AssignCoordinates(x, y, 100, 100);
+	spriteManager_.AddSource(mainImage);
+	spriteManager_.AssignCoordinates(x, y, 100, 100);
 	useNewExperiment = true;
 }
 
 Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): Node(x, y, width, height) {
 	rendererSetDimensions_ = false;
 	collisionBitMask = "Sprite";
-	spriteManager_ = std::make_unique<SpriteManager>();
-	spriteManager_->AddSource(mainImage);
-	spriteManager_->AssignCoordinates(x, y, width, height);
+	spriteManager_.AddSource(mainImage);
+	spriteManager_.AssignCoordinates(x, y, width, height);
 	useNewExperiment = true;
 	
 }
 
 void Sprite::SetImage(int imageIndex) {
-	spriteManager_->ChangeByIndex(imageIndex);
+	spriteManager_.ChangeByIndex(imageIndex);
 }
 
 void Sprite::NextImage() {
-	spriteManager_->ShowNextSource();
+	spriteManager_.ShowNextSource();
 }
 
 void Sprite::AddImage(std::string img) {
 	if (CheckImageSource(img)) {
-		spriteManager_->AddSource(img);
+		spriteManager_.AddSource(img);
 	}
 	else
 		throw std::invalid_argument("Error: the image file " + img + " does not exist!");
@@ -44,13 +42,13 @@ bool Sprite::CheckImageSource(std::string src) {
 }
 
 void Sprite::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
-	spriteManager_->AssignRenderer(renderer);
+	spriteManager_.AssignRenderer(renderer);
 }
 
 void Sprite::Render() {
-	spriteManager_->Render();
+	spriteManager_.Render();
 }
 
 void Sprite::Clear() {
-	spriteManager_->Clear();
+	spriteManager_.Clear();
 }

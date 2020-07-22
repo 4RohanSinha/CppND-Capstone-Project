@@ -9,6 +9,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
+#include "Integrate.h"
 
 class Font {
 public:
@@ -38,20 +39,11 @@ public:
 
 	static bool IsValidSize(float size);
 
-	//TODO: convert to use unique_ptrs
-	//this may remove the need for DeleteTTF
-	//make sure that it does not exist as a member variable for this object and is only a temp variable
-	//that way, the destructor will get called after the scope is exited
-	void SDLConvert();
-
-	void DeleteTTF();
-
-	TTF_Font* GetTTF();
+	integration::unique_ptr_sdl<TTF_Font> GetTTF();
 
 private:
 	std::string font_{"Ubuntu-M"};
 	SDL_Color color_;
-	TTF_Font* fontTTF_ = NULL;
 	float size_;
 
 	void SetDefaultColor();

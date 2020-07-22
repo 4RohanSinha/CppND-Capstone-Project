@@ -40,10 +40,8 @@ void Text::SetText(std::string text) {
 
 	textOptions_.push_back(text);
 	currentForm_ = textOptions_.size() - 1;
-	font_.SDLConvert();
-	TTF_Font* fontTTF = font_.GetTTF();
-	surface_ = GetSharedPtr(TTF_RenderText_Solid(fontTTF, text.c_str(), font_.GetColor()));
-	font_.DeleteTTF();
+	auto fontTTF = font_.GetTTF();
+	surface_ = integration::create_shared(TTF_RenderText_Solid(fontTTF.get(), text.c_str(), font_.GetColor()));
 	surfaces_.push_back(surface_);
 	newSurfaces_.push(surface_);
 	status_ = TextureRender::kRenderNow;
@@ -63,11 +61,9 @@ void Text::ChangeColor(SDL_Color color) {
 }
 
 void Text::CreateSurface(int i) {
-	font_.SDLConvert();
-	TTF_Font* fontTTF = font_.GetTTF();
-	surface_ = GetSharedPtr(TTF_RenderText_Solid(fontTTF, textOptions_[i].c_str(), font_.GetColor()));
+	auto fontTTF = font_.GetTTF();
+	surface_ = integration::create_shared(TTF_RenderText_Solid(fontTTF.get(), textOptions_[i].c_str(), font_.GetColor()));
 	surfaces_.push_back(surface_);
-	font_.DeleteTTF();
 }
 
 void Text::GenerateSurfacesFromSources() {

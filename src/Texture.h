@@ -7,6 +7,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "Surface.h"
+#include "Integrate.h"
 
 class Texture {
 public:

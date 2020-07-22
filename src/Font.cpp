@@ -67,7 +67,7 @@ void Font::SetDefaultColor() {
 //if it can be, return true because it can be read by other functions
 //otherwise return false because it either does not exist or it cannot be read by other functions
 bool Font::FontExists(std::string font) {
-	std::string fontFile = "../fonts/" + font + ".ttf";
+	std::string fontFile = "../assets/fonts/" + font + ".ttf";
 	std::ifstream filestream(fontFile);
 
 	if (filestream.is_open())
@@ -90,8 +90,14 @@ bool Font::IsValidRGB(SDL_Color color) {
 	return (IsValidRGBPoint(color.r) && IsValidRGBPoint(color.g) && IsValidRGBPoint(color.b));
 }
 
-TTF_Font* Font::GetTTF() {
-	return fontTTF_;
+//returns a unique_ptr
+//used in TextManager to generate surface, which is then used for further rendering
+integration::unique_ptr_sdl<TTF_Font> Font::GetTTF() {
+	if (!FontExists(font_.c_str()))
+		throw std::runtime_error("Error: font " + font_ + " does not exist");
+	std::string fontFile = "../assets/fonts/" + font_ + ".ttf";
+	return integration::create_unique(TTF_OpenFont(fontFile.c_str(), size_));
+	
 }
 
 //check if each part of the RGB value if valid - if so, return true
@@ -99,17 +105,4 @@ TTF_Font* Font::GetTTF() {
 
 bool Font::IsValidRGBPoint(int val) {
 	return (val >= 0 && val <= 255);
-}
-
-void Font::SDLConvert() {
-
-	if (FontExists(font_.c_str())) {
-		std::string fontFile = "../fonts/" + font_ + ".ttf";
-		fontTTF_ = TTF_OpenFont(fontFile.c_str(), size_);
-	}
-}
-
-void Font::DeleteTTF() {
-	if (fontTTF_ != nullptr && fontTTF_ != NULL)
-		TTF_CloseFont(fontTTF_);
 }

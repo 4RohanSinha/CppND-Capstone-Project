@@ -1,12 +1,10 @@
-#ifndef COLLISION_DETECTOR
-#define COLLISION_DETECTOR
+#ifndef COLLISION_DETECTOR_H
+#define COLLISION_DETECTOR_H
 
 #include <vector>
 #include <memory>
-#include <thread>
-#include <mutex>
 #include "Node.h"
-#include "Event.h"
+#include <functional>
 
 class CollisionDetector {
 public:
@@ -20,7 +18,6 @@ private:
 	std::shared_ptr<Node> nodeTwo = nullptr;
 	//usage of std::function from https://en.cppreference.com/w/cpp/utility/functional/function
 	std::function<void()> handlerFunction_;
-	std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes_ = nullptr;
 
 };
 

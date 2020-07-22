@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
 #include <vector>
@@ -15,12 +16,12 @@
 #include "Text.h"
 #include "Sprite.h"
 #include "Layer.h"
-
+#include "Integrate.h"
 
 class Renderer {
 public:
 	Renderer(): height_(200), width_(400) {}
-	Renderer(int height, int width, std::string windowTitle, std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes);
+	Renderer(int height, int width, std::string windowTitle);
 	void AddLayers(int n);
 	void AddToLayer(int layer, std::shared_ptr<Node> node);
 	void AddNode(std::shared_ptr<Node> node);
@@ -36,9 +37,8 @@ private:
 	int width_;
 	std::string windowTitle_;
 	std::vector<std::shared_ptr<Layer>> layers_;
-	std::shared_ptr<std::vector<std::shared_ptr<Node>>> nodes_;
 	std::shared_ptr<SDL_Renderer> renderer = nullptr;
-	std::shared_ptr<SDL_Window> window = nullptr;
+	integration::unique_ptr_sdl<SDL_Window> window = nullptr;
 };
 
 #endif

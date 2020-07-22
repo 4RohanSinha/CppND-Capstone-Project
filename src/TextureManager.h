@@ -14,11 +14,11 @@ public:
 	TextureManager(std::shared_ptr<SDL_Renderer> renderer, std::shared_ptr<SurfaceManager> surfaceManager);
 	void AddSource(std::string imgName);
 	void AddSource(std::shared_ptr<Surface> surface);
-	void AddTexture(std::shared_ptr<Texture> texture);
-	std::shared_ptr<Texture> operator[](int i) const;
+	void AddTexture(Texture texture);
+	Texture operator[](int i) const;
 	int size() { return textures_.size(); }
 private:
-	std::vector<std::shared_ptr<Texture>> textures_;
+	std::vector<Texture> textures_;
 	std::shared_ptr<SDL_Renderer> renderer_ = nullptr;
 };
 

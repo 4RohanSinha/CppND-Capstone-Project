@@ -23,14 +23,14 @@ public:
 
 	void AddImage(std::string img);
 
-	int GetCurrentImageIndex() { return spriteManager_->CurrentIndex(); }
+	int GetCurrentImageIndex() { return spriteManager_.CurrentIndex(); }
 
-	std::string GetImageSourceAt(int index) { return (*spriteManager_)[index].begin()->first; }
+	std::string GetImageSourceAt(int index) { return spriteManager_[index].begin()->first; }
 	std::string GetCurrentImage() { return GetImageSourceAt(GetCurrentImageIndex()); }
 
 	static bool CheckImageSource(std::string src);
 
-	void ConstructRectangle() { spriteManager_->ConstructRectangle(x, y, width_, height_); }
+	void ConstructRectangle() { spriteManager_.ConstructRectangle(x, y, width_, height_); }
 
 	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
 
@@ -38,11 +38,8 @@ public:
 
 	void Clear();
 
-	int GetWidth() { return spriteManager_->GetWidth(); }
-	int GetHeight() { return spriteManager_->GetHeight(); }
-
 private:
-	std::unique_ptr<SpriteManager> spriteManager_ = nullptr;
+	SpriteManager spriteManager_;
 };
 
 #endif

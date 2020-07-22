@@ -4,10 +4,9 @@
 #include <SDL2/SDL.h>
 #include <memory>
 #include <initializer_list>
+#include <functional>
 #include "Node.h"
-#include "Event.h"
 #include "CollisionDetector.h"
-#include "GameEventListener.h"
 #include "EventHandler.h"
 #include "Input.h"
 
@@ -20,7 +19,7 @@ public:
 	//these template functions can only be defined within the header files themselves
 	template <typename T>
 	void HandleCollisionsBetween(std::shared_ptr<Node> nodeOne, std::shared_ptr<Node> nodeTwo, T handlerFunction) {
-		collideDetect.emplace_back(std::make_unique<CollisionDetector>(nodeOne, nodeTwo, handlerFunction));
+		collideDetect_.emplace_back(CollisionDetector(nodeOne, nodeTwo, handlerFunction));
 	}
 
 	template <typename T>
@@ -52,12 +51,13 @@ public:
 
 private:
 	//See if unique_ptr can be used or if pointers can be removed altogether
-	std::vector<std::unique_ptr<CollisionDetector>> collideDetect;
+	std::vector<CollisionDetector> collideDetect_;
+	//EventHandler is an abstract class
+	//cannot store a vector of regular objects, but unique pointers to an abstract class can be stored
 	std::vector<std::unique_ptr<EventHandler>> eventHandlers_;
 	std::shared_ptr<Input> inputMonitor_ = std::make_shared<Input>();
 	void CollisionUpdate();
 	void ListenUpdate();
-	std::vector<std::future<void>> updateThreads_;
 };
 
 #endif

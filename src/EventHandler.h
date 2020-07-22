@@ -4,9 +4,22 @@
 #include <SDL2/SDL.h>
 #include <initializer_list>
 #include <set>
-#include "Event.h"
+#include <functional>
+#include <memory>
 #include "Keyboard.h"
 #include "Input.h"
+
+enum class EventType {
+        kCollision,
+        kUpKey,
+        kDownKey,
+        kTapDown,
+        kTapUp,
+        kSwipe,
+        kClick,
+        kQuit,
+        kNone
+};
 
 class EventHandler {
 public:

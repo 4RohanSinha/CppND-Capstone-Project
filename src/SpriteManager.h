@@ -9,23 +9,22 @@
 
 class SpriteManager: public NodeManager {
 public:
-	SpriteManager(): NodeManager() { rect_ = std::make_shared<SDL_Rect>(); }
+	SpriteManager(): NodeManager() {}
 	SpriteManager(std::shared_ptr<SDL_Renderer> renderer);
 	void AssignCoordinates(int x_val, int y_val, int w_val, int h_val);
 	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
 	void AddSource(std::string source);
 	std::shared_ptr<Texture> GetCurrentTexture();
-	std::unordered_map<std::string, std::shared_ptr<Texture>> operator[](int i) const;
+	std::unordered_map<std::string, Texture> operator[](int i) const;
 	void ShowNextSource();
 	void ChangeByIndex(int index);
 	int CurrentIndex() { return currentForm_; }
 	void ConstructRectangle(float x, float y, int w, int h);
 	void Render();
 	void Clear();
-	int GetWidth() { return rect_->w; }
-	int GetHeight() { return rect_->h; }
 private:
-	std::shared_ptr<SDL_Rect> rect_ = nullptr;
+	SDL_Rect rect_;
+	//unique ptr used to declare object without initializing it
 	std::unique_ptr<TextureManager> textureManager_ = nullptr;
 	std::vector<std::string> imageSources_;
 	int currentForm_{0};

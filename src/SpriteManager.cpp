@@ -3,14 +3,13 @@
 
 SpriteManager::SpriteManager(std::shared_ptr<SDL_Renderer> renderer): NodeManager(renderer) {
 	textureManager_ = std::make_unique<TextureManager>(renderer_);
-	rect_ = std::make_shared<SDL_Rect>();
 }
 
 void SpriteManager::AssignCoordinates(int x_val, int y_val, int w_val, int h_val) {
-	rect_->x = x_val;
-	rect_->y = y_val;
-	rect_->w = w_val;
-	rect_->h = h_val;
+	rect_.x = x_val;
+	rect_.y = y_val;
+	rect_.w = w_val;
+	rect_.h = h_val;
 }
 
 void SpriteManager::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
@@ -27,13 +26,7 @@ void SpriteManager::AddSource(std::string source) {
 		textureManager_->AddSource(source);
 }
 
-std::shared_ptr<Texture> SpriteManager::GetCurrentTexture() {
-	if (textureManager_ == nullptr)
-		throw std::runtime_error("Error: texture manager not assigned because the renderer is nullptr. Cannot continue.");
-	return (*textureManager_)[currentForm_];
-}
-
-std::unordered_map<std::string, std::shared_ptr<Texture>> SpriteManager::operator[](int i) const {
+std::unordered_map<std::string, Texture> SpriteManager::operator[](int i) const {
 	if (textureManager_ == nullptr)
 		throw std::runtime_error("Error: texture manager not assigned because the renderer is nullptr. Cannot continue.");
 	if (i >= textureManager_->size())
@@ -59,17 +52,17 @@ void SpriteManager::ChangeByIndex(int index) {
 }
 
 void SpriteManager::ConstructRectangle(float x, float y, int w, int h) {
-	rect_->x = x;
-	rect_->y = y;
-	rect_->w = w;
-	rect_->h = h;
+	rect_.x = x;
+	rect_.y = y;
+	rect_.w = w;
+	rect_.h = h;
 }
 
 void SpriteManager::Render() {
-	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_]->GetSDL().get(), NULL, rect_.get());
+	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].GetSDL().get(), NULL, &rect_);
 }
 
 void SpriteManager::Clear() {
-	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_]->GetSDL().get());
-	SDL_RenderFillRect(renderer_.get(), rect_.get());
+	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_].GetSDL().get());
+	SDL_RenderFillRect(renderer_.get(), &rect_);
 }

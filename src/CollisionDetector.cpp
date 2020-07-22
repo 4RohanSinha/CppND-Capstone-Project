@@ -2,10 +2,10 @@
 #include <iostream>
 
 void CollisionDetector::CheckForCollisions() {
-	auto iWidth = (nodeOne->GetWidth())/2;	
-	auto iHeight = (nodeOne->GetHeight())/2;	
-	auto jWidth = (nodeTwo->GetWidth())/2;	
-	auto jHeight = (nodeTwo->GetHeight())/2;	
+	auto iWidth = (nodeOne->width_)/2;	
+	auto iHeight = (nodeOne->height_)/2;	
+	auto jWidth = (nodeTwo->width_)/2;	
+	auto jHeight = (nodeTwo->height_)/2;	
 
 	auto iCenterX = iWidth + (nodeOne->x);
 	auto iCenterY = iHeight + (nodeOne->y);
@@ -19,7 +19,6 @@ void CollisionDetector::CheckForCollisions() {
 	} else if (nodeOne == nodeTwo) {       
 
 	} else {
-		Event collision = Event(EventType::kCollision, 2, nodeOne, nodeTwo);
 		handlerFunction_();
 	}
 

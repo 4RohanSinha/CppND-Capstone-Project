@@ -37,11 +37,6 @@ std::shared_ptr<T> GetSharedPtr(T *t) {
 	return std::shared_ptr<T>(t, [](T* t) { SDL_DelObject(t); });
 }*/
 
-template<typename T>
-std::unique_ptr<T> GetUniquePtr(T *t) {
-	return std::unique_ptr<T, void*(T*)>(t, [](T* t) { SDL_DelObject(t); });
-}
-
 enum TextureRender {
 	kRenderNow,
 	kRenderForever,

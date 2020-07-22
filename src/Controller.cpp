@@ -2,8 +2,8 @@
 #include <iostream>
 
 void Controller::CollisionUpdate() {
-	for (auto& i: collideDetect) {
-		i->CheckForCollisions();
+	for (auto& i: collideDetect_) {
+		i.CheckForCollisions();
 	}
 }
 

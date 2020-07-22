@@ -1,5 +1,6 @@
 #include "TextManager.h"
 
+/*
 TextManager::TextManager(std::shared_ptr<SDL_Renderer> renderer): renderer_(renderer) {
 	surfaceManager_ = std::make_shared<SurfaceManager>();
 	textureManager_ = std::make_unique<TextureManager>(renderer_);
@@ -53,4 +54,4 @@ void TextManager::ChangeByIndex(int index) {
 		currentForm_ = index;
 	else
 		throw std::invalid_argument("Error: index out of bounds in TextManager::ChangeByIndex.");
-}
+}*/

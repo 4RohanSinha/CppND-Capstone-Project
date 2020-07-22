@@ -2,7 +2,10 @@
 #define TIMER_H
 
 class Timer {
-	
+public:
+
+private:
+
 };
 
 #endif
