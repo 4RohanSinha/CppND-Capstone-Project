@@ -10,10 +10,6 @@
 #include "Font.h"
 #include "Integrate.h"
 
-//Using SDL2 with smart pointers
-//research for using SDL2 and smart pointers combined is from: https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
-
-
 class Surface {
 public:
 	Surface(std::string text, Font font);
