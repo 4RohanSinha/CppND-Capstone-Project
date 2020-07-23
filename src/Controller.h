@@ -10,6 +10,7 @@
 #include "EventHandler.h"
 #include "Input.h"
 
+//TODO: allow for simultaneous events to be handled - e.g. click and key press at the same time
 class Controller {
 public:
 	Controller() {}
@@ -47,6 +48,7 @@ public:
 		eventHandlers_.emplace_back(std::make_unique<KeyUpEventHandler>(inputMonitor_, handlerFunction, keyInput));
 	}
 
+
 	bool IsRunning() { return inputMonitor_->IsRunning(); }
 
 private:
@@ -55,6 +57,7 @@ private:
 	//EventHandler is an abstract class
 	//cannot store a vector of regular objects, but unique pointers to an abstract class can be stored
 	std::vector<std::unique_ptr<EventHandler>> eventHandlers_;
+	//shared ptr among the event handlers
 	std::shared_ptr<Input> inputMonitor_ = std::make_shared<Input>();
 	void CollisionUpdate();
 	void ListenUpdate();

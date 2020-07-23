@@ -13,8 +13,11 @@ find_package(SDL2 REQUIRED)
 find_package(Threads REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} src)
 include_directories(${PROJECT_SOURCE_DIR}/animation)
+include_directories(${PROJECT_SOURCE_DIR}/audio)
+include_directories(${PROJECT_SOURCE_DIR}/rendering)
+include_directories(${PROJECT_SOURCE_DIR}/games/Pong)
 
-file(GLOB SOURCES "src/*.cpp" "src/animation/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "src/animation/*.cpp" "src/games/Pong/*.cpp" "src/audio/*.cpp" "src/rendering/*.cpp")
 
 add_executable(Capstone ${SOURCES})
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)

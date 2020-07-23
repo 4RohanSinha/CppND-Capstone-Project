@@ -1,7 +1,8 @@
 #include "Game.h"
+#include "games/Pong/Pong.h"
 
 int main() {
-	Game game;
-	game.Run();
+	Pong pong;
+	pong.Run();
 	return 0;
 }

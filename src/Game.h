@@ -3,23 +3,18 @@
 
 #include "Engine.h"
 #include "Shape.h"
-#include "Audio.h"
 #include <memory>
+#include <random>
 
 class Game {
 public:
 	Game();
-	void Run();
-private:
-	std::unique_ptr<Engine> gameEngine = nullptr;
-	std::shared_ptr<Rectangle> paddle1 = nullptr;
-	std::shared_ptr<Rectangle> paddle2 = nullptr;
-	std::shared_ptr<Circle> ball2 = nullptr;
-	std::shared_ptr<Sprite> bird = nullptr;
-	std::shared_ptr<Sprite> alligator = nullptr;
-	std::shared_ptr<Text> text = nullptr;
+	virtual void Run() = 0;
 
-	void Setup();
+protected:
+	std::unique_ptr<Engine> gameEngine = nullptr;
+
+	virtual void Setup() = 0;
 };
 
 #endif

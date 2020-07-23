@@ -9,6 +9,7 @@
 #include "Keyboard.h"
 #include "Input.h"
 
+//TODO: allow multiple different kinds of events at one event handler
 enum class EventType {
         kCollision,
         kUpKey,
@@ -59,4 +60,5 @@ public:
 private:
 	std::set<KeyCharacter> keys_;
 };
+
 #endif

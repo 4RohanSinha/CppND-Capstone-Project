@@ -16,6 +16,7 @@ public:
 private:
 	std::shared_ptr<Node> nodeOne = nullptr;
 	std::shared_ptr<Node> nodeTwo = nullptr;
+	bool isColliding_ = false;
 	//usage of std::function from https://en.cppreference.com/w/cpp/utility/functional/function
 	std::function<void()> handlerFunction_;
 

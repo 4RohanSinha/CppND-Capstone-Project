@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include "Integrate.h"
 #include "Node.h"
 
 class Layer {

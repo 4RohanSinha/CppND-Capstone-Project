@@ -36,7 +36,7 @@ private:
 	int height_;
 	int width_;
 	std::string windowTitle_;
-	std::vector<std::shared_ptr<Layer>> layers_;
+	std::vector<Layer> layers_;
 	std::shared_ptr<SDL_Renderer> renderer = nullptr;
 	integration::unique_ptr_sdl<SDL_Window> window = nullptr;
 };

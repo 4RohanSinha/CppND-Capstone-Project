@@ -12,8 +12,7 @@ enum class AudioType {
 	kMusic,
 	kSoundEffect
 };
-//TODO: allow for volume change
-//store the channel that each Audio object is playing in
+
 class Audio {
 public:
 	Audio(std::string filename): filename_(filename) {}

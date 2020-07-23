@@ -30,7 +30,7 @@ void Layer::AddNode(std::shared_ptr<Node> node) {
 
 std::shared_ptr<SDL_Texture> Layer::CreateTextureFromSurface(std::shared_ptr<SDL_Surface> surface) {
 	if ((surface != nullptr && renderer_ != nullptr) && (surface != NULL && renderer_ != NULL))
-		return GetSharedPtr(SDL_CreateTextureFromSurface(renderer_.get(), surface.get()));	
+		return integration::create_shared(SDL_CreateTextureFromSurface(renderer_.get(), surface.get()));	
 	else
 		throw std::runtime_error("Fatal Error: Layer::CreateTextureFromSurface(std::shared_ptr<SDL_Surface> surface): nullptr in either surface or renderer_ argument");
 }

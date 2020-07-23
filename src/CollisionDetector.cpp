@@ -1,5 +1,7 @@
 #include "CollisionDetector.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 void CollisionDetector::CheckForCollisions() {
 	auto iWidth = (nodeOne->width_)/2;	
@@ -13,12 +15,17 @@ void CollisionDetector::CheckForCollisions() {
 	auto jCenterY = jHeight + (nodeTwo->y);
 
 	if (abs(iCenterX - jCenterX) > (iWidth + jWidth)) {
-	
+		isColliding_ = false;	
 	} else if (abs(iCenterY - jCenterY) > (iHeight + jHeight)) {
+		isColliding_ = false;	
 	
 	} else if (nodeOne == nodeTwo) {       
+		isColliding_ = false;	
 
+	} else if (isColliding_) {
+	
 	} else {
+		isColliding_ = true;
 		handlerFunction_();
 	}
 

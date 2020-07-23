@@ -1,11 +1,11 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "Renderer.h"
+#include "audio/AudioManager.h"
+#include "rendering/Renderer.h"
 #include "Timer.h"
 #include "Controller.h"
 #include "CollisionDetector.h"
-#include "AudioManager.h"
 
 class Engine {
 public:

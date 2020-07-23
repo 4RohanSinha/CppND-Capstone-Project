@@ -20,14 +20,14 @@ Renderer::Renderer(int height, int width, std::string windowTitle): height_(heig
 
 void Renderer::AddNode(std::shared_ptr<Node> node) {
 	if (layers_.size() > 0) {
-		layers_[layers_.size() - 1]->AddNode(node);
+		layers_[layers_.size() - 1].AddNode(node);
 	}
 }
 
 int Renderer::GetNumberOfLayers() {
 	int cnt = 0;
 	for (auto i: layers_) {
-		if (i->HasNodes())
+		if (i.HasNodes())
 			cnt++;
 	}
 	return cnt;
@@ -35,20 +35,20 @@ int Renderer::GetNumberOfLayers() {
 
 void Renderer::AddLayers(int n) {
 	for (int i = 0; i < n; i++)
-		layers_.push_back(std::make_shared<Layer>(renderer));
+		layers_.push_back(Layer(renderer));
 }
 
 void Renderer::AddToLayer(int layer, std::shared_ptr<Node> node) {
-	if (layers_[layer-1] == nullptr)
+	if (layer - 1 >= layers_.size())
 		for (int i = layers_.size(); i < layer-1; i++)
-			layers_.push_back(std::make_shared<Layer>(renderer));
-	layers_[layer-1]->AddNode(node);
+			layers_.push_back(Layer(renderer));
+	layers_[layer-1].AddNode(node);
 }
 
 void Renderer::Update() {
 	for (auto i: layers_) {
-		if (i->HasNodes())
-			i->Update();
+		if (i.HasNodes())
+			i.Update();
 			
 	}
 }
