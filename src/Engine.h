@@ -16,7 +16,7 @@ public:
 	void AddLayers(int n);
 	void AddToLayer(int layer, std::shared_ptr<Node> node);
 	void AddNode(std::shared_ptr<Node> node);
-	void RenderLoop();
+	void Loop();
 	bool IsRunning();
 	void ClearNode(std::shared_ptr<Node> node);
 	void HideNode(std::shared_ptr<Node> node);

@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "Engine.h"
+#include "Timer.h"
 #include "Shape.h"
 #include <memory>
 #include <random>
@@ -13,7 +14,7 @@ public:
 
 protected:
 	std::unique_ptr<Engine> gameEngine = nullptr;
-
+	std::unique_ptr<Timer> timer = nullptr;
 	virtual void Setup() = 0;
 };
 

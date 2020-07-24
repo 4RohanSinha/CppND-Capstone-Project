@@ -16,7 +16,7 @@ void TextureManager::AddSource(std::shared_ptr<Surface> surface) {
 }
 
 void TextureManager::AddTexture(Texture texture) {
-	textures_.emplace_back(std::move(texture));
+	textures_.push_back(texture);
 }
 
 Texture TextureManager::operator[](int i) const {

@@ -1,6 +1,7 @@
 #include "Pong.h"
 
 Pong::Pong(): Game() {
+	timer = std::make_unique<Timer>(16.66);
 	paddle1 = std::make_shared<Sprite>("../assets/photos/paddle1.jpg", 20, 200, 25, 100);
 	paddle2 = std::make_shared<Sprite>("../assets/photos/paddle2.png", 450, 200, 25, 100);
 	ball = std::make_shared<Ball>(250, 250, 50, 50);
@@ -37,14 +38,13 @@ void Pong::Setup() {
 }
 
 void Pong::Run() {
-	int iter = 0;
-
 	while (gameEngine->IsRunning()) {
-		gameEngine->RenderLoop();
+		timer->BeginKeyframe();
+		gameEngine->Loop();
 		paddle2->y += paddle2Vel;
 		if (paddle2->y == 0 || paddle2->y == 450)
 			paddle2Vel *= -1;
 		ball->Update();
-		iter++;
+		timer->EndKeyframe();
 	}
 }

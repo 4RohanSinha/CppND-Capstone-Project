@@ -21,8 +21,7 @@ void Engine::AddNode(std::shared_ptr<Node> node) {
 	renderer_->AddNode(node);
 }
 
-void Engine::RenderLoop() {
-	SDL_Delay(8);
+void Engine::Loop() {
 	controller->Update();
 	renderer_->Update();
 }
