@@ -11,6 +11,7 @@ public:
 	template <typename T>
 	CollisionDetector(std::shared_ptr<Node> firstNode, std::shared_ptr<Node> secondNode, T handlerFunction): nodeOne(firstNode), nodeTwo(secondNode), handlerFunction_(handlerFunction) {}
 
+	operator bool() { return isColliding_; }
 	void CheckForCollisions();
 	
 private:

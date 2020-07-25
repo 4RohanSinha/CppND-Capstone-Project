@@ -6,12 +6,12 @@ bool EventHandler::CheckKeyboardInput(std::set<KeyCharacter> inputKeys, std::set
 	return runFunction;
 }
 
-void KeyDownEventHandler::Listen() {
-	if (CheckKeyboardInput(inputMonitor_->GetPressedKeys(), keys_))
+void KeyDownEventHandler::Listen(Input& inputMonitor) {
+	if (CheckKeyboardInput(inputMonitor.GetPressedKeys(), keys_))
 		handlerFunction_();
 }
 
-void KeyUpEventHandler::Listen() {
-	if (CheckKeyboardInput(inputMonitor_->GetReleasedKeys(), keys_))
+void KeyUpEventHandler::Listen(Input& inputMonitor) {
+	if (CheckKeyboardInput(inputMonitor.GetReleasedKeys(), keys_))
 		handlerFunction_();
 }

@@ -9,11 +9,11 @@ void Controller::CollisionUpdate() {
 
 void Controller::ListenUpdate() {
 	for (auto& i: eventHandlers_)
-		i->Listen();
+		i->Listen(inputMonitor_);
 }
 
 void Controller::Update() {
-	inputMonitor_->Update();
+	inputMonitor_.Update();
 	ListenUpdate();
 	CollisionUpdate();
 }

@@ -25,11 +25,10 @@ enum class EventType {
 class EventHandler {
 public:
 	template <typename T>
-	EventHandler(EventType eventType, std::shared_ptr<Input> inputMonitor, T handlerFunction): eventType_(eventType), inputMonitor_(inputMonitor), handlerFunction_(handlerFunction) {}
-	virtual void Listen() = 0;
+	EventHandler(EventType eventType, T handlerFunction): eventType_(eventType), handlerFunction_(handlerFunction) {}
+	virtual void Listen(Input& inputMonitor) = 0;
 protected:
 	EventType eventType_{EventType::kNone};	
-	std::shared_ptr<Input> inputMonitor_ = nullptr;
 	std::function<void()> handlerFunction_;
 	static bool CheckKeyboardInput(std::set<KeyCharacter> inputKeys, std::set<KeyCharacter> listenKeys); //returns whether the handler function should be called or not
 };
@@ -39,10 +38,10 @@ public:
 	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyDownEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kDownKey, inputMonitor, handlerFunction), keys_(keys) {
+	KeyDownEventHandler(T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kDownKey, handlerFunction), keys_(keys) {
 	}
 
-	void Listen();
+	void Listen(Input& inputMonitor);
 private:
 	std::set<KeyCharacter> keys_;
 };
@@ -53,10 +52,10 @@ public:
 	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyUpEventHandler(std::shared_ptr<Input> inputMonitor, T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kUpKey, inputMonitor, handlerFunction), keys_(keys) {
+	KeyUpEventHandler(T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kUpKey, handlerFunction), keys_(keys) {
 	}
 
-	void Listen();
+	void Listen(Input& inputMonitor);
 private:
 	std::set<KeyCharacter> keys_;
 };

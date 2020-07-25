@@ -9,6 +9,8 @@
 
 namespace integration {
 	//using custom deleter with std::shared_ptr & std::unique_ptr: https://thispointer.com/shared_ptr-and-custom-deletor/
+	//https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
+
 	struct SDL_Deleter {
 		void operator()(SDL_Window* window) { SDL_DestroyWindow(window); }
 		void operator()(SDL_Renderer* renderer) { SDL_DestroyRenderer(renderer); }
