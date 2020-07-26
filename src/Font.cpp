@@ -28,7 +28,6 @@ Font::Font(std::string font, float size, SDL_Color color) {
 	SetColor(color);
 }
 
-//
 //assign the font style to a new font only if it exists in the fonts folder
 //otherwise, throw an invalid argument exception 
 void Font::SetFont(std::string font) {

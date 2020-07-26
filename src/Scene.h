@@ -6,18 +6,16 @@
 #include <SDL2/SDL_ttf.h>
 #include "rendering/Layer.h"
 #include "Node.h"
+#include "NodeGroup.h"
 
 class Scene {
 public:
-	Scene();
-	void Update();
-	void AddLayers(int n);
-	void AddToLayer(int layer, std::shared_ptr<Node> node);
-	void AddNode(std::shared_ptr<Node> node);
-	int GetNumberOfLayers() { return layers_.size(); }
+	void Render(NodeGroup& ngroup);
+	void Render(std::unique_ptr<Node>& node); //experimental
+	void Render(std::shared_ptr<Node> node);
+	void Clear();
 private:
 	std::shared_ptr<SDL_Renderer> renderer;
-	std::vector<Layer> layers_;
 };
 
 #endif

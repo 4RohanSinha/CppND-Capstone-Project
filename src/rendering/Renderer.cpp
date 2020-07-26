@@ -7,7 +7,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 
-//TODO: add title as argument to constructor function
 Renderer::Renderer(int height, int width, std::string windowTitle): height_(height), width_(width), windowTitle_(windowTitle) {
 	TTF_Init();
 	IMG_Init(IMG_INIT_PNG);
@@ -60,8 +59,6 @@ void Renderer::Clear() {
 void Renderer::ClearNode(std::shared_ptr<Node> node) {
 	if (node == nullptr || renderer == nullptr)
 		return;
-	SDL_SetRenderTarget(renderer.get(), (node->texture_).get());
-	SDL_RenderFillRect(renderer.get(), (node->rect_).get());
 }
 
 void Renderer::HideNode(std::shared_ptr<Node> node) {

@@ -14,8 +14,7 @@ public:
 	void AssignCoordinates(int x_val, int y_val, int w_val, int h_val);
 	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
 	void AddSource(std::string source);
-	std::shared_ptr<Texture> GetCurrentTexture();
-	std::unordered_map<std::string, Texture> operator[](int i) const;
+	std::string operator[](int i) const;
 	void ShowNextSource();
 	void ChangeByIndex(int index);
 	int CurrentIndex() { return currentForm_; }

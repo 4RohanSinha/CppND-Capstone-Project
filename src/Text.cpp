@@ -8,72 +8,51 @@
 #include <SDL2/SDL_ttf.h>
 
 Text::Text(std::string text): Node(0, 0), text_(text) {
-	rendererSetDimensions_ = true;
 	collisionBitMask = "Text";
-	textOptions_.push_back(text_);
-	newSurfaces_ = std::queue<std::shared_ptr<SDL_Surface>>();
+	textManager_.AddSource(text_);
+	textManager_.ConstructRectangle(x, y);
 }
 
 Text::Text(std::string text, Font font) : Node(0, 0), text_(text) {
 	font_ = font;
-	rendererSetDimensions_ = true;
 	collisionBitMask = "Text";
-	textOptions_.push_back(text_);
-	newSurfaces_ = std::queue<std::shared_ptr<SDL_Surface>>();
+	textManager_.AddSource(text_);
+	textManager_.AddFont(font);
+	textManager_.ConstructRectangle(x, y);
 }
 
 Text::Text(std::string text, Font font, float x, float y): Node(x, y), text_(text) {
 	font_ = font;
-	rendererSetDimensions_ = true;
 	collisionBitMask = "Text";
-	textOptions_.push_back(text_);
-	newSurfaces_ = std::queue<std::shared_ptr<SDL_Surface>>();
+	textManager_.AddSource(text_);
+	textManager_.AddFont(font);
+	textManager_.ConstructRectangle(x, y);
 }
 
-void Text::SetText(std::string text) {
-	for (int i = 0; i < textOptions_.size(); i++) {
-		if (textOptions_[i] == text) {
-			currentForm_ = i;
-			return;
-		}
-	}
-
-	textOptions_.push_back(text);
-	currentForm_ = textOptions_.size() - 1;
-	auto fontTTF = font_.GetTTF();
-	surface_ = integration::create_shared(TTF_RenderText_Solid(fontTTF.get(), text.c_str(), font_.GetColor()));
-	surfaces_.push_back(surface_);
-	newSurfaces_.push(surface_);
-	status_ = TextureRender::kRenderNow;
+void Text::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
+	textManager_.AssignRenderer(renderer);
 }
 
-void Text::ChangeFont(Font newFont) {
-	font_.SetFont(newFont);
-	//TODO: Re-render
-	
-	
-
+void Text::Render() {
+	textManager_.Render();
 }
 
-void Text::ChangeColor(SDL_Color color) {
-	font_.SetColor(color);
-	//TODO: Re-render
+void Text::Clear() {
+	textManager_.Clear();
 }
 
-void Text::CreateSurface(int i) {
-	auto fontTTF = font_.GetTTF();
-	surface_ = integration::create_shared(TTF_RenderText_Solid(fontTTF.get(), textOptions_[i].c_str(), font_.GetColor()));
-	surfaces_.push_back(surface_);
+void Text::AddFont(Font font) {
+	textManager_.AddFont(font);
 }
 
-void Text::GenerateSurfacesFromSources() {
-	int i = 0;
-	while (i < textOptions_.size()) {
-		CreateSurface(i);
-		i++;
-	}
+void Text::SetStyle(int ind) {
+	textManager_.ChangeByIndex(ind);
 }
 
-void Text::GetCurrentTexture() {
+void Text::AddSource(std::string text) {
+	textManager_.AddSource(text);
+}
 
+void Text::ConstructRectangle() {
+	textManager_.ConstructRectangle(x, y); 
 }

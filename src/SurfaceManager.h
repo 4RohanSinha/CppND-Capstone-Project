@@ -11,11 +11,11 @@
 class SurfaceManager {
 public:
 	void AddSource(std::string text, Font font);
-	void AddSurface(std::shared_ptr<Surface> surface);
-	std::shared_ptr<Surface> operator[](int i) const;
+	void AddSurface(Surface surface);
+	Surface operator[](int i) const;
 	int size() { return surfaces_.size(); }
 private:
-	std::vector<std::shared_ptr<Surface>> surfaces_;
+	std::vector<Surface> surfaces_;
 };
 
 #endif

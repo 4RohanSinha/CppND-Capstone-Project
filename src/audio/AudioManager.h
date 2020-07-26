@@ -16,9 +16,8 @@ public:
 	AudioManager(int channels);
 	void LoadFromDirectory(std::string dir);
 	void AddMusic(std::string file, std::string identifier);
-	void AddMusic(std::unique_ptr<Music> music, std::string identifier);
 	void AddSoundEffect(std::string file, std::string identifier);
-	void AddSoundEffect(std::unique_ptr<SoundEffect> effect, std::string identifier);
+	void AddMedia(std::unique_ptr<Audio> clip, std::string identifier);
 	void Play(std::string identifier);
 	void Pause(std::string identifier);
 	void Resume(std::string identifier);

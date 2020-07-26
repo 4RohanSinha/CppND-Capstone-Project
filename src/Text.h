@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include "Font.h"
+#include "TextManager.h"
 
 class Text: public Node {
 public:
@@ -21,21 +22,26 @@ public:
 	
 	Text(std::string text, Font font, float x, float y);
 
-	//TODO: allow for adding text option without replacing current onr
-	void SetText(std::string text);
-
 	Font GetFont() { return font_; }
 
-	void ChangeFont(Font newFont);
+	void AddFont(Font font);
+
+	void SetStyle(int ind);
 	
-	void ChangeColor(SDL_Color color);
+	void AddSource(std::string text);
+
+	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
+
+	void Render();
+
+	void Clear();
+
+	void ConstructRectangle();
 	
 protected:
-	void CreateSurface(int i);
-	void GenerateSurfacesFromSources();
-	void GetCurrentTexture();
 
 private:
+	TextManager textManager_;
 	std::string text_;
 	std::vector<std::string> textOptions_;
 	Font font_{Font("Ubuntu-M")};

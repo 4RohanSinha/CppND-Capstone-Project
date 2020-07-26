@@ -30,16 +30,12 @@ void AudioManager::AddMusic(std::string file, std::string identifier) {
 	media_[identifier] = std::make_unique<Music>(file);
 }
 
-void AudioManager::AddMusic(std::unique_ptr<Music> music, std::string identifier) {
-	media_[identifier] = std::move(music);
-}
-
 void AudioManager::AddSoundEffect(std::string file, std::string identifier) {
 	media_[identifier] = std::make_unique<SoundEffect>(file);
 }
 
-void AudioManager::AddSoundEffect(std::unique_ptr<SoundEffect> effect, std::string identifier) {
-	media_[identifier] = std::move(effect);
+void AudioManager::AddMedia(std::unique_ptr<Audio> clip, std::string identifier) {
+	media_[identifier] = std::move(clip);
 }
 
 void AudioManager::Play(std::string identifier) {

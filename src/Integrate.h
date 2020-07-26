@@ -7,9 +7,13 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 
+//this file allows for better integration of the SDL2 library into C++
+//SDL2 was written in C so it relies on raw pointers
+//one part of the namespace below involves functions to create smart pointers with the SDL Deleters
 namespace integration {
 	//using custom deleter with std::shared_ptr & std::unique_ptr: https://thispointer.com/shared_ptr-and-custom-deletor/
 	//https://blog.galowicz.de/2016/02/21/automatic_resource_release_with_sdl/
+	//a function object as a custom deleter for shared pointers to various SDL2 objects
 
 	struct SDL_Deleter {
 		void operator()(SDL_Window* window) { SDL_DestroyWindow(window); }

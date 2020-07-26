@@ -25,7 +25,7 @@ public:
 
 	int GetCurrentImageIndex() { return spriteManager_.CurrentIndex(); }
 
-	std::string GetImageSourceAt(int index) { return spriteManager_[index].begin()->first; }
+	std::string GetImageSourceAt(int index) { return spriteManager_[index]; }
 	std::string GetCurrentImage() { return GetImageSourceAt(GetCurrentImageIndex()); }
 
 	static bool CheckImageSource(std::string src);

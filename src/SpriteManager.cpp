@@ -26,12 +26,8 @@ void SpriteManager::AddSource(std::string source) {
 		textureManager_->AddSource(source);
 }
 
-std::unordered_map<std::string, Texture> SpriteManager::operator[](int i) const {
-	if (textureManager_ == nullptr)
-		throw std::runtime_error("Error: texture manager not assigned because the renderer is nullptr. Cannot continue.");
-	if (i >= textureManager_->size())
-		throw std::invalid_argument("Error: SpriteManager[] operator: i is out of bounds.");
-	return {{imageSources_[i], (*textureManager_)[i]}};
+std::string SpriteManager::operator[](int i) const {
+	return imageSources_[currentForm_];
 }
 
 void SpriteManager::ShowNextSource() {
@@ -59,10 +55,10 @@ void SpriteManager::ConstructRectangle(float x, float y, int w, int h) {
 }
 
 void SpriteManager::Render() {
-	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].GetSDL().get(), NULL, &rect_);
+	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].texture_.get(), NULL, &rect_);
 }
 
 void SpriteManager::Clear() {
-	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_].GetSDL().get());
+	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_].texture_.get());
 	SDL_RenderFillRect(renderer_.get(), &rect_);
 }

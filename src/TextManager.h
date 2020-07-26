@@ -3,27 +3,34 @@
 
 #include "SurfaceManager.h"
 #include "TextureManager.h"
+#include "NodeManager.h"
+#include "Font.h"
 
-class TextManager {
+class TextManager: public NodeManager {
 public:
-	/*
+	TextManager(): NodeManager() {}
 	TextManager(std::shared_ptr<SDL_Renderer> renderer);
+	void AssignCoordinates(int x_val, int y_val);
 	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
-	void AddText(std::string text, Font font);
-	std::shared_ptr<Surface> GetCurrentSurface();
-	std::shared_ptr<Texture> GetCurrentTexture();
-	std::shared_ptr<Surface> GetSurfaceAtIndex(int i) const;
-	std::shared_ptr<Texture> operator[](int i) const;
-	void ShowNextText();
+//TODO: fix the two methods below
+//right now, they add too many elements to the textSources_ and fonts_ vectors
+//fix that
+	void AddSource(std::string source);
+	void AddFont(Font font);
+	void ShowNextSource();
 	void ChangeByIndex(int index);
-	int CurrentIndex() const { return currentForm_; }
+	int CurrentIndex() { return currentForm_; }
+	void ConstructRectangle(float x, float y);
+	void Render();
+	void Clear();
 private:
-	std::shared_ptr<SDL_Renderer> renderer_ = nullptr;
-	std::shared_ptr<SurfaceManager> surfaceManager_ = nullptr;
+	SDL_Rect rect_;
+	SurfaceManager surfaceManager_;
 	std::unique_ptr<TextureManager> textureManager_ = nullptr;
-	int currentForm_;
+	std::vector<std::string> textSources_;
+	std::vector<Font> fonts_;
+	int currentForm_{0};
 	bool rendererAssigned_{false};
-	*/
 };
 
 #endif

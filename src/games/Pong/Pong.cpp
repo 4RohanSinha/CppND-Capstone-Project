@@ -4,6 +4,8 @@ Pong::Pong(): Game() {
 	timer = std::make_unique<Timer>(16.66);
 	paddle1 = std::make_shared<Sprite>("../assets/photos/paddle1.jpg", 20, 200, 25, 100);
 	paddle2 = std::make_shared<Sprite>("../assets/photos/paddle2.png", 450, 200, 25, 100);
+	Font testFont = Font("Ubuntu-M", 20);
+	helloWorld = std::make_shared<Text>("Hello World", testFont, 200, 200);
 	ball = std::make_shared<Ball>(250, 250, 50, 50);
 	gameEngine->audioManager.AddMusic("../assets/audio/beat.wav", "beat");
 	gameEngine->audioManager.AddSoundEffect("../assets/audio/medium.wav", "medium");
@@ -15,6 +17,7 @@ void Pong::Setup() {
 	gameEngine->AddToLayer(1, ball);
 	gameEngine->AddToLayer(1, paddle1);
 	gameEngine->AddToLayer(1, paddle2);
+	gameEngine->AddToLayer(1, helloWorld);
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [this] () {
 		if (paddle1->y > 0)
                 	paddle1->y -= 2;

@@ -21,43 +21,28 @@
 #include "TextureManager.h"
 #include "Color.h"
 
-enum TextureRender {
-	kRenderNow,
-	kRenderForever,
-	kNoRender,
-	kClear
-};
-
 class Node {
 public:
 	Node() {}
+
 	Node(float x, float y, int width, int height); //basic constructor
+
 	Node(float x, float y); //basic constructor
 
 	virtual void Draw() {}
 
 	float GetX() { return x; }
-	float GetY() { return y; }
-	int GetWidth() { return width_; }
-	int GetHeight() { return height_; }
-	//Rule of Five
-	~Node(); //destructor
-/*
-	Node(Node const &source); //copy constructor
-	Node& operator=(Node const &source); //copy assignment operator
-	Node(Node &&source); //move constructor
-	Node& operator=(Node &&source); //move assignment operator
-*/	
-	//virtual function to create surface
-	//surface is used to create the texture that can then be rendered
-	template<typename T>
-	void CallOnAnimation(T animateFunction) {
-		animationFunction_ = animateFunction;
-	}
-	
-	void AnimationChange();
 
-	//void Move(float newX, float newY);
+	float GetY() { return y; }
+	
+	int GetWidth() { return width_; }
+	
+	int GetHeight() { return height_; }
+
+	virtual void Render() {}
+
+	//TODO: get rid of two methods below and the Animation/MoveAnimation classes
+	//replace with dx and dy variables to control movement velocity
 	void Move(float newX, float newY, float speed);
 
 	void Move(float direction, float speed);
@@ -68,7 +53,7 @@ public:
 
 	void SetForm(int form);
 
-	virtual void Clear();
+	virtual void Clear() {}
 
 	void ClearAnimations();
 
@@ -79,64 +64,25 @@ public:
 	void ChangeSpeed(float newSpeed) { if (IsAnimating()) animations_.front()->SetSpeed(-4.0); }
 
 	float x;
+	
 	float y;
+	
 	std::string collisionBitMask{"Unknown Node Type"};
 
 protected:
-	bool rendererSetDimensions_{false};
-	
-	bool usesSurfaces_{true};
-
-	bool usesTextures_{true};
-
-	TextureRender status_{TextureRender::kRenderNow};
-	
 	int width_;
 	
 	int height_;
 	
 	bool isHidden_{false};
 
-	//NOTE: the variable below is used to help transition to the new rendering system
-	//delete after the transition is complete
-	bool useNewExperiment{false};
-
-	//TODO: allow Node descendants not to require surfaces and textures
-	//fix the rendering system to do so
-	//allow descendants to declare their own custom rendering processes
-	//this will allow the Shape class to be used
-	
-	std::shared_ptr<SDL_Surface> surface_ = nullptr;
-	
-	std::shared_ptr<SDL_Texture> texture_ = nullptr;
-
-	std::shared_ptr<SDL_Rect> rect_ = nullptr;
-
-	int currentForm_ = 0;
-
-	std::vector<std::string> sources_;
-
-	std::vector<std::shared_ptr<SDL_Surface>> surfaces_;
-
-	std::vector<std::shared_ptr<SDL_Texture>> textures_;
-
 	std::deque<std::shared_ptr<Animation::Animation>> animations_;
 
-	std::queue<std::shared_ptr<SDL_Surface>> newSurfaces_;
-
-	virtual void ConstructRectangle();
-	
-	virtual void GenerateSurfacesFromSources() {}
-	
-	virtual void CreateSurface(int i) {}
-
-	static bool CheckLength(float len);
+	virtual void ConstructRectangle() {}
 
 	virtual void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {}
-
-	virtual void Render() {}
-
-	std::function<void()> animationFunction_;
+	
+	static bool CheckLength(float len);
 
 	std::vector<SDL_Point> points_;
 
@@ -152,6 +98,8 @@ protected:
 	friend class Layer;	
 	
 	friend class CollisionDetector;
+
+	friend class Scene;
 };
 
 #endif
