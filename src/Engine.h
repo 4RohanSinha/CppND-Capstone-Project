@@ -6,9 +6,11 @@
 #include "Timer.h"
 #include "Controller.h"
 #include "CollisionDetector.h"
+#include "SceneManager.h"
 
 class Engine {
 public:
+	std::unique_ptr<SceneManager> sceneManager;
 	AudioManager audioManager;
 	std::unique_ptr<Controller> controller = nullptr;
 
@@ -21,11 +23,6 @@ public:
 	void ClearNode(std::shared_ptr<Node> node);
 	void HideNode(std::shared_ptr<Node> node);
 	void ShowNode(std::shared_ptr<Node> node);
-
-	template<typename T>
-	void HandleCollisionsBetween(std::shared_ptr<Node> nodeOne, std::shared_ptr<Node> nodeTwo, T handlerFunction) {
-		controller->HandleCollisionsBetween(nodeOne, nodeTwo, handlerFunction);
-	}
 
 	template<typename T>
 	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {

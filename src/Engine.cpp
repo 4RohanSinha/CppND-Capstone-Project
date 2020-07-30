@@ -7,6 +7,7 @@ Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	renderer_ = std::make_unique<Renderer>(WindowWidth, WindowHeight, WindowTitle);
 	controller = std::make_unique<Controller>();
+	sceneManager = std::make_unique<SceneManager>(renderer_->getSDL());
 }
 
 void Engine::AddLayers(int n) {

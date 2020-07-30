@@ -84,7 +84,8 @@ void TextManager::Render() {
 	SDL_QueryTexture((*textureManager_)[currentForm_].texture_.get(), NULL, NULL, &width, &height);
 	rect_.w = width;
 	rect_.h = height;
-	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].texture_.get(), NULL, &rect_);
+	for (int i = 0; i < 5; i++)
+		SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].texture_.get(), NULL, &rect_);
 }
 
 void TextManager::Clear() {

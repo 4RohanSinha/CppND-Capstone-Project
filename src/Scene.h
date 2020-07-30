@@ -10,12 +10,14 @@
 
 class Scene {
 public:
-	void Render(NodeGroup& ngroup);
-	void Render(std::unique_ptr<Node>& node); //experimental
-	void Render(std::shared_ptr<Node> node);
+	void AddNodeGroup(NodeGroup& ngroup);
+	void AddNode(std::shared_ptr<Node> node);
+	void Render();
 	void Clear();
 private:
-	std::shared_ptr<SDL_Renderer> renderer;
+	std::vector<std::shared_ptr<Node>> nodes_;
+	std::shared_ptr<SDL_Renderer> renderer_;
+	friend class SceneManager;
 };
 
 #endif

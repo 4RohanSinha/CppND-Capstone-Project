@@ -19,11 +19,6 @@ public:
 	
 	//these template functions can only be defined within the header files themselves
 	template <typename T>
-	void HandleCollisionsBetween(std::shared_ptr<Node> nodeOne, std::shared_ptr<Node> nodeTwo, T handlerFunction) {
-		collideDetect_.emplace_back(CollisionDetector(nodeOne, nodeTwo, handlerFunction));
-	}
-
-	template <typename T>
 	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
 		std::set<KeyCharacter> keyInput{key};
 		eventHandlers_.emplace_back(std::make_unique<KeyDownEventHandler>(handlerFunction, keyInput));
@@ -51,12 +46,10 @@ public:
 	bool IsRunning() { return inputMonitor_.IsRunning(); }
 
 private:
-	std::vector<CollisionDetector> collideDetect_;
 	//EventHandler is an abstract class
 	//cannot store a vector of regular objects, but unique pointers to an abstract class can be stored
 	std::vector<std::unique_ptr<EventHandler>> eventHandlers_;
 	Input inputMonitor_;
-	void CollisionUpdate();
 	void ListenUpdate();
 };
 

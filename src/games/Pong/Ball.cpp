@@ -20,13 +20,6 @@ void Ball::HandleCollision() {
 }
 
 void Ball::Update() {
-	if (x <= 0 || x >= 500) {
-		velocity[0] *= -1;
-		SetVelocity();
-	}
-	if (y <= 0 || y >= 500) {
-		velocity[1] *= -1;
-	}
 	x += velocity[0];
 	y += velocity[1];
 }

@@ -1,3 +1,4 @@
+//TODO: remove this class
 #ifndef LAYER_H
 #define LAYER_H
 

@@ -32,6 +32,7 @@ public:
 	void ShowNode(std::shared_ptr<Node> node);
 	int GetNumberOfLayers();
 	~Renderer();
+	std::shared_ptr<SDL_Renderer> getSDL() { return renderer; }
 private:
 	int height_;
 	int width_;

@@ -39,9 +39,7 @@ public:
 	void Clear();
 
 protected:
-	float speed{2.0};
-	float angle;
-	std::vector<float> velocity{0, 0};
+
 private:
 	SpriteManager spriteManager_;
 };

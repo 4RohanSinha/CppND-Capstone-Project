@@ -17,6 +17,7 @@ void Layer::AddNode(std::shared_ptr<Node> node) {
 //TODO: transition entirely to new rendering system based on the NodeManager
 //work on the TextManager class
 void Layer::Update() {
+	return;
 	if (renderer_ == nullptr)
 		return;
 	//TODO: fix renderer_; there are 16 copies produced of the shared ptr

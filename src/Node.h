@@ -3,12 +3,8 @@
 
 #include <vector>
 #include <unordered_map>
-#include <queue>
 #include <deque>
 #include <algorithm>
-#include <mutex>
-#include <thread>
-#include <future>
 #include <stdexcept>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -16,14 +12,15 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 #include <cmath>
-#include "animation/Animation.h"
-#include "animation/MoveAnimation.h"
+#include "Physics.h"
 #include "TextureManager.h"
 #include "Color.h"
 
+class Physics;
+
 class Node {
 public:
-	Node() {}
+	Node();
 
 	Node(float x, float y, int width, int height); //basic constructor
 
@@ -41,13 +38,8 @@ public:
 
 	virtual void Render() {}
 
-	//TODO: get rid of two methods below and the Animation/MoveAnimation classes
+	//TODO: get rid of the Animation/MoveAnimation classes
 	//replace with dx and dy variables to control movement velocity
-	void Move(float newX, float newY, float speed);
-
-	void Move(float direction, float speed);
-
-	void ChangeSize(int width, int height);
 
 	virtual Color GetColor() { return Color(0, 0, 0, 0); }
 
@@ -55,28 +47,24 @@ public:
 
 	virtual void Clear() {}
 
-	void ClearAnimations();
-
-	bool IsAnimating() { return !animations_.empty(); }
-
-	float GetSpeed() { if (IsAnimating()) return animations_.front()->GetSpeed(); else return 0; }
-
-	void ChangeSpeed(float newSpeed) { if (IsAnimating()) animations_.front()->SetSpeed(-4.0); }
-
 	float x;
 	
 	float y;
 	
-	std::string collisionBitMask{"Unknown Node Type"};
-
-protected:
 	int width_;
-	
+
 	int height_;
 	
-	bool isHidden_{false};
+	std::string collisionBitMask{"Unknown Node Type"};
 
-	std::deque<std::shared_ptr<Animation::Animation>> animations_;
+	std::unique_ptr<Physics> physics;
+	std::vector<float> velocity{0, 0};
+
+protected:
+	float speed{2.0};
+	float angle;
+	
+	bool isHidden_{false};
 
 	virtual void ConstructRectangle() {}
 

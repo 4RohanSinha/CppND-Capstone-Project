@@ -16,17 +16,22 @@ void CollisionDetector::CheckForCollisions() {
 
 	if (abs(iCenterX - jCenterX) > (iWidth + jWidth)) {
 		isColliding_ = false;	
+		initCollide_ = false;
 	} else if (abs(iCenterY - jCenterY) > (iHeight + jHeight)) {
 		isColliding_ = false;	
+		initCollide_ = false;
 	
 	} else if (nodeOne == nodeTwo) {       
 		isColliding_ = false;	
+		initCollide_ = false;
 
 	} else if (isColliding_) {
-	
+		initCollide_ = false;
 	} else {
 		isColliding_ = true;
-		handlerFunction_();
+		initCollide_ = true;
+		if (handlerFunction_)
+			handlerFunction_();
 	}
 
 }
