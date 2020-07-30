@@ -2,7 +2,7 @@
 
 std::shared_ptr<Scene> SceneManager::CreateNewScene(std::string identifier) {
 	scenes_[identifier] = std::make_shared<Scene>();
-	scenes_[identifier]->renderer_ = renderer;
+	scenes_[identifier]->renderer_ = renderer_;
 	return scenes_[identifier];
 }
 
