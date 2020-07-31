@@ -1,45 +1,36 @@
 #include "Engine.h"
+#include "Window.h"
 #include <iostream>
 #include <thread>
 #include <future>
 
+Engine::Engine() {
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+	TTF_Init();
+	IMG_Init(IMG_INIT_PNG);
+	controller = std::make_unique<Controller>();
+}
+
 Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	renderer_ = std::make_unique<Renderer>(WindowWidth, WindowHeight, WindowTitle);
+	TTF_Init();
+	IMG_Init(IMG_INIT_PNG);
+	windowManager.CreateNewWindow("main", WindowWidth, WindowHeight, WindowTitle);
 	controller = std::make_unique<Controller>();
-	sceneManager = std::make_unique<SceneManager>(renderer_->getSDL());
 }
 
-void Engine::AddLayers(int n) {
-	renderer_->AddLayers(n);
-}
-
-void Engine::AddToLayer(int layer, std::shared_ptr<Node> node) {
-	renderer_->AddToLayer(layer, node);
-}
-
-void Engine::AddNode(std::shared_ptr<Node> node) {
-	renderer_->AddNode(node);
+Engine::~Engine() {
+	TTF_Quit();
+	IMG_Quit();
+	SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
+	SDL_Quit();
 }
 
 void Engine::Loop() {
 	controller->Update();
-	renderer_->Update();
+	windowManager.Update();
 }
 
 bool Engine::IsRunning() {
 	return controller->IsRunning();
-}
-
-void Engine::ClearNode(std::shared_ptr<Node> node) {
-	renderer_->ClearNode(node);
-}
-
-void Engine::HideNode(std::shared_ptr<Node> node) {
-	renderer_->HideNode(node);
-}
-
-void Engine::ShowNode(std::shared_ptr<Node> node) {
-	renderer_->ShowNode(node);
-
 }

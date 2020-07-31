@@ -1,8 +1,8 @@
 #include "TextManager.h"
 #include <iostream>
 
-TextManager::TextManager(std::shared_ptr<SDL_Renderer> renderer): NodeManager(renderer) {
-	textureManager_ = std::make_unique<TextureManager>(renderer_);
+TextManager::TextManager(SDL_Renderer* renderer): NodeManager(renderer) {
+	textureManager_ = std::make_unique<TextureManager>();
 	rendererAssigned_ = true;
 }
 
@@ -14,7 +14,7 @@ void TextManager::AssignCoordinates(int x_val, int y_val) {
 	//width and height are set with SDL_QueryTexture shortly before rendering
 }
 
-void TextManager::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
+void TextManager::AssignRenderer(SDL_Renderer* renderer) {
 	renderer_ = renderer;
 	rendererAssigned_ = true;
 	textureManager_ = std::make_unique<TextureManager>(renderer_, surfaceManager_);
@@ -33,7 +33,7 @@ void TextManager::AddSource(std::string source) {
 	surfaceManager_.AddSurface(Surface(source, filler));
 
 	if (textureManager_ != nullptr)
-		textureManager_->AddSource(surfaceManager_[surfaceManager_.size() - 1]);
+		textureManager_->AddSource(surfaceManager_[surfaceManager_.size() - 1], renderer_);
 }
 
 void TextManager::AddFont(Font font) {
@@ -47,7 +47,7 @@ void TextManager::AddFont(Font font) {
 	surfaceManager_.AddSurface(Surface(source, font));
 
 	if (textureManager_ != nullptr)
-		textureManager_->AddSource(surfaceManager_[surfaceManager_.size() - 1]);
+		textureManager_->AddSource(surfaceManager_[surfaceManager_.size() - 1], renderer_);
 }
 
 void TextManager::ShowNextSource() {
@@ -81,14 +81,14 @@ void TextManager::Render() {
 		throw std::runtime_error("Error: texture manager not assigned because the renderer is nullptr. Cannot render.");
 	int width;
 	int height;
-	SDL_QueryTexture((*textureManager_)[currentForm_].texture_.get(), NULL, NULL, &width, &height);
+	SDL_QueryTexture((*textureManager_)[currentForm_].get(), NULL, NULL, &width, &height);
 	rect_.w = width;
 	rect_.h = height;
 	for (int i = 0; i < 5; i++)
-		SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].texture_.get(), NULL, &rect_);
+		SDL_RenderCopy(renderer_, (*textureManager_)[currentForm_].get(), NULL, &rect_);
 }
 
 void TextManager::Clear() {
-	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_].texture_.get());
-	SDL_RenderFillRect(renderer_.get(), &rect_);
+	SDL_SetRenderTarget(renderer_, (*textureManager_)[currentForm_].get());
+	SDL_RenderFillRect(renderer_, &rect_);
 }

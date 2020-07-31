@@ -29,7 +29,7 @@ Text::Text(std::string text, Font font, float x, float y): Node(x, y), text_(tex
 	textManager_.ConstructRectangle(x, y);
 }
 
-void Text::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
+void Text::AssignRenderer(SDL_Renderer* renderer) {
 	textManager_.AssignRenderer(renderer);
 }
 

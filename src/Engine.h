@@ -2,28 +2,26 @@
 #define ENGINE_H
 
 #include "audio/AudioManager.h"
+#include "Window.h"
 #include "rendering/Renderer.h"
 #include "Timer.h"
 #include "Controller.h"
 #include "CollisionDetector.h"
+#include "WindowManager.h"
 #include "SceneManager.h"
 
 class Engine {
 public:
-	std::unique_ptr<SceneManager> sceneManager;
+	//std::unique_ptr<SceneManager> sceneManager = nullptr;
+	WindowManager windowManager;
 	AudioManager audioManager;
 	std::unique_ptr<Controller> controller = nullptr;
 
+	Engine();
 	Engine(int WindowWidth, int WindowHeight, std::string WindowTitle);
-	void AddLayers(int n);
-	void AddToLayer(int layer, std::shared_ptr<Node> node);
-	void AddNode(std::shared_ptr<Node> node);
+	~Engine();
 	void Loop();
 	bool IsRunning();
-	void ClearNode(std::shared_ptr<Node> node);
-	void HideNode(std::shared_ptr<Node> node);
-	void ShowNode(std::shared_ptr<Node> node);
-
 	template<typename T>
 	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
 		controller->HandleKeyPressFor(key, handlerFunction);
@@ -44,7 +42,8 @@ public:
 		controller->HandleKeyUpFor(keys, handlerFunction);
 	}
 private:
-	std::unique_ptr<Renderer> renderer_ = nullptr;
+	std::unique_ptr<Window> window_ = nullptr;
+	//std::unique_ptr<Renderer> renderer_ = nullptr;
 	std::unique_ptr<Timer> timer_ = nullptr;
 	SDL_Event event;
 };

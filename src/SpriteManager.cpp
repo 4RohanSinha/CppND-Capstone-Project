@@ -1,8 +1,8 @@
 #include <iostream>
 #include "SpriteManager.h"
 
-SpriteManager::SpriteManager(std::shared_ptr<SDL_Renderer> renderer): NodeManager(renderer) {
-	textureManager_ = std::make_unique<TextureManager>(renderer_);
+SpriteManager::SpriteManager(SDL_Renderer* renderer): NodeManager(renderer) {
+	textureManager_ = std::make_unique<TextureManager>();
 }
 
 void SpriteManager::AssignCoordinates(int x_val, int y_val, int w_val, int h_val) {
@@ -12,18 +12,18 @@ void SpriteManager::AssignCoordinates(int x_val, int y_val, int w_val, int h_val
 	rect_.h = h_val;
 }
 
-void SpriteManager::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
+void SpriteManager::AssignRenderer(SDL_Renderer* renderer) {
 	renderer_ = renderer;
 	rendererAssigned_ = true;
-	textureManager_ = std::make_unique<TextureManager>(renderer_);
+	textureManager_ = std::make_unique<TextureManager>();
 	for (int i = 0; i < imageSources_.size(); i++)
-		textureManager_->AddSource(imageSources_[i]);
+		textureManager_->AddSource(imageSources_[i], renderer_);
 }
 
 void SpriteManager::AddSource(std::string source) {
 	imageSources_.push_back(source);
 	if (textureManager_ != nullptr)
-		textureManager_->AddSource(source);
+		textureManager_->AddSource(source, renderer_);
 }
 
 std::string SpriteManager::operator[](int i) const {
@@ -55,10 +55,10 @@ void SpriteManager::ConstructRectangle(float x, float y, int w, int h) {
 }
 
 void SpriteManager::Render() {
-	SDL_RenderCopy(renderer_.get(), (*textureManager_)[currentForm_].texture_.get(), NULL, &rect_);
+	SDL_RenderCopy(renderer_, (*textureManager_)[currentForm_].get(), NULL, &rect_);
 }
 
 void SpriteManager::Clear() {
-	SDL_SetRenderTarget(renderer_.get(), (*textureManager_)[currentForm_].texture_.get());
-	SDL_RenderFillRect(renderer_.get(), &rect_);
+	SDL_SetRenderTarget(renderer_, (*textureManager_)[currentForm_].get());
+	SDL_RenderFillRect(renderer_, &rect_);
 }

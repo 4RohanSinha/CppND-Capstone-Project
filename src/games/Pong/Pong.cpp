@@ -1,13 +1,15 @@
 #include "Pong.h"
 
 Pong::Pong(): Game() {
-	scene = std::make_shared<Scene>();
-	win_scene = std::make_shared<Scene>();
-	lose_scene = std::make_shared<Scene>();
-	gameEngine->sceneManager->AddScene(scene, "main");
-	gameEngine->sceneManager->AddScene(win_scene, "player_win");
-	gameEngine->sceneManager->AddScene(lose_scene, "player_lose");
-	gameEngine->sceneManager->ShowScene("main");
+	mainWindow = gameEngine->windowManager.CreateNewWindow("main", 500, 500, "Pong");
+	scene = mainWindow->sceneManager->CreateNewScene("main");
+	win_scene = mainWindow->sceneManager->CreateNewScene("player_win");
+	lose_scene = mainWindow->sceneManager->CreateNewScene("player_lose");
+	/*
+	scene = gameEngine->sceneManager->CreateNewScene("main");
+	win_scene = gameEngine->sceneManager->CreateNewScene("player_win");
+	lose_scene = gameEngine->sceneManager->CreateNewScene("player_lose");
+	*/
 	timer = std::make_unique<Timer>(16.66);
 	paddle1 = std::make_shared<Sprite>("../assets/photos/paddle1.jpg", 20, 200, 25, 100);
 	paddle2 = std::make_shared<Sprite>("../assets/photos/paddle2.png", 450, 200, 25, 100);
@@ -16,7 +18,7 @@ Pong::Pong(): Game() {
 	computerText = std::make_shared<Text>("0", testFont, 450, 50);
 	helloWorld = std::make_shared<Text>("Hello World", testFont, 200, 200);
 	win = std::make_shared<Text>("You win!", testFont, 200, 200);
-	lose = std::make_shared<Text>("You win!", testFont, 200, 200);
+	lose = std::make_shared<Text>("You lose!", testFont, 200, 200);
 	ball = std::make_shared<Ball>(250, 250, 50, 50);
 	pad1 = std::make_unique<CollisionDetector>(paddle1, ball);
 	pad2 = std::make_unique<CollisionDetector>(paddle2, ball);
@@ -29,7 +31,6 @@ void Pong::Setup() {
 	scene->AddNode(ball);
 	scene->AddNode(paddle1);
 	scene->AddNode(paddle2);
-	scene->AddNode(helloWorld);
 	scene->AddNode(playerText);
 	scene->AddNode(computerText);
 	win_scene->AddNode(win);
@@ -47,16 +48,17 @@ void Pong::Setup() {
 }
 
 void Pong::Run() {
-	gameEngine->sceneManager->ShowScene("main");
+	mainWindow->sceneManager->ShowScene("main");
 	while (gameEngine->IsRunning()) {
 		timer->BeginKeyframe();
 		if (player1Score == 5 && player1Score > computerScore) {
-			gameEngine->sceneManager->ShowScene("player_win");
+			mainWindow->sceneManager->ShowScene("player_win");
+			mainWindow->sceneManager->DeleteScene("main");
 		} else if (computerScore == 5 && computerScore > player1Score) {
-			gameEngine->sceneManager->ShowScene("player_lose");
+			mainWindow->sceneManager->ShowScene("player_lose");
+			mainWindow->sceneManager->DeleteScene("main");
 		}
 		gameEngine->Loop();
-		gameEngine->sceneManager->RenderCurrentScene();
 		(*pad1)();
 		(*pad2)();
 		if (pad1->FirstCollisionIsHappening() || pad2->FirstCollisionIsHappening()) {

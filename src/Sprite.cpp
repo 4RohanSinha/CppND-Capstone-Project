@@ -37,7 +37,7 @@ bool Sprite::CheckImageSource(std::string src) {
 	return false;
 }
 
-void Sprite::AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {
+void Sprite::AssignRenderer(SDL_Renderer* renderer) {
 	spriteManager_.AssignRenderer(renderer);
 }
 

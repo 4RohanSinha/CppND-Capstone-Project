@@ -1,7 +1,7 @@
 #include "Audio.h"
 
 void Music::LoadMusic() {
-	music_ = integration::create_unique(Mix_LoadMUS(filename_.c_str()));
+	music_ = Mix_LoadMUS(filename_.c_str());
 	if (music_ == NULL || music_ == nullptr)
 		throw std::runtime_error("Error: unable to load music from file.");
 }
@@ -32,7 +32,7 @@ void Music::Resume() {
 }
 
 void Music::RepeatFor(int n) {
-	Mix_PlayMusic(music_.get(), n);
+	Mix_PlayMusic(music_, n);
 }
 
 float Music::GetVolume() {
@@ -43,14 +43,19 @@ void Music::SetVolume(float val) {
 	Mix_VolumeMusic(static_cast<int>(val * MIX_MAX_VOLUME));
 }
 
+
+Music::~Music() {
+	Mix_FreeMusic(music_);
+}
+
 void SoundEffect::LoadMusic() {
-	effect_ = integration::create_unique(Mix_LoadWAV(filename_.c_str()));
+	effect_ = Mix_LoadWAV(filename_.c_str());
 	if (effect_ == NULL || effect_ == nullptr)
 		throw std::runtime_error("Error: unable to load sound effect from file.");
 }
 
 void SoundEffect::Play() {
-	channel_ = Mix_PlayChannel(-1, effect_.get(), 1);
+	channel_ = Mix_PlayChannel(-1, effect_, 1);
 }
 
 void SoundEffect::Pause() {
@@ -62,7 +67,7 @@ void SoundEffect::Resume() {
 }
 
 void SoundEffect::Repeat(int n) {
-	channel_ = Mix_PlayChannel(-1, effect_.get(), n);
+	channel_ = Mix_PlayChannel(-1, effect_, n);
 }
 
 void SoundEffect::Stop() {
@@ -77,4 +82,7 @@ void SoundEffect::SetVolume(float val) {
 	Mix_Volume(channel_, static_cast<int>(MIX_MAX_VOLUME*val));
 }
 
+SoundEffect::~SoundEffect() {
+	Mix_FreeChunk(effect_);
+}
 

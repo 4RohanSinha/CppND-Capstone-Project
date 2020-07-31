@@ -30,7 +30,7 @@ public:
 	
 	void AddSource(std::string text);
 
-	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
+	void AssignRenderer(SDL_Renderer* renderer);
 
 	void Render();
 

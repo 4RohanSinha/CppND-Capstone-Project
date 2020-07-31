@@ -10,10 +10,10 @@
 
 class TextureManager {
 public:
-	TextureManager(std::shared_ptr<SDL_Renderer> renderer): renderer_(renderer) {}
-	TextureManager(std::shared_ptr<SDL_Renderer> renderer, SurfaceManager surfaceManager);
-	void AddSource(std::string imgName);
-	void AddSource(Surface surface);
+	TextureManager() {}
+	TextureManager(SDL_Renderer* renderer, SurfaceManager surfaceManager);
+	void AddSource(std::string imgName, SDL_Renderer* renderer);
+	void AddSource(Surface surface, SDL_Renderer* renderer);
 	void AddTexture(Texture texture);
 	Texture& operator[](int i);
 	int size() { return textures_.size(); }

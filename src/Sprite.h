@@ -32,7 +32,7 @@ public:
 
 	void ConstructRectangle() { spriteManager_.ConstructRectangle(x, y, width_, height_); }
 
-	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
+	void AssignRenderer(SDL_Renderer* renderer);
 
 	void Render();
 

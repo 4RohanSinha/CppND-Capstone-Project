@@ -1,0 +1,7 @@
+TODO:
+fix memory leaks
+allow multiple windows to work
+add vectors to characters' motion, include gravity (use Physics class)
+clean up code
+create practice games
+submit

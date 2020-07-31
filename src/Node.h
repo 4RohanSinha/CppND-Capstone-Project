@@ -68,7 +68,7 @@ protected:
 
 	virtual void ConstructRectangle() {}
 
-	virtual void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer) {}
+	virtual void AssignRenderer(SDL_Renderer* renderer) {}
 	
 	static bool CheckLength(float len);
 

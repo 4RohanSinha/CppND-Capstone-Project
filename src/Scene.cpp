@@ -24,11 +24,11 @@ void Scene::Render() {
         	nodes_[i]->ConstructRectangle();
         	nodes_[i]->Render();
 	}
-	SDL_RenderPresent(renderer_.get());
+	SDL_RenderPresent(renderer_);
 }
 
 void Scene::Clear() {
 	if (renderer_ == nullptr)
 		throw std::runtime_error("Error: Scene::Clear(): renderer not assigned in scene. Maybe the scene has not been added to the scene manager?");
-	SDL_RenderClear(renderer_.get());
+	SDL_RenderClear(renderer_);
 }

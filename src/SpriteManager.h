@@ -10,9 +10,9 @@
 class SpriteManager: public NodeManager {
 public:
 	SpriteManager(): NodeManager() {}
-	SpriteManager(std::shared_ptr<SDL_Renderer> renderer);
+	SpriteManager(SDL_Renderer* renderer);
 	void AssignCoordinates(int x_val, int y_val, int w_val, int h_val);
-	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
+	void AssignRenderer(SDL_Renderer* renderer);
 	void AddSource(std::string source);
 	std::string operator[](int i) const;
 	void ShowNextSource();

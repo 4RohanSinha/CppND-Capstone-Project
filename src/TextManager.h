@@ -9,9 +9,9 @@
 class TextManager: public NodeManager {
 public:
 	TextManager(): NodeManager() {}
-	TextManager(std::shared_ptr<SDL_Renderer> renderer);
+	TextManager(SDL_Renderer* renderer);
 	void AssignCoordinates(int x_val, int y_val);
-	void AssignRenderer(std::shared_ptr<SDL_Renderer> renderer);
+	void AssignRenderer(SDL_Renderer* renderer);
 //TODO: fix the two methods below
 //right now, they add too many elements to the textSources_ and fonts_ vectors
 //fix that

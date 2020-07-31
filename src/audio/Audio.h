@@ -24,6 +24,7 @@ public:
 	virtual float GetVolume() = 0;
 	virtual void SetVolume(float val) = 0;
 	std::string GetFilename() { return filename_; }
+	virtual ~Audio() {}
 protected:
 	std::string filename_;
 };
@@ -40,8 +41,9 @@ public:
 	void Stop();
 	float GetVolume();
 	void SetVolume(float val);
+	~Music();
 private:
-	integration::unique_ptr_sdl<Mix_Music> music_ = nullptr;
+	Mix_Music* music_ = nullptr;
 	void RepeatFor(int n);
 };
 
@@ -56,8 +58,9 @@ public:
 	void Stop();
 	float GetVolume();
 	void SetVolume(float val);
+	~SoundEffect();
 private:
-	integration::unique_ptr_sdl<Mix_Chunk> effect_ = nullptr;
+	Mix_Chunk* effect_ = nullptr;
 	int channel_;	
 };
 

@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "rendering/Layer.h"
 #include "Node.h"
 #include "NodeGroup.h"
 
@@ -16,7 +15,8 @@ public:
 	void Clear();
 private:
 	std::vector<std::shared_ptr<Node>> nodes_;
-	std::shared_ptr<SDL_Renderer> renderer_;
+//	std::shared_ptr<SDL_Renderer> renderer_;
+	SDL_Renderer* renderer_;
 	friend class SceneManager;
 };
 
