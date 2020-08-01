@@ -17,20 +17,13 @@
 #include "Sprite.h"
 #include "Integrate.h"
 
-class Window;
-
 class Renderer {
 public:
-	Renderer() {}
 	Renderer(SDL_Window* win);
 	~Renderer();
 	SDL_Renderer* getSDL() { return renderer; }
 private:
-	int height_;
-	int width_;
-	std::string windowTitle_;
 	SDL_Renderer* renderer = nullptr;
-	SDL_Window* window = nullptr;
 };
 
 #endif

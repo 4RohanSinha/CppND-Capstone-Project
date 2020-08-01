@@ -1,4 +1,6 @@
+#include <iostream>
 #include "Audio.h"
+
 
 void Music::LoadMusic() {
 	music_ = Mix_LoadMUS(filename_.c_str());

@@ -1,15 +1,10 @@
 #include "Pong.h"
 
 Pong::Pong(): Game() {
-	mainWindow = gameEngine->windowManager.CreateNewWindow("main", 500, 500, "Pong");
-	scene = mainWindow->sceneManager->CreateNewScene("main");
-	win_scene = mainWindow->sceneManager->CreateNewScene("player_win");
-	lose_scene = mainWindow->sceneManager->CreateNewScene("player_lose");
-	/*
-	scene = gameEngine->sceneManager->CreateNewScene("main");
-	win_scene = gameEngine->sceneManager->CreateNewScene("player_win");
-	lose_scene = gameEngine->sceneManager->CreateNewScene("player_lose");
-	*/
+	gameEngine->window = std::make_unique<Window>(500, 500, "Pong");
+	scene = gameEngine->window->sceneManager->CreateNewScene("main");
+	win_scene = gameEngine->window->sceneManager->CreateNewScene("player_win");
+	lose_scene = gameEngine->window->sceneManager->CreateNewScene("player_lose");
 	timer = std::make_unique<Timer>(16.66);
 	paddle1 = std::make_shared<Sprite>("../assets/photos/paddle1.jpg", 20, 200, 25, 100);
 	paddle2 = std::make_shared<Sprite>("../assets/photos/paddle2.png", 450, 200, 25, 100);
@@ -48,15 +43,13 @@ void Pong::Setup() {
 }
 
 void Pong::Run() {
-	mainWindow->sceneManager->ShowScene("main");
+	gameEngine->window->sceneManager->ShowScene("main");
 	while (gameEngine->IsRunning()) {
 		timer->BeginKeyframe();
 		if (player1Score == 5 && player1Score > computerScore) {
-			mainWindow->sceneManager->ShowScene("player_win");
-			mainWindow->sceneManager->DeleteScene("main");
+			gameEngine->window->sceneManager->ShowScene("player_win");
 		} else if (computerScore == 5 && computerScore > player1Score) {
-			mainWindow->sceneManager->ShowScene("player_lose");
-			mainWindow->sceneManager->DeleteScene("main");
+			gameEngine->window->sceneManager->ShowScene("player_lose");
 		}
 		gameEngine->Loop();
 		(*pad1)();

@@ -7,13 +7,11 @@
 #include "Timer.h"
 #include "Controller.h"
 #include "CollisionDetector.h"
-#include "WindowManager.h"
 #include "SceneManager.h"
 
 class Engine {
 public:
-	//std::unique_ptr<SceneManager> sceneManager = nullptr;
-	WindowManager windowManager;
+	std::unique_ptr<Window> window = nullptr;
 	AudioManager audioManager;
 	std::unique_ptr<Controller> controller = nullptr;
 
@@ -42,8 +40,6 @@ public:
 		controller->HandleKeyUpFor(keys, handlerFunction);
 	}
 private:
-	std::unique_ptr<Window> window_ = nullptr;
-	//std::unique_ptr<Renderer> renderer_ = nullptr;
 	std::unique_ptr<Timer> timer_ = nullptr;
 	SDL_Event event;
 };

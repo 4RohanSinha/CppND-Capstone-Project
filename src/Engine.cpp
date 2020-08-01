@@ -6,16 +6,9 @@
 
 Engine::Engine() {
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+	Mix_Init(MIX_INIT_OGG|MIX_INIT_MP3);
 	TTF_Init();
 	IMG_Init(IMG_INIT_PNG);
-	controller = std::make_unique<Controller>();
-}
-
-Engine::Engine(int WindowWidth, int WindowHeight, std::string WindowTitle) {
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	TTF_Init();
-	IMG_Init(IMG_INIT_PNG);
-	windowManager.CreateNewWindow("main", WindowWidth, WindowHeight, WindowTitle);
 	controller = std::make_unique<Controller>();
 }
 
@@ -28,7 +21,8 @@ Engine::~Engine() {
 
 void Engine::Loop() {
 	controller->Update();
-	windowManager.Update();
+	if (window != nullptr)
+		window->sceneManager->RenderCurrentScene();
 }
 
 bool Engine::IsRunning() {
