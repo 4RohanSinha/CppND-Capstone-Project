@@ -16,7 +16,17 @@ void Scene::AddNode(std::shared_ptr<Node> node) {
 	node->Render();
 }
 
+void Scene::AddNodes(std::initializer_list<std::shared_ptr<Node>> nodes) {
+	for (auto& i: nodes) {
+		i->AssignRenderer(renderer_);
+		i->ConstructRectangle();
+		i->Render();
+		nodes_.push_back(i);
+	}
+}
+
 void Scene::Render() {
+	Clear();
 	if (renderer_ == nullptr)
 		throw std::runtime_error("Error: Scene::Render(): renderer not assigned in scene. Maybe the scene has not been added to the scene manager?");
 	for (int i = 0; i < nodes_.size(); i++) {

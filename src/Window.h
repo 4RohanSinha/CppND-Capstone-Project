@@ -8,12 +8,11 @@
 #include "SceneManager.h"
 #include "rendering/Renderer.h"
 
-//TODO: fix errors with multiple windows in event handling
-
 class Window {
 public:
 	Window() {}
 	Window(int width, int height, std::string title);
+	//copying windows is not permitted because for this project, there may only be one window open at a time.
 	Window(const Window& other) = delete;
 	Window& operator=(const Window& other) = delete;
 	Window(Window&& other);
@@ -27,7 +26,8 @@ public:
 	void SetHeight(int h);
 	void SetDimensions(int w, int h);
 	SDL_Window* get() { return window_; }
-	
+	void Hide();
+	void Show();	
 	std::unique_ptr<SceneManager> sceneManager = nullptr;
 private:
 	int width_;

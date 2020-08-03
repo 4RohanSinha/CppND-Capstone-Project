@@ -72,3 +72,10 @@ void Window::SetDimensions(int w, int h) {
 	SDL_SetWindowSize(window_, width_, height_);
 }
 
+void Window::Hide() {
+	SDL_HideWindow(window_);
+}
+
+void Window::Show() {
+	SDL_ShowWindow(window_);
+}

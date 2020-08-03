@@ -60,7 +60,7 @@ void TextManager::ShowNextSource() {
 }
 
 void TextManager::ChangeByIndex(int index) {
-	if (textureManager_ = nullptr)
+	if (textureManager_ == nullptr)
 		throw std::runtime_error("Error: texture manager not assigned because the renderer is nullptr. Cannot change by index.");
 	if (index >= textureManager_->size())
 		throw std::invalid_argument("Error: TextManager::ChangeByIndex(int index): index is out of bounds.");

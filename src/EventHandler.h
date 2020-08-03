@@ -27,6 +27,7 @@ public:
 	template <typename T>
 	EventHandler(EventType eventType, T handlerFunction): eventType_(eventType), handlerFunction_(handlerFunction) {}
 	virtual void Listen(Input& inputMonitor) = 0;
+	virtual ~EventHandler() {}
 protected:
 	EventType eventType_{EventType::kNone};	
 	std::function<void()> handlerFunction_;

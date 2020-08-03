@@ -8,16 +8,19 @@
 
 class CollisionDetector {
 public:
-	CollisionDetector(std::shared_ptr<Node> firstNode, std::shared_ptr<Node> secondNode): nodeOne(firstNode), nodeTwo(secondNode) {}
+	bool isEnabled{true};
+	CollisionDetector() {}
+	CollisionDetector(std::shared_ptr<Node> firstNode, std::shared_ptr<Node> secondNode): isEnabled(true), nodeOne(firstNode), nodeTwo(secondNode) {}
 
 	template <typename T>
-	CollisionDetector(std::shared_ptr<Node> firstNode, std::shared_ptr<Node> secondNode, T handlerFunction): nodeOne(firstNode), nodeTwo(secondNode), handlerFunction_(handlerFunction) {}
+	CollisionDetector(std::shared_ptr<Node> firstNode, std::shared_ptr<Node> secondNode, T handlerFunction): isEnabled(true), nodeOne(firstNode), nodeTwo(secondNode), handlerFunction_(handlerFunction) {}
 
 	//void ForbidObjectsFromIntersecting();
-	operator bool() { return isColliding_; }
+	operator bool() { return isColliding_ && isEnabled; }
 	void operator()() { CheckForCollisions(); }
-	bool FirstCollisionIsHappening() { return initCollide_; }
+	bool FirstCollisionIsHappening() { return initCollide_ && isEnabled; }
 	void CheckForCollisions();
+	bool HasHandlerFunction() { return static_cast<bool>(handlerFunction_); }
 	
 private:
 	std::shared_ptr<Node> nodeOne = nullptr;

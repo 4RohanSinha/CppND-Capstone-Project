@@ -9,6 +9,7 @@ AudioManager::AudioManager(int channels): channels_(channels) {
 }
 
 void AudioManager::LoadFromDirectory(std::string dir) {
+	/*
 	for (auto& file: std::filesystem::directory_iterator(dir)) {
 		AudioType aType;
 		std::string path = file.path();
@@ -23,6 +24,7 @@ void AudioManager::LoadFromDirectory(std::string dir) {
 		else
 			AddSoundEffect(path, finalId);
 	}	
+	*/
 
 }
 

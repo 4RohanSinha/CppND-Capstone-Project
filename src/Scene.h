@@ -11,11 +11,11 @@ class Scene {
 public:
 	void AddNodeGroup(NodeGroup& ngroup);
 	void AddNode(std::shared_ptr<Node> node);
+	void AddNodes(std::initializer_list<std::shared_ptr<Node>> nodes);
 	void Render();
 	void Clear();
 private:
 	std::vector<std::shared_ptr<Node>> nodes_;
-//	std::shared_ptr<SDL_Renderer> renderer_;
 	SDL_Renderer* renderer_;
 	friend class SceneManager;
 };

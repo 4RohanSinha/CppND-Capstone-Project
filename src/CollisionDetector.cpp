@@ -4,6 +4,7 @@
 #include <thread>
 
 void CollisionDetector::CheckForCollisions() {
+	if (nodeOne == nullptr || nodeTwo == nullptr) return;
 	auto iWidth = (nodeOne->width_)/2;	
 	auto iHeight = (nodeOne->height_)/2;	
 	auto jWidth = (nodeTwo->width_)/2;	
@@ -17,6 +18,7 @@ void CollisionDetector::CheckForCollisions() {
 	if (abs(iCenterX - jCenterX) > (iWidth + jWidth)) {
 		isColliding_ = false;	
 		initCollide_ = false;
+
 	} else if (abs(iCenterY - jCenterY) > (iHeight + jHeight)) {
 		isColliding_ = false;	
 		initCollide_ = false;
@@ -27,6 +29,7 @@ void CollisionDetector::CheckForCollisions() {
 
 	} else if (isColliding_) {
 		initCollide_ = false;
+
 	} else {
 		isColliding_ = true;
 		initCollide_ = true;
