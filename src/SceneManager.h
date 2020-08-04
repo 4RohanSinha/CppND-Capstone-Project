@@ -1,7 +1,6 @@
 #ifndef SCENE_MANAGER_H
 #define SCENE_MANAGER_H
 
-#include "Camera.h"
 #include "Scene.h"
 #include <iostream>
 #include <string>
@@ -21,7 +20,6 @@ private:
 	SDL_Renderer* renderer_;
 	std::unordered_map<std::string, std::unique_ptr<Scene>> scenes_;
 	std::string currentScene_;
-	Camera camera_;
 };
 
 #endif

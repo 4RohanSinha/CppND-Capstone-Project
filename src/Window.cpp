@@ -3,14 +3,13 @@
 #include "Integrate.h"
 
 Window::Window(int width, int height, std::string title): width_(width), height_(height), title_(title) {
-	window_ = (SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, 0));
-	renderer = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	window_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
+	renderer = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
 	sceneManager = std::make_unique<SceneManager>(renderer);
 }
-
 
 Window::Window(Window&& other) {
 	window_ = other.window_;
@@ -48,8 +47,12 @@ Window& Window::operator=(Window&& other) {
 }
 
 Window::~Window() {
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window_);
+	if (renderer != nullptr && window_ != nullptr) {
+		SDL_DestroyRenderer(renderer);
+		SDL_DestroyWindow(window_);
+		renderer = nullptr;
+		window_ = nullptr;
+	}
 }
 
 void Window::SetTitle(std::string new_title) {

@@ -4,6 +4,10 @@ void NodeGroup::AddNode(std::shared_ptr<Node> node) {
 	nodes_.push_back(node);
 }
 
+void NodeGroup::AddNodes(std::initializer_list<std::shared_ptr<Node>> nodes) {
+	nodes_.insert(nodes_.end(), nodes);
+}
+
 void NodeGroup::DeleteNode(int ind) {
 	nodes_.erase(nodes_.begin() + (ind - 1));
 }

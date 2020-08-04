@@ -14,25 +14,25 @@ ObstacleCourse::ObstacleCourse(): Game() {
 	movingWall1 = std::make_shared<MovingWall>(110, 70, 16, 60);
 	movingWall2 = std::make_shared<MovingWall>(260, 70, 16, 60);
 	movingWall3 = std::make_shared<MovingWall>(410, 70, 16, 60);
+	movingWalls.AddNodes({movingWall1, movingWall2, movingWall3});
+	mmWalls.AddNodes({wall1, wall2});
+	allWalls.AddNodes({wall1, wall2, wall3, wall4});
 	player = std::make_shared<Sprite>("../assets/photos/ball.png", 50, 125, 25, 25);
+
+
+	//lambda function that will be called when the player loses a life
+	//is passed into the collision detector methods
 	auto playerLosesLife = [this] () {
 		lives--;
 		player->x = 50;
 		player->y = 125;
 	};
-	collisionManager.DetectCollisionsBetween(movingWall1, wall1, "mm1wall1");
-	collisionManager.DetectCollisionsBetween(movingWall1, wall2, "mm1wall2");
-	collisionManager.DetectCollisionsBetween(movingWall2, wall1, "mm2wall1");
-	collisionManager.DetectCollisionsBetween(movingWall2, wall2, "mm2wall2");
-	collisionManager.DetectCollisionsBetween(movingWall3, wall1, "mm3wall1");
-	collisionManager.DetectCollisionsBetween(movingWall3, wall2, "mm3wall2");
-	collisionManager.DetectCollisionsBetween(player, wall1, "wall1Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, wall2, "wall2Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, wall3, "wall3Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, wall4, "wall4Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, movingWall1, "movingWall1Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, movingWall2, "movingWall2Player", playerLosesLife);
-	collisionManager.DetectCollisionsBetween(player, movingWall3, "movingWall3Player", playerLosesLife);
+	
+	collisionManager.DetectCollisionsBetweenGroupAndNode(mmWalls, movingWall1, "mm1wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(mmWalls, movingWall2, "mm2wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(mmWalls, movingWall3, "mm3wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(allWalls, player, "wallPlayer", playerLosesLife);
+	collisionManager.DetectCollisionsBetweenGroupAndNode(movingWalls, player, "movingWallPlayer", playerLosesLife);
 
 	Setup();
 }
@@ -70,15 +70,16 @@ void ObstacleCourse::Run() {
 		movingWall3->Update();
 		collisionManager.Update();
 
-		if (collisionManager["mm1wall1"] || collisionManager["mm1wall2"]) {
+		if (collisionManager["mm1wall"]) {
 			movingWall1->velocity[1] *= -1;
 		}
 
-		if (collisionManager["mm2wall1"] || collisionManager["mm2wall2"]) {
+		if (collisionManager["mm2wall"]) {
 			movingWall2->velocity[1] *= -1;
 		}
 
-		if (collisionManager["mm3wall1"] || collisionManager["mm3wall2"]) {
+
+		if (collisionManager["mm3wall"]) {
 			movingWall3->velocity[1] *= -1;
 		}
 

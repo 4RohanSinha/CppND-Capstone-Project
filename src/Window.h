@@ -17,7 +17,7 @@ public:
 	Window& operator=(const Window& other) = delete;
 	Window(Window&& other);
 	Window& operator=(Window&& other);
-	~Window();
+	virtual ~Window();
 	void SetTitle(std::string new_title);
 	std::string GetTitle() {return title_; }
 	int GetWidth() { return width_; }

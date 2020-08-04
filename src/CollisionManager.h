@@ -5,21 +5,26 @@
 #include <unordered_map>
 #include "NodeGroup.h"
 #include "CollisionDetector.h"
+#include "NGCollisionDetector.h"
 
 class CollisionManager {
 public:
-	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier) { collisions_[identifier] = CollisionDetector(nodeA, node_b); }
+	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier);
 
-	void DetectCollisionsBetweenGroupAndNode(NodeGroup& ng, std::shared_ptr<Node> node);
+	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier, std::function<void()> handlerFunction);
 
-	void DetectCollisionsBetweenGroups(NodeGroup& groupA, NodeGroup& group_b);
+	void DetectCollisionsBetweenGroupAndNode(NodeGroup& ng, std::shared_ptr<Node> node, std::string identifier);
 
-	template <typename T>
-	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier, T handlerFunction) { collisions_[identifier] = CollisionDetector(nodeA, node_b, handlerFunction); }
+	void DetectCollisionsBetweenGroupAndNode(NodeGroup& ng, std::shared_ptr<Node> node, std::string identifier, std::function<void()> handler);
 
-	CollisionDetector operator[](std::string identifier) { return collisions_[identifier];  }
+	void DetectCollisionsBetweenGroups(NodeGroup& groupA, NodeGroup& group_b, std::string identifier);
+	
+	void DetectCollisionsBetweenGroups(NodeGroup& groupA, NodeGroup& group_b, std::string identifier, std::function<void()> handler);
 
-	bool FirstCollisionIsHappening(std::string identifier) { return collisions_[identifier].FirstCollisionIsHappening(); }
+
+	NGCollisionDetector& operator[](std::string identifier) { return collisions_[identifier]; }
+
+	bool FirstCollisionIsHappening(std::string identifier);
 
 	void DeleteCollisionAt(std::string identifier) { collisions_.erase(identifier); }
 
@@ -30,7 +35,7 @@ public:
 	void Update();
 
 private:
-	std::unordered_map<std::string, CollisionDetector> collisions_;
+	std::unordered_map<std::string, NGCollisionDetector> collisions_;
 };
 
 #endif
