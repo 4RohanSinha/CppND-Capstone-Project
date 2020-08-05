@@ -6,11 +6,6 @@ MovingWall::MovingWall(float x, float y, int width, int height): Sprite("../asse
 	std::uniform_int_distribution<> distr_dir(0, 1);
 	int dir = distr_dir(eng);
 	if (dir == 0) dir = -1;
-	std::uniform_real_distribution<> distr_vel(0.5, 1.5);
+	std::uniform_real_distribution<> distr_vel(0.5, 1.25);
 	velocity[1] = dir*distr_vel(eng);
-}
-
-void MovingWall::Update() {
-	x += velocity[0];
-	y += velocity[1];
 }

@@ -9,9 +9,14 @@
 
 class CollisionManager {
 public:
+
 	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier);
 
 	void DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std::shared_ptr<Node> node_b, std::string identifier, std::function<void()> handlerFunction);
+
+	void DetectCollisionsWithin(NodeGroup& ng, std::string identifier);
+
+	void DetectCollisionsWithin(NodeGroup& ng, std::string identifier, std::function<void()> handlerFunction);
 
 	void DetectCollisionsBetweenGroupAndNode(NodeGroup& ng, std::shared_ptr<Node> node, std::string identifier);
 

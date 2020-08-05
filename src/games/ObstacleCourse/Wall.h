@@ -12,8 +12,6 @@ public:
 class MovingWall: public Sprite {
 public:
 	MovingWall(float x, float y, int width, int height);
-	//TODO: implement the method below
-	void Update();
 
 };
 

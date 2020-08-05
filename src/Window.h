@@ -34,6 +34,7 @@ private:
 	int height_;
 	std::string title_;
 	SDL_Window* window_ = nullptr; //All SDL objects must be allocated and freed according to their specific functions, so RAII is used to manage them
+	std::unique_ptr<Renderer> renderer_ = nullptr;
 	SDL_Renderer* renderer = nullptr;
 };
 

@@ -1,7 +1,6 @@
 TODO:
-fix memory leaks
-allow multiple windows to work
-add vectors to characters' motion, include gravity (use Physics class)
+create "break rooms" in Obstacle Course game
 clean up code
-create practice games
+get rid of Setup() in Game class and include all content in constructor
+fix README
 submit

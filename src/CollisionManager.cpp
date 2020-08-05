@@ -14,6 +14,14 @@ void CollisionManager::DetectCollisionsBetween(std::shared_ptr<Node> nodeA, std:
 	collisions_[identifier] = NGCollisionDetector(nodeA, node_b, handlerFunction);
 }
 
+void CollisionManager::DetectCollisionsWithin(NodeGroup& ng, std::string identifier) {
+	collisions_[identifier] = NGCollisionDetector(ng);
+}
+
+void CollisionManager::DetectCollisionsWithin(NodeGroup& ng, std::string identifier, std::function<void()> handlerFunction) {
+	collisions_[identifier] = NGCollisionDetector(ng, handlerFunction);
+}
+
 void CollisionManager::DetectCollisionsBetweenGroupAndNode(NodeGroup& ng, std::shared_ptr<Node> node, std::string identifier) {
 	collisions_[identifier] = NGCollisionDetector(ng, node);
 }

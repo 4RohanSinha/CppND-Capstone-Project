@@ -4,23 +4,20 @@
 
 Window::Window(int width, int height, std::string title): width_(width), height_(height), title_(title) {
 	window_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
-	renderer = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
-	sceneManager = std::make_unique<SceneManager>(renderer);
+	renderer_ = std::make_unique<Renderer>(window_);
+	sceneManager = std::make_unique<SceneManager>(renderer_->getSDL());
 }
 
 Window::Window(Window&& other) {
 	window_ = other.window_;
-	renderer = other.renderer;
+	renderer_ = std::move(other.renderer_);
 	sceneManager = std::move(other.sceneManager);
 	width_ = other.width_;
 	height_ = other.height_;
 	title_ = other.title_;
 
 	other.window_ = nullptr;
-	other.renderer = nullptr;
+	other.renderer_ = nullptr;
 	other.sceneManager = nullptr;
 	other.width_ = 0;
 	other.height_ = 0;
@@ -31,14 +28,14 @@ Window& Window::operator=(Window&& other) {
 	if (this == &other)
 		return *this;
 	window_ = other.window_;
-	renderer = other.renderer;
+	renderer_ = std::move(other.renderer_);
 	sceneManager = std::move(other.sceneManager);
 	width_ = other.width_;
 	height_ = other.height_;
 	title_ = other.title_;
 
 	other.window_ = nullptr;
-	other.renderer = nullptr;
+	other.renderer_ = nullptr;
 	other.sceneManager = nullptr;
 	other.width_ = 0;
 	other.height_ = 0;
@@ -48,7 +45,7 @@ Window& Window::operator=(Window&& other) {
 
 Window::~Window() {
 	if (renderer != nullptr && window_ != nullptr) {
-		SDL_DestroyRenderer(renderer);
+		renderer_.reset();
 		SDL_DestroyWindow(window_);
 		renderer = nullptr;
 		window_ = nullptr;

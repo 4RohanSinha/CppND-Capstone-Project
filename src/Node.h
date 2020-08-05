@@ -26,6 +26,8 @@ public:
 
 	Node(float x, float y); //basic constructor
 
+	virtual ~Node() {}
+
 	virtual void Draw() {}
 
 	float GetX() { return x; }
@@ -46,6 +48,8 @@ public:
 	void SetForm(int form);
 
 	virtual void Clear() {}
+
+	virtual void Update();
 
 	float x;
 	

@@ -25,3 +25,8 @@ bool Node::CheckLength(float len) {
 		return true;
 	return false;
 }
+
+void Node::Update() {
+	x += velocity[0];
+	y += velocity[1];
+}
