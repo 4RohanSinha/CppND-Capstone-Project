@@ -6,7 +6,7 @@
 #include <SDL2/SDL_timer.h>
 #include <memory>
 #include "SceneManager.h"
-#include "rendering/Renderer.h"
+#include "Renderer.h"
 
 class Window {
 public:
@@ -19,7 +19,7 @@ public:
 	Window& operator=(Window&& other);
 	virtual ~Window();
 	void SetTitle(std::string new_title);
-	std::string GetTitle() {return title_; }
+	std::string GetTitle() { return title_; }
 	int GetWidth() { return width_; }
 	int GetHeight() { return height_; }
 	void SetWidth(int w);
@@ -27,7 +27,8 @@ public:
 	void SetDimensions(int w, int h);
 	SDL_Window* get() { return window_; }
 	void Hide();
-	void Show();	
+	void Show();
+
 	std::unique_ptr<SceneManager> sceneManager = nullptr;
 private:
 	int width_;
@@ -35,7 +36,6 @@ private:
 	std::string title_;
 	SDL_Window* window_ = nullptr; //All SDL objects must be allocated and freed according to their specific functions, so RAII is used to manage them
 	std::unique_ptr<Renderer> renderer_ = nullptr;
-	SDL_Renderer* renderer = nullptr;
 };
 
 #endif

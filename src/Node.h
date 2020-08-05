@@ -12,85 +12,46 @@
 #include <SDL2/SDL_ttf.h>
 #include <memory>
 #include <cmath>
-#include "Physics.h"
 #include "TextureManager.h"
 #include "Color.h"
 
-class Physics;
+//The class Node is an abstract class with multiple virtual functions
+//it is needed to unite Sprite and Text classes under one class, so then a vector of Nodes (as pointers - abstract classes alone cannot be stored in vectors) are stored together in one vector
 
 class Node {
 public:
 	Node();
 
-	Node(float x, float y, int width, int height); //basic constructor
+	Node(float x_val, float y_val, int width_val, int height_val); //basic constructor
 
-	Node(float x, float y); //basic constructor
+	Node(float x_val, float y_val); //basic constructor
 
-	virtual ~Node() {}
+	virtual void Render() = 0;
 
-	virtual void Draw() {}
+	virtual void Clear() = 0;
 
-	float GetX() { return x; }
-
-	float GetY() { return y; }
-	
-	int GetWidth() { return width_; }
-	
-	int GetHeight() { return height_; }
-
-	virtual void Render() {}
-
-	//TODO: get rid of the Animation/MoveAnimation classes
-	//replace with dx and dy variables to control movement velocity
-
-	virtual Color GetColor() { return Color(0, 0, 0, 0); }
-
-	void SetForm(int form);
-
-	virtual void Clear() {}
-
+	//this function is defined in Node.cpp, but allow future descendants of Node to override it
 	virtual void Update();
 
+	//some basic variables setting the position of the Node
 	float x;
-	
 	float y;
-	
-	int width_;
+	int width;
+	int height;
 
-	int height_;
-	
-	std::string collisionBitMask{"Unknown Node Type"};
-
-	std::unique_ptr<Physics> physics;
+	//the velocity can also be used to change the Node's position
 	std::vector<float> velocity{0, 0};
 
 protected:
-	float speed{2.0};
-	float angle;
-	
 	bool isHidden_{false};
 
-	virtual void ConstructRectangle() {}
+	virtual void ConstructRectangle() = 0;
 
-	virtual void AssignRenderer(SDL_Renderer* renderer) {}
+	virtual void AssignRenderer(SDL_Renderer* renderer) = 0;
 	
 	static bool CheckLength(float len);
 
-	std::vector<SDL_Point> points_;
-
-	bool textureSurface_{true};
-	
-
-	//make this class a friend so that it can access the texture private member
-	//this member should not be accessed from other classes or users, so keep it protected
-	//limit its access to descendant and friend classes
-	//TODO: figure out way to reduce number of friend classes
-	friend class Renderer;
-	
-	friend class Layer;	
-	
-	friend class CollisionDetector;
-
+	//make this class a friend so that it can call ConstructRectangle() and AssignRenderer(SDL_Renderer* renderer)
 	friend class Scene;
 };
 

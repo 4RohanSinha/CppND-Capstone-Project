@@ -10,7 +10,6 @@
 #include "EventHandler.h"
 #include "Input.h"
 
-//TODO: allow for simultaneous events to be handled - e.g. click and key press at the same time
 class Controller {
 public:
 	Controller() {}

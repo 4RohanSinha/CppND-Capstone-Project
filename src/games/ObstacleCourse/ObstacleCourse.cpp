@@ -45,14 +45,10 @@ ObstacleCourse::ObstacleCourse(): Game() {
 	collisionManager.DetectCollisionsBetweenGroupAndNode(movingWalls, player, "movingWallPlayer", playerLosesLife);
 	collisionManager.DetectCollisionsBetweenGroupAndNode(projectiles, player, "projectilePlayer", playerLosesLife);
 	collisionManager.DetectCollisionsBetweenGroupAndNode(diagonalProjectiles, player, "diagonalProjectilePlayer", playerLosesLife);
-	collisionManager.DetectCollisionsBetweenGroupAndNode(diagWalls, diagProj1, "diag1Wall");
-	collisionManager.DetectCollisionsBetweenGroupAndNode(diagWalls, diagProj2, "diag2Wall");
-	collisionManager.DetectCollisionsBetweenGroupAndNode(diagWalls, diagProj3, "diag3Wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(allWalls, diagProj1, "diag1Wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(allWalls, diagProj2, "diag2Wall");
+	collisionManager.DetectCollisionsBetweenGroupAndNode(allWalls, diagProj3, "diag3Wall");
 
-	Setup();
-}
-
-void ObstacleCourse::Setup() {
 	scene1->AddNodes({player, wall1, wall2, wall3, wall4, movingWall1, movingWall2, movingWall3, projectile1, projectile2, projectile3, diagProj1, diagProj2, diagProj3});
 
 	gameEngine->HandleKeyPressFor(KeyCharacter::keyLeftArr, [this] () {

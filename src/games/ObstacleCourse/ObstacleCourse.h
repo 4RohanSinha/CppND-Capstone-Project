@@ -35,5 +35,4 @@ private:
 	NodeGroup mmWalls;
 	NodeGroup diagWalls;
 	int lives;
-	void Setup();
 };

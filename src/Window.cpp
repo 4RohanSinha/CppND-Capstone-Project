@@ -1,6 +1,4 @@
 #include "Window.h"
-#include "rendering/Renderer.h"
-#include "Integrate.h"
 
 Window::Window(int width, int height, std::string title): width_(width), height_(height), title_(title) {
 	window_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
@@ -44,10 +42,10 @@ Window& Window::operator=(Window&& other) {
 }
 
 Window::~Window() {
-	if (renderer != nullptr && window_ != nullptr) {
+	if (renderer_ != nullptr && window_ != nullptr) {
 		renderer_.reset();
 		SDL_DestroyWindow(window_);
-		renderer = nullptr;
+		renderer_ = nullptr;
 		window_ = nullptr;
 	}
 }

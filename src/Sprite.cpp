@@ -1,13 +1,11 @@
 #include "Sprite.h"
 
 Sprite::Sprite(std::string mainImage, float x, float y): Node(x, y) {
-	collisionBitMask = "Sprite";
 	spriteManager_.AddSource(mainImage);
 	spriteManager_.AssignCoordinates(x, y, 100, 100);
 }
 
 Sprite::Sprite(std::string mainImage, float x, float y, int width, int height): Node(x, y, width, height) {
-	collisionBitMask = "Sprite";
 	spriteManager_.AddSource(mainImage);
 	spriteManager_.AssignCoordinates(x, y, width, height);
 	

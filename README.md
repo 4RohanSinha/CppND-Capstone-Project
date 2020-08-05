@@ -12,6 +12,13 @@ THIS IS A WORK IN PROGRESS. FILL IN DESCRIPTION HERE.<br /><br />
 
 * gcc/g++ >= 5.4
 
+* SDL2 library and extension libraries
+	* SDL2
+		* The SDL wiki contains install instructions for the SDL 2 library <a href="https://wiki.libsdl.org/Installation">here</a>.
+			* Note that on Ubuntu, this package can be installed with the following command: `sudo apt install libsdl2-2.0-0 libsdl2-dev`
+	* SDL2 extension libraries: SDL image, SDL ttf, and SDL mixer are all required for this project to run.
+		* TO BE CONTINUED		
+
 ## Building: Compile and Run
 
 ### Compilation
@@ -34,21 +41,99 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 
 ## File Structure
 * CppND-Capstone Project/
+	* assets/
+		* audio/
+		* fonts/ 
+			* Note: the fonts in this directory are copied from /usr/share/fonts/truetype/ubuntu
+		* photos/
+			* alligator.png
+			* ball.png
+			* bird.png
+			* paddle1.jpg
+			* paddle2.png
+		
 	* CMakeLists.txt
 	* README.md
-	* include/
-		* Graphics.h
 	* src/
-		* Graphics.cpp
+		* audio/
+			* Audio.h
+			* Audio.cpp
+			* AudioManager.h
+			* AudioManager.cpp
+		* CollisionDetector.h
+		* CollisionDetector.cpp
+		* CollisionManager.h
+		* CollisionManager.cpp
+		* Color.h
+		* Color.cpp
+		* Controller.h
+		* Controller.cpp
+		* Engine.h
+		* Engine.cpp
+		* EventHandler.h
+		* EventHandler.cpp
+		* Font.h
+		* Font.cpp
+		* Game.h
+		* Game.cpp
+		* games/
+			* ObstacleCourse/
+				* ObstacleCourse.h
+				* ObstacleCourse.cpp
+				* Projectile.h
+				* Projectile.cpp
+				* Wall.h
+				* Wall.cpp
+			* Pong/
+				* Ball.h
+				* Ball.cpp
+				* Pong.h
+				* Pong.cpp
+		* Input.h
+		* Input.cpp
+		* Keyboard.h
+		* Keyboard.cpp
 		* main.cpp
-
+		* Mouse.h
+		* Mouse.cpp
+		* NGCollisionDetector.h
+		* NGCollisionDetector.cpp
+		* Node.h
+		* Node.cpp
+		* NodeGroup.h
+		* NodeGroup.cpp
+		* Renderer.h
+		* Renderer.cpp
+		* Scene.h
+		* Scene.cpp
+		* SceneManager.h
+		* SceneManager.cpp
+		* Sprite.h
+		* Sprite.cpp
+		* SpriteManager.h
+		* SpriteManager.cpp
+		* Surface.h
+		* Surface.cpp
+		* SurfaceManager.h
+		* SurfaceManager.cpp
+		* Text.h
+		* Text.cpp
+		* TextManager.h
+		* TextManager.cpp
+		* Texture.h
+		* Texture.cpp
+		* TextureManager.h
+		* TextureManager.cpp
+		* Timer.h
+		* Timer.cpp
+		* Window.h
+		* Window.cpp
 
 ## Class Structure
 
 
 
 ## Rubric Points
-
 
 
 

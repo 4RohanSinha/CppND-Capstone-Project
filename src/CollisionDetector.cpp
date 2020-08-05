@@ -5,10 +5,10 @@
 
 void CollisionDetector::CheckForCollisions() {
 	if (nodeOne == nullptr || nodeTwo == nullptr) return;
-	auto iWidth = (nodeOne->width_)/2;	
-	auto iHeight = (nodeOne->height_)/2;	
-	auto jWidth = (nodeTwo->width_)/2;	
-	auto jHeight = (nodeTwo->height_)/2;	
+	auto iWidth = (nodeOne->width)/2;	
+	auto iHeight = (nodeOne->height)/2;	
+	auto jWidth = (nodeTwo->width)/2;	
+	auto jHeight = (nodeTwo->height)/2;	
 
 	auto iCenterX = iWidth + (nodeOne->x);
 	auto iCenterY = iHeight + (nodeOne->y);

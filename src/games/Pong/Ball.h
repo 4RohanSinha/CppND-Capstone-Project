@@ -9,4 +9,7 @@ public:
 	void SetVelocity();
 	void HandleCollision();
 	void Update();
+private:
+	float speed{2.0};
+	float angle;
 };

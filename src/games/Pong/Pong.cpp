@@ -19,10 +19,6 @@ Pong::Pong(): Game() {
 	pad2 = std::make_unique<CollisionDetector>(paddle2, ball);
 	gameEngine->audioManager.AddMusic("../assets/audio/beat.wav", "beat");
 	gameEngine->audioManager.AddSoundEffect("../assets/audio/medium.wav", "medium");
-	Setup();
-}
-
-void Pong::Setup() {
 	scene->AddNode(ball);
 	scene->AddNode(paddle1);
 	scene->AddNode(paddle2);
@@ -61,7 +57,8 @@ void Pong::Run() {
 		paddle2->y += paddle2Vel;
 		if (paddle2->y == 0 || paddle2->y == 450)
 			paddle2Vel *= -1;
-		if (ball->x >= 500) {
+
+		if (ball->x >= 475) {
 			player1Score++;
 			playerText->AddSource(std::to_string(player1Score));
 			computerText->AddSource(std::to_string(computerScore));
@@ -79,7 +76,6 @@ void Pong::Run() {
 		if (ball->y <= 0 || ball->y >= 500)
 			ball->velocity[1] *= -1;
 
-		ball->Update();
 		timer->EndKeyframe();
 	}
 }

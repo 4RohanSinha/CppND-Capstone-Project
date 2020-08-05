@@ -14,7 +14,6 @@ public:
 protected:
 	std::unique_ptr<Engine> gameEngine = nullptr;
 	std::unique_ptr<Timer> timer = nullptr;
-	virtual void Setup() = 0;
 };
 
 #endif

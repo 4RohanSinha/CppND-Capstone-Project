@@ -26,19 +26,20 @@ public:
 	int GetCurrentImageIndex() { return spriteManager_.CurrentIndex(); }
 
 	std::string GetImageSourceAt(int index) { return spriteManager_[index]; }
+
 	std::string GetCurrentImage() { return GetImageSourceAt(GetCurrentImageIndex()); }
 
 	static bool CheckImageSource(std::string src);
-
-	void ConstructRectangle() { spriteManager_.ConstructRectangle(x, y, width_, height_); }
-
-	void AssignRenderer(SDL_Renderer* renderer);
 
 	void Render();
 
 	void Clear();
 
 protected:
+
+	void ConstructRectangle() { spriteManager_.ConstructRectangle(x, y, width, height); }
+
+	void AssignRenderer(SDL_Renderer* renderer);
 
 private:
 	SpriteManager spriteManager_;

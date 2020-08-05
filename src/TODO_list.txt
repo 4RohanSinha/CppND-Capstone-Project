@@ -1,6 +1,6 @@
 TODO:
 create "break rooms" in Obstacle Course game
 clean up code
-get rid of Setup() in Game class and include all content in constructor
+get rid of NodeManager and Physics class
 fix README
 submit

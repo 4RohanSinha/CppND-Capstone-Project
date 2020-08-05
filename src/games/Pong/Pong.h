@@ -10,8 +10,6 @@ class Pong: public Game {
 public:
 	Pong();
 	void Run();
-protected:
-	void Setup();
 private:
 	std::shared_ptr<Ball> ball = nullptr;
 	std::shared_ptr<Sprite> paddle1 = nullptr;

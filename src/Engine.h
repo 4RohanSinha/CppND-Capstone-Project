@@ -3,7 +3,7 @@
 
 #include "audio/AudioManager.h"
 #include "Window.h"
-#include "rendering/Renderer.h"
+#include "Renderer.h"
 #include "Timer.h"
 #include "Controller.h"
 #include "CollisionDetector.h"
