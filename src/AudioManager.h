@@ -29,8 +29,8 @@ public:
 	//there should only ever be one audio manager at a time
 	AudioManager(const AudioManager& source) = delete;
 	AudioManager& operator=(const AudioManager& source) = delete;
-	AudioManager(AudioManager&& source) = delete;
-	AudioManager& operator=(AudioManager&& source) = delete;
+	AudioManager(AudioManager&& source);
+	AudioManager& operator=(AudioManager&& source);
 private:
 	//unordered_map of string identifier to media
 	//media has to be unique_ptr because Audio is an abstract class with pure virtual functions (see Audio.h)

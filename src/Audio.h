@@ -10,6 +10,7 @@
 
 class Audio {
 public:
+	//empty constructor needed for descendent copy and move constructors
 	Audio() {}
 	Audio(std::string filename);
 	//virtual destructor because Audio objects in the AudioManager class are stored in an unordered_map
@@ -23,6 +24,7 @@ public:
 	Audio(Audio&& source) = default;
 	Audio& operator=(Audio&& source) = default;
 
+	//all virtual functions that should be called on any Audio object
 	virtual void LoadMusic() = 0;
 	virtual void Play() = 0;
 	virtual void Pause() = 0;
@@ -31,6 +33,7 @@ public:
 	virtual float GetVolume() = 0;
 	virtual void SetVolume(float val) = 0;
 	std::string GetFilename() { return filename_; }
+	//the cleanup method - called by destructor and Rule of Five functions
 	virtual void Delete() = 0;
 protected:
 	ReferenceCounter* ref_count;

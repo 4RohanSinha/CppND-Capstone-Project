@@ -59,3 +59,22 @@ std::string AudioManager::GetFilenameFor(std::string identifier) {
 AudioManager::~AudioManager(){
 	Mix_Quit();
 }
+
+AudioManager::AudioManager(AudioManager&& source) {
+	media_ = std::move(source.media_);
+	channels_ = source.channels_;
+	source.media_.clear();
+	source.channels_ = 0;
+}
+
+AudioManager& AudioManager::operator=(AudioManager&& source) {
+	if (this == &source)
+		return *this;
+
+	media_ = std::move(source.media_);
+	channels_ = source.channels_;
+	source.media_.clear();
+	source.channels_ = 0;
+	return *this;
+}
+

@@ -1,6 +1,6 @@
 # CppND Capstone Project
 
-This project is a C++ and SDL2 implementation of two games: a single-player obstacle course game and a Pong game against the computer. A major part of the code for this project involved building a small framework to make coding these two games easier.
+This project is a C++ and SDL2 implementation of a single-player obstacle game. There is also a Pong game included that was used previously for testing purposes but is not the central goal of this project.  A major part of the code for this project involved building a small framework to make coding these two games easier.
 
 ## Dependencies
 
@@ -35,7 +35,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ```
 
 ## Expected Behavior
-
+<br /><img src="CppND-Capstone-Project.gif" width="50" height="200" /><br />
 
 ## File Structure
 * CppND-Capstone Project/
@@ -151,7 +151,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ### Loops, Functions, I/O
 * <strong>The project demonstrates an understanding of C++ functions and control structure.</strong>
 	* A variety of control structures are used in the project. <strong>File: main.cpp. Line number 7 (while loop), 13 (if statement), 19-28 (if, else if, else).</strong>
-	* The project is clearly organized into functions. <strong>File: Timer.h. Line numbers 10-14 - methods of the class Timer to prevent the game from running too quickly. </strong>
+	* The project is clearly organized into functions. <strong>File: Timer.h. Line numbers 10-14 - methods of class Timer. </strong>
 
 * <strong>The project accepts user input and processes the input.</strong>
 	* The project accepts input from a user as part of the necessary operation of the program. <strong>File: main.cpp. Line number: 11 - Gets input about which game to run.</strong>
@@ -165,9 +165,6 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 
 * <strong>Class constructors utilize member initialization lists.</strong>
 	* All class members that are set to argument values are initialized through member initialization lists. <strong>File: Font.cpp. Line numbers: 8-29.</strong>
-
-* <strong>Classes abstract implementation details from their interfaces.</strong>
-	* All class member functions document their effects, either through function names, comments, or formal documentation. Member functions do not change program state in undocumented ways. <strong>File: &lt;filename&gt;. Line numbers: &lt;line numbers&gt;.</strong>
 
 * <strong>Classes follow an appropriate inheritance hierarchy.</strong>
 	* Inheritance hierarchies are logical. Composition is used instead of inheritance when appropriate. Abstract classes are composed of pure virtual functions. Override functions are specified.<br />

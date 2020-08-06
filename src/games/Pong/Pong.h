@@ -14,11 +14,8 @@ private:
 	std::shared_ptr<Ball> ball = nullptr;
 	std::shared_ptr<Sprite> paddle1 = nullptr;
 	std::shared_ptr<Sprite> paddle2 = nullptr;
-	std::shared_ptr<Text> helloWorld = nullptr;
 	std::shared_ptr<Text> win = nullptr;
 	std::shared_ptr<Text> lose = nullptr;
-	std::shared_ptr<Text> playerText = nullptr;
-	std::shared_ptr<Text> computerText = nullptr;
 	std::unique_ptr<CollisionDetector> pad1 = nullptr;
 	std::unique_ptr<CollisionDetector> pad2 = nullptr;
 	//non-owning references to the Scene objects - the SceneManager owns them

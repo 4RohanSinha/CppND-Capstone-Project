@@ -1,6 +1,6 @@
 #include "Pong.h"
 
-Pong::Pong(): Game() {
+Pong::Pong() {
 	gameEngine->window = std::make_unique<Window>(500, 500, "Pong");
 	scene = gameEngine->window->sceneManager->CreateNewScene("main");
 	win_scene = gameEngine->window->sceneManager->CreateNewScene("player_win");
@@ -9,9 +9,6 @@ Pong::Pong(): Game() {
 	paddle1 = std::make_shared<Sprite>("../assets/photos/paddle1.jpg", 20, 200, 25, 100);
 	paddle2 = std::make_shared<Sprite>("../assets/photos/paddle2.png", 450, 200, 25, 100);
 	Font testFont = Font("Ubuntu-M", 20);
-	playerText = std::make_shared<Text>("0", testFont, 50, 50);
-	computerText = std::make_shared<Text>("0", testFont, 450, 50);
-	helloWorld = std::make_shared<Text>("Hello World", testFont, 200, 200);
 	win = std::make_shared<Text>("You win!", testFont, 200, 200);
 	lose = std::make_shared<Text>("You lose!", testFont, 200, 200);
 	ball = std::make_shared<Ball>(250, 250, 50, 50);
@@ -22,17 +19,15 @@ Pong::Pong(): Game() {
 	scene->AddNode(ball);
 	scene->AddNode(paddle1);
 	scene->AddNode(paddle2);
-	scene->AddNode(playerText);
-	scene->AddNode(computerText);
 	win_scene->AddNode(win);
 	lose_scene->AddNode(lose);
 
-	gameEngine->HandleKeyPressFor(KeyCharacter::keyUpArr, [this] () {
+	gameEngine->controller.HandleKeyPressFor(KeyCharacter::keyUpArr, [this] () {
 		if (paddle1->y > 0)
                 	paddle1->y -= 2;
         });
 
-        gameEngine->HandleKeyPressFor(KeyCharacter::keyDownArr, [this] () {
+        gameEngine->controller.HandleKeyPressFor(KeyCharacter::keyDownArr, [this] () {
 		if (paddle1->y < 450)
                 	paddle1->y += 2;
         });
@@ -60,15 +55,11 @@ void Pong::Run() {
 
 		if (ball->x >= 475) {
 			player1Score++;
-			playerText->AddSource(std::to_string(player1Score));
-			computerText->AddSource(std::to_string(computerScore));
 			ball->SetVelocity();
 			std::cout << player1Score << " " << computerScore << "\n";
 		}
 		else if (ball->x <= 0) {
 			computerScore++;
-			playerText->AddSource(std::to_string(player1Score));
-			computerText->AddSource(std::to_string(computerScore));
 			ball->SetVelocity();
 			std::cout << player1Score << " " << computerScore << "\n";
 		}

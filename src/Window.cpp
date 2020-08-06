@@ -43,9 +43,8 @@ Window& Window::operator=(Window&& other) {
 
 Window::~Window() {
 	if (renderer_ != nullptr && window_ != nullptr) {
-		renderer_.reset(); //ensure that the renderer is destroyed before the window to avoid memory leak
+		renderer_ = nullptr; //ensure that the renderer is destroyed before the window to avoid memory leak
 		SDL_DestroyWindow(window_);
-		renderer_ = nullptr;
 		window_ = nullptr;
 	}
 }
