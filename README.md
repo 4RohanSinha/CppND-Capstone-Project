@@ -16,7 +16,7 @@ This project is a C++ and SDL2 implementation of a single-player obstacle game. 
 			* Note that on Ubuntu, this package can be installed with the following command: `sudo apt install libsdl2-2.0-0 libsdl2-dev`
 	* SDL2 extension libraries: SDL image, SDL ttf, and SDL mixer are all required for this project to run.
 		* SDL image installation instructions for all platforms are available at <a href="https://lazyfoo.net/tutorials/SDL/06_extension_libraries_and_loading_other_image_formats/index.php">this link.</a>		
-		* Note that the tutorial provides instructions for SDL image only. For the other library, follow the same instructions, but use the other links. Here are the links to all the SDL extension libraries used:
+		* Note that the tutorial provides instructions for SDL image only. For the other libraries, follow the same instructions, but use the other links. Here are the links to all the SDL extension libraries used:
 			* <a href="http://www.libsdl.org/projects/SDL_image/">SDL image</a>
 			* <a href="http://www.libsdl.org/projects/SDL_ttf/">SDL ttf</a>
 			* <a href="http://www.libsdl.org/projects/SDL_mixer/">SDL mixer</a>
