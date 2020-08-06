@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include <SDL2/SDL.h>
+#include "SDL2_headers.h"
 #include <unordered_map>
 #include <vector>
 #include <set>

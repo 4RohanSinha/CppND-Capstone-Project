@@ -3,9 +3,7 @@
 
 #include <string>
 #include <memory>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include "Surface.h"
 #include "Integrate.h"
 #include "ReferenceCounter.h"
@@ -24,7 +22,6 @@ public:
 	void Delete();
 	~Texture();
 private:
-	//integration::unique_ptr_sdl<SDL_Texture> texture_ = nullptr;
 	SDL_Texture* texture_ = nullptr;
 	ReferenceCounter* ref_count = nullptr;
 };

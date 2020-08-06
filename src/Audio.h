@@ -1,9 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
+#include "SDL2_headers.h"
 #include <stdexcept>
 #include <string>
 #include "ReferenceCounter.h"

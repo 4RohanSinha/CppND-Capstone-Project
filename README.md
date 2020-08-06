@@ -49,6 +49,8 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 			* bird.png
 			* paddle1.jpg
 			* paddle2.png
+			* goal.png
+			* instructions.png
 			* Note: I created these photos.
 		
 	* CMakeLists.txt
@@ -128,10 +130,6 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 		* Window.h
 		* Window.cpp
 
-## Class Structure
-
-
-
 ## Rubric Points
 
 
@@ -170,8 +168,8 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 	* Inheritance hierarchies are logical. Composition is used instead of inheritance when appropriate. Abstract classes are composed of pure virtual functions. Override functions are specified.<br />
 
 		* File: <strong>Node.h</strong>, Node is an abstract class with pure virtual functions on <u>lines 29, 31, 34, 48, and 50</u>.
-			* File: <strong>Sprite.h</strong>, Sprite inherits from Node. <u>See line number 14.</u>
-			* File: <strong>Text.h</strong>, Text inherits from Node. <u>See line number 17.</u>
+			* File: <strong>Sprite.h</strong>, Sprite inherits from Node. <u>See line number 14.</u> It also overrides virtual functions: see lines 34, 36, 40, 42.
+			* File: <strong>Text.h</strong>, Text inherits from Node. <u>See line number 17.</u> It overrides virtual functions on lines 33, 35, 39, 41.
 		* File: <strong>Sprite.h</strong>, Sprite is composed of a SpriteManager object, responsible for rendering to the window. <u>See line number 45.</u>
 		* File: <strong>Text.h</strong>, similar situation as Sprite. <u>See line number 44.</u>
 

@@ -6,10 +6,7 @@
 #include <deque>
 #include <algorithm>
 #include <stdexcept>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include <memory>
 #include <cmath>
 #include "TextureManager.h"

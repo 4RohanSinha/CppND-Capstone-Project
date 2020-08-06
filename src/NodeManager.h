@@ -1,7 +1,7 @@
 #ifndef NODE_MANAGER_H
 #define NODE_MANAGER_H
 
-#include <SDL2/SDL.h>
+#include "SDL2_headers.h"
 
 class NodeManager {
 public:

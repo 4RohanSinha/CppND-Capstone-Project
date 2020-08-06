@@ -2,7 +2,7 @@
 #define TIMER_H
 
 #include <iostream>
-#include <SDL2/SDL.h>
+#include "SDL2_headers.h"
 
 //adapted from timer in game.h and game.cpp from CppND-Capstone-Snake-Game
 class Timer {

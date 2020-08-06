@@ -20,9 +20,6 @@ void TextManager::AssignRenderer(SDL_Renderer* renderer) {
 	textureManager_ = std::make_unique<TextureManager>(renderer_, surfaceManager_);
 }
 
-//TODO: fix the two methods below
-//right now, they add too many elements to the textSources_ and fonts_ vectors
-//fix that
 void TextManager::AddSource(std::string source) {
 	textSources_.push_back(source);
 	Font filler = Font("Ubuntu-M");

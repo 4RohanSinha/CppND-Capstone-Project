@@ -2,9 +2,7 @@
 #define TEXTURE_MANAGER_H
 
 #include <vector>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include "Texture.h"
 #include "SurfaceManager.h"
 

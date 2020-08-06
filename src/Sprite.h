@@ -1,13 +1,11 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "SDL2_headers.h"
 #include "Node.h"
 #include "SpriteManager.h"
 
@@ -31,15 +29,15 @@ public:
 
 	static bool CheckImageSource(std::string src);
 
-	void Render();
+	void Render() override;
 
-	void Clear();
+	void Clear() override;
 
 protected:
 
-	void ConstructRectangle() { spriteManager_.ConstructRectangle(x, y, width, height); }
+	void ConstructRectangle() override { spriteManager_.ConstructRectangle(x, y, width, height); }
 
-	void AssignRenderer(SDL_Renderer* renderer);
+	void AssignRenderer(SDL_Renderer* renderer) override;
 
 private:
 	SpriteManager spriteManager_;

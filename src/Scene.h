@@ -1,9 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include "Node.h"
 #include "NodeGroup.h"
 

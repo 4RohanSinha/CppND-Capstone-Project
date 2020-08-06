@@ -1,7 +1,5 @@
 #include "CollisionDetector.h"
 #include <iostream>
-#include <chrono>
-#include <thread>
 
 void CollisionDetector::CheckForCollisions() {
 	if (nodeOne == nullptr || nodeTwo == nullptr) return;

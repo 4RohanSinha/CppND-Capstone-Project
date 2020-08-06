@@ -2,10 +2,7 @@
 #define TEXT_H
 
 #include "Node.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -30,15 +27,15 @@ public:
 	
 	void AddSource(std::string text);
 
-	void AssignRenderer(SDL_Renderer* renderer);
+	void Render() override;
 
-	void Render();
+	void Clear() override;
 
-	void Clear();
-
-	void ConstructRectangle();
 	
 protected:
+	void ConstructRectangle() override;
+
+	void AssignRenderer(SDL_Renderer* renderer) override;
 
 private:
 	TextManager textManager_;

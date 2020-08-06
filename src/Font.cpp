@@ -1,10 +1,7 @@
 #include <iostream>
 #include "Font.h"
 #include "Node.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 
 Font::Font(std::string font) : size_(30) {
 	SetDefaultColor();

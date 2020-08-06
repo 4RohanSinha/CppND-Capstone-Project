@@ -1,10 +1,10 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <SDL2/SDL.h>
 #include <memory>
 #include <initializer_list>
 #include <functional>
+#include "SDL2_headers.h"
 #include "Node.h"
 #include "CollisionDetector.h"
 #include "EventHandler.h"

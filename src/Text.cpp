@@ -1,11 +1,4 @@
-#include "Node.h"
 #include "Text.h"
-#include "Font.h"
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
 
 Text::Text(std::string text): Node(0, 0), text_(text) {
 	textManager_.AddSource(text_);

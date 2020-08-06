@@ -5,10 +5,7 @@
 #include <string>
 #include <stdexcept>
 #include <memory>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
+#include "SDL2_headers.h"
 #include "Integrate.h"
 
 class Font {

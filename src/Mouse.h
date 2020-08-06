@@ -2,7 +2,7 @@
 #define MOUSE_H
 
 #include <vector>
-#include <SDL2/SDL.h>
+#include "SDL2_headers.h"
 
 enum class MouseButton {
 	kLeft,
