@@ -12,43 +12,30 @@
 
 class Controller {
 public:
-	Controller() {}
-
 	void Update();
 	
-	//these template functions can only be defined within the header files themselves
-	template <typename T>
-	void HandleKeyPressFor(KeyCharacter key, T handlerFunction) {
-		std::set<KeyCharacter> keyInput{key};
-		eventHandlers_.emplace_back(std::make_unique<KeyDownEventHandler>(handlerFunction, keyInput));
-	}
+	//functions overloaded to give the option of providing one or multiple keys
+	//handler functions should be passed in for the event handlers to execute once the event that they are listening for has occurred
+	void HandleKeyPressFor(KeyCharacter key, std::function<void()> handlerFunction);
 
-	template <typename T>
-	void HandleKeyPressFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
-		std::set<KeyCharacter> keyInput = keys;
-		eventHandlers_.emplace_back(std::make_unique<KeyDownEventHandler>(handlerFunction, keyInput));
-	}
+	void HandleKeyPressFor(std::initializer_list<KeyCharacter> keys, std::function<void()> handlerFunction);
+	
+	void HandleKeyUpFor(KeyCharacter key, std::function<void()> handlerFunction);
+	
+	void HandleKeyUpFor(std::initializer_list<KeyCharacter> key, std::function<void()> handlerFunction);
 
-	template <typename T>
-	void HandleKeyUpFor(KeyCharacter key, T handlerFunction) {
-		std::set<KeyCharacter> keyInput{key};
-		eventHandlers_.emplace_back(std::make_unique<KeyUpEventHandler>(handlerFunction, keyInput));
-	}
-
-	template <typename T>
-	void HandleKeyUpFor(std::initializer_list<KeyCharacter> keys, T handlerFunction) {
-		std::set<KeyCharacter> keyInput = keys;
-		eventHandlers_.emplace_back(std::make_unique<KeyUpEventHandler>(handlerFunction, keyInput));
-	}
-
-
+	//this function returns if the program is still running - used in the game loop
 	bool IsRunning() { return inputMonitor_.IsRunning(); }
 
 private:
 	//EventHandler is an abstract class
 	//cannot store a vector of regular objects, but unique pointers to an abstract class can be stored
 	std::vector<std::unique_ptr<EventHandler>> eventHandlers_;
+	
+	//input monitor - contains Mouse and Keyboard classes, which contain mouse and keyboard info from SDL libraries
 	Input inputMonitor_;
+
+	//private member function to update event handlers in vector above
 	void ListenUpdate();
 };
 

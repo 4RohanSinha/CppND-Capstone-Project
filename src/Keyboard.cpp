@@ -3,8 +3,8 @@
 #include <iterator>
 #include <iostream>
 
-//dictionary connecting the KeyCharacter enum to the Uint8 keyboard values
-const std::unordered_map<KeyCharacter, Uint8, std::hash<std::underlying_type<KeyCharacter>::type>> Keyboard::keys_ = { 
+//unordered_map connecting the KeyCharacter enum to the Uint8 keyboard values
+std::unordered_map<KeyCharacter, Uint8, HashKey> Keyboard::keys_ = { 
 	{KeyCharacter::keyLeftArr, SDL_SCANCODE_LEFT},
         {KeyCharacter::keyRightArr, SDL_SCANCODE_RIGHT},
         {KeyCharacter::keyUpArr, SDL_SCANCODE_UP},
@@ -45,11 +45,20 @@ const std::unordered_map<KeyCharacter, Uint8, std::hash<std::underlying_type<Key
 	{KeyCharacter::key7, SDL_SCANCODE_7},
 	{KeyCharacter::key8, SDL_SCANCODE_8},
 	{KeyCharacter::key9, SDL_SCANCODE_9},
-	{KeyCharacter::keyReturn, SDL_SCANCODE_RETURN2},
+	{KeyCharacter::keyEnter, SDL_SCANCODE_RETURN},
 	{KeyCharacter::keyTab, SDL_SCANCODE_TAB},
 	{KeyCharacter::keySlash, SDL_SCANCODE_SLASH},
+	{KeyCharacter::keyBackslash, SDL_SCANCODE_BACKSLASH},
 	{KeyCharacter::keyComma, SDL_SCANCODE_COMMA},
-	{KeyCharacter::keyPeriod, SDL_SCANCODE_PERIOD}
+	{KeyCharacter::keyPeriod, SDL_SCANCODE_PERIOD},
+	{KeyCharacter::keyBackspace, SDL_SCANCODE_BACKSPACE},
+	{KeyCharacter::keyEquals, SDL_SCANCODE_EQUALS},
+	{KeyCharacter::keyEsc, SDL_SCANCODE_ESCAPE},
+	{KeyCharacter::keyLeftCtrl, SDL_SCANCODE_LCTRL},
+	{KeyCharacter::keyRightCtrl, SDL_SCANCODE_RCTRL},
+	{KeyCharacter::keyLeftShift, SDL_SCANCODE_LSHIFT},
+	{KeyCharacter::keyRightShift, SDL_SCANCODE_RSHIFT},
+	{KeyCharacter::keySemicolon, SDL_SCANCODE_SEMICOLON}
 };
 
 //constructor
@@ -61,13 +70,7 @@ Keyboard::Keyboard() {
 	}
 }
 
-//convert the enum to Uint8 format used in SDL2
-Uint8 Keyboard::ConvertToSDL(KeyCharacter key) {
-	//Source: http://www.cplusplus.com/reference/unordered_map/unordered_map/find/
-	return keys_.find(key)->second;
-}
-
-//update the dictionary
+//update the unordered_map
 void Keyboard::Update() {
 	SDL_PumpEvents();
 	UpdateKeyStatus();
@@ -79,12 +82,12 @@ void Keyboard::Update() {
 //then in the next iteration it will be changed to keyNone to indicate that the key is no longer active
 
 //return vector of keys that are pressed
-std::set<KeyCharacter> Keyboard::GetPressedKeys() {
+std::vector<KeyCharacter> Keyboard::GetPressedKeys() {
 	return LookForKeyStatus(KeyStatus::keyPressed);
 }
 
 //return vector of keys that were pressed but now are released
-std::set<KeyCharacter> Keyboard::GetReleasedKeys() {
+std::vector<KeyCharacter> Keyboard::GetReleasedKeys() {
 	return LookForKeyStatus(KeyStatus::keyReleased);
 }
 
@@ -96,9 +99,10 @@ KeyStatus Keyboard::GetStatusOfKey(KeyCharacter key) {
 //update the unordered map as described above
 void Keyboard::UpdateKeyStatus() {
 	for (auto& i: keyStatuses_) {
-		if (keyStates_[ConvertToSDL(i.first)]) {
+		auto sdlVersion = keys_[i.first];
+		if (keyStates_[sdlVersion]) {
 			keyStatuses_[i.first] = KeyStatus::keyPressed;
-		} else if (!keyStates_[ConvertToSDL(i.first)] && keyStatuses_[i.first] == KeyStatus::keyPressed) {
+		} else if (!keyStates_[sdlVersion] && keyStatuses_[i.first] == KeyStatus::keyPressed) {
 			keyStatuses_[i.first] = KeyStatus::keyReleased;
 		} else if (keyStatuses_[i.first] == KeyStatus::keyReleased) {
 			keyStatuses_[i.first] = KeyStatus::keyNone;
@@ -108,11 +112,11 @@ void Keyboard::UpdateKeyStatus() {
 
 //this function is a private method designed to look for keys with a particular key status (KeyStatus::keyPressed for example)
 //it is used in the Keyboard::GetPressedKeys() and Keyboard::GetReleasedKeys()
-std::set<KeyCharacter> Keyboard::LookForKeyStatus(KeyStatus status) {
-	std::set<KeyCharacter> res;
+std::vector<KeyCharacter> Keyboard::LookForKeyStatus(KeyStatus status) {
+	std::vector<KeyCharacter> res;
 	for (auto& i: keyStatuses_) {
 		if (keyStatuses_[i.first] == status) {
-			res.insert(i.first);
+			res.push_back(i.first);
 		}
 	}
 

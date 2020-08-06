@@ -8,26 +8,6 @@ AudioManager::AudioManager(int channels): channels_(channels) {
 	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, channels_, 2048);
 }
 
-void AudioManager::LoadFromDirectory(std::string dir) {
-	/*
-	for (auto& file: std::filesystem::directory_iterator(dir)) {
-		AudioType aType;
-		std::string path = file.path();
-		std::transform(path.begin(), path.end(), path.begin(), [](unsigned char character) { return std::tolower(character); });
-		size_t fileExtensionStart = path.find_last_of(".");
-		size_t audioTypeIndex = path.find_last_of("_");
-		std::string identifier = path.substr(0, fileExtensionStart);
-		std::string audioType = identifier.substr(audioTypeIndex, identifier.length()); 
-		std::string finalId = identifier.substr(0, audioTypeIndex);
-		if (audioType == "_music")
-			AddMusic(path, finalId); 
-		else
-			AddSoundEffect(path, finalId);
-	}	
-	*/
-
-}
-
 void AudioManager::AddMusic(std::string file, std::string identifier) {
 	media_[identifier] = std::make_unique<Music>(file);
 }

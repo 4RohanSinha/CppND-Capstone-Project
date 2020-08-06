@@ -1,10 +1,9 @@
-//note: std::filesystem only works with C++17 and above
 #ifndef AUDIO_MANAGER_H
 #define AUDIO_MANAGER_H
 
 #include <fstream>
 #include <sstream>
-#include <filesystem>
+#include <memory>
 #include <unordered_map>
 #include <algorithm>
 #include <string>
@@ -14,7 +13,6 @@ class AudioManager {
 public:
 	AudioManager();
 	AudioManager(int channels);
-	void LoadFromDirectory(std::string dir);
 	void AddMusic(std::string file, std::string identifier);
 	void AddSoundEffect(std::string file, std::string identifier);
 	void AddMedia(std::unique_ptr<Audio> clip, std::string identifier);
@@ -28,8 +26,16 @@ public:
 	float GetVolume();
 	std::string GetFilenameFor(std::string identifier);
 	~AudioManager();
+	//there should only ever be one audio manager at a time
+	AudioManager(const AudioManager& source) = delete;
+	AudioManager& operator=(const AudioManager& source) = delete;
+	AudioManager(AudioManager&& source) = delete;
+	AudioManager& operator=(AudioManager&& source) = delete;
 private:
+	//unordered_map of string identifier to media
+	//media has to be unique_ptr because Audio is an abstract class with pure virtual functions (see Audio.h)
 	std::unordered_map<std::string, std::unique_ptr<Audio>> media_;
+	//number of channels
 	int channels_;
 };
 

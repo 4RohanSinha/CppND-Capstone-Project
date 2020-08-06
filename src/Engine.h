@@ -18,6 +18,13 @@ public:
 	Engine();
 	Engine(int WindowWidth, int WindowHeight, std::string WindowTitle);
 	~Engine();
+	//there should not be multiple engines at once
+	//also, the engine should not be moved
+	Engine(const Engine& source) = delete;
+	Engine& operator=(const Engine& source) = delete;
+	Engine(Engine&& source) = delete;
+	Engine& operator=(Engine&& source) = delete;
+
 	void Loop();
 	bool IsRunning();
 	template<typename T>

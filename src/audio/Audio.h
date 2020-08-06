@@ -4,18 +4,25 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
-#include "Integrate.h"
 #include <stdexcept>
 #include <string>
-
-enum class AudioType {
-	kMusic,
-	kSoundEffect
-};
+#include "ReferenceCounter.h"
 
 class Audio {
 public:
-	Audio(std::string filename): filename_(filename) {}
+	Audio() {}
+	Audio(std::string filename);
+	//virtual destructor because Audio objects in the AudioManager class are stored in an unordered_map
+	//Audio is also an abstract class, so the unordered map is full of Music and SoundEffect objects instead
+	//They have destructors because they have raw pointers to SDL objects that need to be deleted
+	virtual ~Audio() {}
+	//adhering to the Rule of Five with virtual destructors: https://stackoverflow.com/questions/26039907/does-rule-of-three-five-apply-to-inheritance-and-virtual-destructors
+	//make other parts of Rule of Five default
+	Audio(const Audio& source) = default;
+	Audio& operator=(const Audio& source) = default;
+	Audio(Audio&& source) = default;
+	Audio& operator=(Audio&& source) = default;
+
 	virtual void LoadMusic() = 0;
 	virtual void Play() = 0;
 	virtual void Pause() = 0;
@@ -24,24 +31,30 @@ public:
 	virtual float GetVolume() = 0;
 	virtual void SetVolume(float val) = 0;
 	std::string GetFilename() { return filename_; }
-	virtual ~Audio() {}
+	virtual void Delete() = 0;
 protected:
+	ReferenceCounter* ref_count;
 	std::string filename_;
 };
 
 class Music: public Audio {
 public:
 	Music(std::string filename): Audio(filename) { LoadMusic(); }
-	void LoadMusic();
-	void Play();
+	~Music() override;
+	Music(const Music& source);
+	Music& operator=(const Music& source);
+	Music(Music&& source);
+	Music& operator=(Music&& source);
+	void LoadMusic() override;
+	void Play() override;
 	void Repeat(int n);
 	void RepeatForever();
-	void Pause();
-	void Resume();
-	void Stop();
-	float GetVolume();
-	void SetVolume(float val);
-	~Music();
+	void Pause() override;
+	void Resume() override;
+	void Stop() override;
+	float GetVolume() override;
+	void SetVolume(float val) override;
+	void Delete() override;
 private:
 	Mix_Music* music_ = nullptr;
 	void RepeatFor(int n);
@@ -50,15 +63,20 @@ private:
 class SoundEffect: public Audio {
 public:
 	SoundEffect(std::string filename): Audio(filename) { LoadMusic(); }
-	void LoadMusic();
-	void Play();
+	~SoundEffect() override;
+	SoundEffect(const SoundEffect& source);
+	SoundEffect& operator=(const SoundEffect& source);
+	SoundEffect(SoundEffect&& source);
+	SoundEffect& operator=(SoundEffect&& source);
+	void LoadMusic() override;
+	void Play() override;
 	void Repeat(int n);
-	void Pause();
-	void Resume();
-	void Stop();
-	float GetVolume();
-	void SetVolume(float val);
-	~SoundEffect();
+	void Pause() override;
+	void Resume() override;
+	void Stop() override;
+	float GetVolume() override;
+	void SetVolume(float val) override;
+	void Delete() override;
 private:
 	Mix_Chunk* effect_ = nullptr;
 	int channel_;	

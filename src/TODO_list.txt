@@ -1,6 +1,7 @@
 TODO:
+REMOVE AUDIO CLIPS
 create "break rooms" in Obstacle Course game
-clean up code
-get rid of NodeManager and Physics class
-fix README
+comment/clean up code
+get rid of NodeManager class
+last changes to README
 submit

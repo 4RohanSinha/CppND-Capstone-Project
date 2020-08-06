@@ -13,7 +13,6 @@
 #include <memory>
 #include <cmath>
 #include "TextureManager.h"
-#include "Color.h"
 
 //The class Node is an abstract class with multiple virtual functions
 //it is needed to unite Sprite and Text classes under one class, so then a vector of Nodes (as pointers - abstract classes alone cannot be stored in vectors) are stored together in one vector

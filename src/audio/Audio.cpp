@@ -1,7 +1,10 @@
 #include <iostream>
 #include "Audio.h"
 
-
+Audio::Audio(std::string filename): filename_(filename) {
+	ref_count = new ReferenceCounter();
+	ref_count->increment();
+}
 void Music::LoadMusic() {
 	music_ = Mix_LoadMUS(filename_.c_str());
 	if (music_ == NULL || music_ == nullptr)
@@ -45,9 +48,60 @@ void Music::SetVolume(float val) {
 	Mix_VolumeMusic(static_cast<int>(val * MIX_MAX_VOLUME));
 }
 
+void Music::Delete() {
+	if (ref_count != nullptr) {
+		ref_count->decrement();
+		if (**ref_count == 0) {
+			delete ref_count;
+			Mix_FreeMusic(music_);
+		}
+	}
+	ref_count = nullptr;
+	music_ = nullptr;
+}
 
 Music::~Music() {
-	Mix_FreeMusic(music_);
+	this->Delete();
+}
+
+Music::Music(const Music& source) {
+	music_ = source.music_;
+	ref_count = source.ref_count;
+	if (music_ != nullptr)
+		ref_count->increment();
+}
+
+Music& Music::operator=(const Music& source) {
+	if (this == &source)
+		return *this;
+
+	this->Delete();
+	music_ = source.music_;
+	ref_count = source.ref_count;
+	if (music_ != nullptr)
+		ref_count->increment();
+
+	return *this;
+}
+
+Music::Music(Music&& source) {
+	music_ = source.music_;
+	ref_count = source.ref_count;
+	source.music_ = nullptr;
+	source.ref_count = nullptr;
+}
+
+Music& Music::operator=(Music&& source) {
+	if (this == &source)
+		return *this;
+
+	this->Delete();
+
+	music_ = source.music_;
+	ref_count = source.ref_count;
+	source.music_ = nullptr;
+	source.ref_count = nullptr;
+	return *this;
 }
 
 void SoundEffect::LoadMusic() {
@@ -84,7 +138,58 @@ void SoundEffect::SetVolume(float val) {
 	Mix_Volume(channel_, static_cast<int>(MIX_MAX_VOLUME*val));
 }
 
-SoundEffect::~SoundEffect() {
-	Mix_FreeChunk(effect_);
+void SoundEffect::Delete() {
+	if (ref_count != nullptr) {
+		ref_count->decrement();
+		if (**ref_count == 0) {
+			delete ref_count;
+			Mix_FreeChunk(effect_);
+		}
+	}
+	ref_count = nullptr;
+	effect_ = nullptr;
 }
 
+SoundEffect::~SoundEffect() {
+	this->Delete();
+}
+
+SoundEffect::SoundEffect(const SoundEffect& source) {
+	effect_ = source.effect_;
+	ref_count = source.ref_count;
+	if (effect_ != nullptr)
+		ref_count->increment();
+}
+
+SoundEffect& SoundEffect::operator=(const SoundEffect& source) {
+	if (this == &source)
+		return *this;
+
+	this->Delete();
+
+	effect_ = source.effect_;
+	ref_count = source.ref_count;
+	if (effect_ != nullptr)
+		ref_count->increment();
+	return *this;
+}
+
+SoundEffect::SoundEffect(SoundEffect&& source) {
+	effect_ = source.effect_;
+	ref_count = source.ref_count;
+	source.effect_ = nullptr;
+	source.ref_count = nullptr;
+}
+
+SoundEffect& SoundEffect::operator=(SoundEffect&& source) {
+	if (this == &source)
+		return *this;
+
+	this->Delete();
+
+	effect_ = source.effect_;
+	ref_count = source.ref_count;
+	source.effect_ = nullptr;
+	source.ref_count = nullptr;
+	return *this;
+}

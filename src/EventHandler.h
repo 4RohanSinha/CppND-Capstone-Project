@@ -9,7 +9,6 @@
 #include "Keyboard.h"
 #include "Input.h"
 
-//TODO: allow multiple different kinds of events at one event handler
 enum class EventType {
         kCollision,
         kUpKey,
@@ -27,38 +26,39 @@ public:
 	template <typename T>
 	EventHandler(EventType eventType, T handlerFunction): eventType_(eventType), handlerFunction_(handlerFunction) {}
 	virtual void Listen(Input& inputMonitor) = 0;
+	//in the Controller class, unique_ptrs to EventHandler objects are stored
+	//because they are unique_ptrs, they will call delete on the internal raw pointer when the object when it goes out of scope
+	//this class is abstract, so a virtual destructor is added
+	//also, the compiler gives a warning without this line
 	virtual ~EventHandler() {}
 protected:
 	EventType eventType_{EventType::kNone};	
 	std::function<void()> handlerFunction_;
-	static bool CheckKeyboardInput(std::set<KeyCharacter> inputKeys, std::set<KeyCharacter> listenKeys); //returns whether the handler function should be called or not
 };
 
 class KeyDownEventHandler final: public EventHandler {
 public:
-	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyDownEventHandler(T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kDownKey, handlerFunction), keys_(keys) {
+	KeyDownEventHandler(T handlerFunction, std::vector<KeyCharacter> keys): EventHandler(EventType::kDownKey, handlerFunction), keys_(keys) {
 	}
 
 	void Listen(Input& inputMonitor);
 private:
-	std::set<KeyCharacter> keys_;
+	std::vector<KeyCharacter> keys_;
 };
 
 
 class KeyUpEventHandler final: public EventHandler {
 public:
-	//using variable arguments: http://www.cplusplus.com/reference/cstdarg/va_list/
 
 	template <typename T>
-	KeyUpEventHandler(T handlerFunction, std::set<KeyCharacter> keys): EventHandler(EventType::kUpKey, handlerFunction), keys_(keys) {
+	KeyUpEventHandler(T handlerFunction, std::vector<KeyCharacter> keys): EventHandler(EventType::kUpKey, handlerFunction), keys_(keys) {
 	}
 
 	void Listen(Input& inputMonitor);
 private:
-	std::set<KeyCharacter> keys_;
+	std::vector<KeyCharacter> keys_;
 };
 
 #endif

@@ -11,8 +11,8 @@ public:
 	bool IsRunning() { return isRunning_; }
 	std::vector<int> GetMouseCoordinates() { return mouse_.GetCoordinates(); }
 	MouseButton GetMouseButton() { return mouse_.GetButtonClicked(); }
-	std::set<KeyCharacter> GetPressedKeys() { return keyboard_.GetPressedKeys(); }
-	std::set<KeyCharacter> GetReleasedKeys() { return keyboard_.GetReleasedKeys(); }
+	std::vector<KeyCharacter> GetPressedKeys() { return keyboard_.GetPressedKeys(); }
+	std::vector<KeyCharacter> GetReleasedKeys() { return keyboard_.GetReleasedKeys(); }
 	KeyStatus GetStatusOfKey(KeyCharacter key) { return keyboard_.GetStatusOfKey(key); }
 private:
 	SDL_Event eventSDL_;
