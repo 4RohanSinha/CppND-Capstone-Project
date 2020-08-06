@@ -35,7 +35,7 @@ The executable is called `Capstone` and is placed in the `build` directory. This
 ```
 
 ## Expected Behavior
-<br /><img src="CppND-Capstone-Project.gif" width="400" height="800" /><br />
+<br /><img src="CppND-Capstone-Project.gif" width="600" height="800" /><br />
 
 ## File Structure
 * CppND-Capstone Project/
