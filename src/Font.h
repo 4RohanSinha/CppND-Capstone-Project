@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <memory>
 #include "SDL2_headers.h"
-#include "Integrate.h"
+#include "SDL_Deleter.h"
 
 class Font {
 public:
@@ -36,7 +36,8 @@ public:
 
 	static bool IsValidSize(float size);
 
-	integration::unique_ptr_sdl<TTF_Font> GetTTF();
+	std::unique_ptr<TTF_Font, SDL_Deleter> GetTTF();
+
 
 private:
 	std::string font_{"Ubuntu-M"};

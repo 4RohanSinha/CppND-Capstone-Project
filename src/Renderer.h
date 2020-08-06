@@ -11,7 +11,6 @@
 #include "Node.h"
 #include "Text.h"
 #include "Sprite.h"
-#include "Integrate.h"
 
 class Renderer {
 public:

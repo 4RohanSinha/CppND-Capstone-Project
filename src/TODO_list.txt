@@ -1,5 +1,4 @@
 TODO:
 REMOVE AUDIO CLIPS
-create "break rooms" in Obstacle Course game
 last changes to README
 submit

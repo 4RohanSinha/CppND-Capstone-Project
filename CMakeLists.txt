@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 
 add_definitions(-std=c++17)
 
-set(CXX_FLAGS "-g -O1 -Wall -Werror -fno-omit-frame-pointer `sdl2-config --libs --cflags` -lSDL2_ttf -lSDL2_image -lSDL2_audio")
+set(CXX_FLAGS "-g -Wall -Werror `sdl2-config --libs --cflags` -lSDL2_ttf -lSDL2_image -lSDL2_audio")
 set (CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
 project(Capstone)

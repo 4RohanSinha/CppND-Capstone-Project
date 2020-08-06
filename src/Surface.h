@@ -5,7 +5,7 @@
 #include <memory>
 #include "SDL2_headers.h"
 #include "Font.h"
-#include "Integrate.h"
+#include "SDL_Deleter.h"
 
 class Surface {
 public:

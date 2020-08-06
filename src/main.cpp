@@ -1,5 +1,6 @@
 #include "games/Pong/Pong.h"
 #include "games/ObstacleCourse/ObstacleCourse.h"
+#include <iostream>
 
 int main() {
 	std::cout << "C++ Nanodegree Program - Capstone Project\n-----------------------------------------\n";

@@ -14,8 +14,6 @@ Pong::Pong() {
 	ball = std::make_shared<Ball>(250, 250, 50, 50);
 	pad1 = std::make_unique<CollisionDetector>(paddle1, ball);
 	pad2 = std::make_unique<CollisionDetector>(paddle2, ball);
-	gameEngine->audioManager.AddMusic("../assets/audio/beat.wav", "beat");
-	gameEngine->audioManager.AddSoundEffect("../assets/audio/medium.wav", "medium");
 	scene->AddNode(ball);
 	scene->AddNode(paddle1);
 	scene->AddNode(paddle2);
@@ -46,7 +44,6 @@ void Pong::Run() {
 		(*pad1)();
 		(*pad2)();
 		if (pad1->FirstCollisionIsHappening() || pad2->FirstCollisionIsHappening()) {
-			gameEngine->audioManager.Play("medium");
 			ball->HandleCollision();
 		}
 		paddle2->y += paddle2Vel;

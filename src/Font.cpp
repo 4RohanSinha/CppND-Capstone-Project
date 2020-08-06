@@ -88,11 +88,11 @@ bool Font::IsValidRGB(SDL_Color color) {
 
 //returns a unique_ptr
 //used in TextManager to generate surface, which is then used for further rendering
-integration::unique_ptr_sdl<TTF_Font> Font::GetTTF() {
+std::unique_ptr<TTF_Font, SDL_Deleter> Font::GetTTF() {
 	if (!FontExists(font_.c_str()))
 		throw std::runtime_error("Error: font " + font_ + " does not exist");
 	std::string fontFile = "../assets/fonts/" + font_ + ".ttf";
-	return integration::create_unique(TTF_OpenFont(fontFile.c_str(), size_));
+	return std::unique_ptr<TTF_Font, SDL_Deleter>(TTF_OpenFont(fontFile.c_str(), size_));
 	
 }
 
